@@ -21,7 +21,7 @@ export default async function ExplorePage() {
 
     let habitTasks: iHabitTask[] = []
     try {
-        const response = await fetch(`${process.env.DOMAIN}/api/lockedin/habit-tasks?accessibbility=public}`, {
+        const response = await fetch(`${process.env.DOMAIN}/api/explore?accessibility=public}`, {
             method: "GET",
         });
         habitTasks = await response.json();

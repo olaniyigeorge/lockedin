@@ -1,15 +1,15 @@
-import HabitTaskForm from "@/components/lockedin/forms/habit-task-form";
+import HabitTaskForm from "@/components/forms/habit-task-form";
 import { auth } from "@/utils/auth";
 import { redirect } from "next/navigation";
 import { getLifeDomains } from "../../life-domains/action";
-import { iLifeDomain } from "@/components/lockedin/forms/life-domain-form";
+import { iLifeDomain } from "@/components/forms/life-domain-form";
 
 export default async function NewHabitTaskPage() {
     const session = await auth(); 
     
-    // Redirect to the auth page if the user is not authenticated
+    // Redirect to sign-in if user is not authenticated
     if (!session?.user?.id) {
-        redirect("/auth");
+        redirect("/sign-in");
     }
     const userId = session.user.id;
     let ASPECTS: iLifeDomain[] = []

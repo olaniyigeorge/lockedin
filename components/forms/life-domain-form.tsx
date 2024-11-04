@@ -51,7 +51,7 @@ export default function LifeDomainForm(data : LifeDomainFormProps) {
 
             if (response.ok) {
                toast.success("Life Domain created")
-               router.push('/i/lockedin/life-domains')
+               router.push('/life-domains')
             } else {
                 toast.error(`Error ${response.status} while creating life domain`)
             }
@@ -70,15 +70,15 @@ export default function LifeDomainForm(data : LifeDomainFormProps) {
 
     return (
         <div className="w-full flex flex-col items-center">
-            <h1 className="text-3xl lockedin_purple_gradient font-extrabold">{data.type} Life Domain</h1>
-            <form className="w-full text-gray-800 p-3 flex gap-2 flex-col border rounded-xl"> 
+            <h1 className="text-3xl lockedin_text_gradient font-extrabold">{data.type} Life Domain</h1>
+            <form className="w-full text-gray-800 shadow glassmorphism p-3 flex gap-2 flex-col border rounded-xl"> 
                 <input 
                     className="p-2 rounded-md" 
                     type="text" 
                     name="name"
                     value={lifeDomain.name}
                     onChange={(e) => setLifeDomain({ ...lifeDomain, name: e.target.value })}
-                    placeholder={`What aspect of your life is this? ${data.user}`}
+                    placeholder={`What aspect of your life is this?`}
                 />  
                 <textarea 
                     className="p-2 rounded-md" 
@@ -87,10 +87,12 @@ export default function LifeDomainForm(data : LifeDomainFormProps) {
                     onChange={(e) => setLifeDomain({ ...lifeDomain, description: e.target.value })}
                     placeholder="Describe this aspect of your life and what you want to achieve. "
                 />  
+
+                <span className="w-full flex items-center justify-center">
                 <button
                     type='submit'
                     disabled={submitting}
-                    className='border hover:bg-green-500 p-2 w-fit justify-end rounded-md text-white'
+                    className='border hover:bg-green-600 bg-orange-200 hover:text-white border-green-600  p-2 w-full md:w-1/2 justify-end rounded-md text-green-600'
                     onClick={(e) => {
                         if (data.type == "Create") {
                             createLifeDomain(e)
@@ -100,8 +102,10 @@ export default function LifeDomainForm(data : LifeDomainFormProps) {
 
                         }}}
                 >
-                    {submitting ? `${type}ing...` : data.type}
+                    {submitting ? `${data.type}ing...` : data.type}
                 </button>
+                </span>
+                
             </form>
         </div>
     )

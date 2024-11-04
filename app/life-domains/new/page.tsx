@@ -1,4 +1,4 @@
-import LifeDomainForm from "@/components/lockedin/forms/life-domain-form";
+import LifeDomainForm from "@/components/forms/life-domain-form";
 import { auth } from "@/utils/auth";
 import { redirect } from "next/navigation";
 

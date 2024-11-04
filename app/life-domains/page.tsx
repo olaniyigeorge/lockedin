@@ -21,7 +21,7 @@ export default async function LifeDomains() {
                <>{session?.user ?
                     <Link 
                         className="border border-black hover:border-gray-900 p-1 rounded-md"
-                        href="/i/lockedin/life-domains/new"
+                        href="/life-domains/new"
                     > 
                         Add Domain
                     </Link>
@@ -43,7 +43,7 @@ export default async function LifeDomains() {
              <span className="w-full flex items-center justify-between">
                 <>Life Domains</>
                 <>{session?.user ?
-                    <Link href="/i/lockedin/life-domains/new"> Add Domain</Link>
+                    <Link href="/life-domains/new"> Add Domain</Link>
                 : <Auth />
                 }</>
             </span>

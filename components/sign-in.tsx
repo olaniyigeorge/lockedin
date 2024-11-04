@@ -21,7 +21,7 @@ export default async function Auth() {
       <form
         action={async () => {
           "use server"
-          await signIn("google")
+          await signIn("google", {redirectTo: "/"})
         }}
       >
         <button className="black_btn flex gap-2" 

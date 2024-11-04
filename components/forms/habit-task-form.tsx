@@ -58,7 +58,7 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
 
             if (response.ok) {
                 toast.success("Habit Task created");
-                router.push('/i/lockedin/habit-tasks');
+                router.push('/habit-tasks');
             } else {
                 toast.error(`Error ${response.status} while creating habit task`);
             }
@@ -84,7 +84,7 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
 
             if (response.ok) {
                 toast.success("Habit Task updated");
-                router.push('/i/habit-tasks');
+                router.push('/habit-tasks');
             } else {
                 toast.error(`Error ${response.status} while updating habit task`);
             }
@@ -98,8 +98,8 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
 
     return (
         <div className="w-full flex flex-col items-center">
-            <h1 className="text-3xl lockedin_purple_gradient font-extrabold">{type} Habit Task</h1>
-            <form className="w-full glassmorphism text-gray-800 p-3 md:p-5 flex gap-2 flex-col  border border-gray-900 rounded-xl" onSubmit={(e) => {
+            <h1 className="text-3xl lockedin_text_gradient font-extrabold">{type} Habit Task</h1>
+            <form className="w-full glassmorphism text-gray-800 p-3 md:p-5 flex gap-2 flex-col  shadow rounded-xl" onSubmit={(e) => {
                 if (type === "Create") {
                     createHabitTask(e);
                 } else if (type === "Edit") {
@@ -173,7 +173,7 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
                     <button
                         type="submit"
                         disabled={submitting}
-                        className='border  hover:bg-gray-950 py-2 px-4 md:px-8 w-fit justify-end rounded-md text-white'
+                        className='border  hover:bg-green-600 text-green-600 border-green-600 hover:text-white p-2 w-full md:w-1/2 justify-end rounded-md'
                     >
                         {submitting ? `${type}ing...` : type}
                     </button>

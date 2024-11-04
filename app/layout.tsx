@@ -5,7 +5,8 @@ import Link from "next/link";
 import FooterControls from "@/components/footer-controls";
 import Image from "next/image"
 import { auth, signIn } from "@/utils/auth";
-
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,6 +37,7 @@ export default async function RootLayout({
       >
         <div className="text-gray-800  relative bg-[url('/grid.png')] backdrop-blur bg-slate-50 w-full min-h-screen h-full flex flex-col items-center justify-between">
           <div className="bg_gradient " />
+          <ToastContainer />
           <nav className="flex sticky z-10 top-0 right-0 w-full items-center justify-between p-2 md:p-6 lg:p-8">
               <Link href="/">
               <h1 className="text-3xl text-green-600 font-extrabold">Locked<span className="text-white px-1 rounded-md bg-orange-500  border-orange-500">In</span></h1>

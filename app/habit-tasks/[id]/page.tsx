@@ -1,4 +1,4 @@
-import MarkTodayButton from "@/components/lockedin/mark-today-button";
+import MarkTodayButton from "@/components/mark-today-button";
 
 export default async function HabitTaskDetailsPage({ params }: { params: { id: string } }) {
     try {

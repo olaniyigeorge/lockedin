@@ -38,7 +38,7 @@ export default async function HabitTasksPage() {
                <>{session?.user ?
                     <Link 
                         className="border border-black hover:border-gray-900 p-1 rounded-md" 
-                        href="/i/lockedin/habit-tasks/new"
+                        href="/habit-tasks/new"
                     > 
                         Add Habit task
                     </Link>
@@ -60,7 +60,7 @@ export default async function HabitTasksPage() {
              <span className="w-full flex items-center justify-between">
                 <>Habit Tasks</>
                 <>{session?.user ?
-                    <Link href="/i/lockedin/habit-tasks/new"> Add habit task</Link>
+                    <Link href="/habit-tasks/new"> Add habit task</Link>
                 : <Auth />
                 }</>
             </span>

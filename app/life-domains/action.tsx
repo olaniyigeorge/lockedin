@@ -18,7 +18,7 @@ export async function getLifeDomains() {
         })
         // console.log(response)
         const res = await response.json()
-        // console.log("RES: ", res)
+        console.log("RES: ", res)
         if (response.ok) {
             return new Response(JSON.stringify(res), {status: response.status})
         } else {

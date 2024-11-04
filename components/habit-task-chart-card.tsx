@@ -1,6 +1,8 @@
+"use client"
 import Link from "next/link";
 import { iLifeDomain } from "./forms/life-domain-form";
 import { iHabitTask } from "./habit-task-card";
+import { usePathname } from "next/navigation";
 
 interface iHabitTaskEntry {
     _id: string;
@@ -47,7 +49,7 @@ const getDaysInRange = (startDate: Date, endDate: Date) => {
 
 export default function HabitTaskChartCard(hbtk: eHabitTask) {
     const { accessibility, start_date, end_date, entries } = hbtk;
-
+    const pathname = usePathname()
     // Create a set of completed entry dates for quick lookup
     const completedDates = new Set(entries.map(entry => new Date(entry.date).toDateString()));
 
@@ -55,13 +57,22 @@ export default function HabitTaskChartCard(hbtk: eHabitTask) {
     const dateRange = getDaysInRange(new Date(start_date), new Date(end_date));
 
     return (
-        <div className="border w-full border-gray-700 bg-slate-100 p-2 hover:bg-purple-100 rounded-md">
+        <div className="border w-full border-gray-700 bg-slate-100 p-2 rounded-md">
             <div className={`h-1 ${accessibilityColors[accessibility]} rounded-t-full`}></div>
-            <div className="">
-                <h1 className="font-medium flex justify-between items-center hover:text-purple-500 w-fit mt-1">
-                    <Link href={`/i/lockedin/habit-tasks/${hbtk._id}`}>
+            <div className="w-full">
+                <h1 className="font-medium flex justify-between items-center hover:text-green-600 w-full mt-1">
+                    <Link href={`/habit-tasks/${hbtk._id}`}>
                         {hbtk.title}
                     </Link>
+                    {/* Owner's details if on explore page */}
+                    { pathname == "/explore" ?
+                        <span className="rounded-full object-contain w-5 h-5 border">
+                        
+                        </span>
+                        : 
+                        ""
+                    }
+                    
                 </h1>
                 <span className="text-sm ">{hbtk.description}</span>
                 <div className="text-sm text-gray-600 mt-2">
