@@ -77,7 +77,13 @@ const config: Config = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+		boxShadow: {
+		glow: '0 0 10px rgba(59, 130, 246, 0.6), 0 0 10px rgba(59, 130, 246, 0.6)', // Blue glow
+		},
+		fontWeight: {
+		'400': '400',
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
