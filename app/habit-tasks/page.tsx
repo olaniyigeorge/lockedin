@@ -6,7 +6,7 @@ import HabitTaskCard from "@/components/habit-task-card"
 export default async function HabitTasksPage() {
     const session = await auth()
     const userId = session?.user?.id
-    console.log(session, userId)
+    // console.log(session, userId)
     
     let resp: Response = new Response()
     try {

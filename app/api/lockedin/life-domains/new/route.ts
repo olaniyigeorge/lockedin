@@ -23,6 +23,6 @@ export const POST = async(req: Request) => {
         return new Response(JSON.stringify(newLifeDomain), {status: 201})
     } catch(error) {
         console.log(error)
-        return new Response("Failed to create prompt", {status: 500})
+        return new Response("Failed to create life domain", {status: 500})
     }
 }

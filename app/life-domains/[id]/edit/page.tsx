@@ -1,4 +1,4 @@
-import LifeDomainForm from "@/components/lockedin/forms/life-domain-form";
+import LifeDomainForm from "@/components/forms/life-domain-form";
 import { auth } from "@/utils/auth";
 import { redirect } from "next/navigation";
 import { getLifeDomainById } from "./action";
@@ -7,7 +7,7 @@ export default async function EditLifeDomain({ params }: { params: { id: string 
     const session = await auth();
 
     if (!session?.user?.id) {
-        redirect("/auth");
+        redirect("/sign-in");
     }
 
     const userId = session.user.id;

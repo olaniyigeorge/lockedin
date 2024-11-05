@@ -5,9 +5,9 @@ import { auth } from "@/utils/auth"
 
 export async function getLifeDomainById(id: string) {
     const session = await auth()
-    console.log(session)
+   
     try {
-        const response = await fetch(`${process.env.DOMAIN}/api/lockedin/life-domains/${id}`, {
+        const response = await fetch(`${process.env.DOMAIN}/api/lockedin/life-domains?id=${id}`, {
             method: "GET",
         })
         console.log(response.status)

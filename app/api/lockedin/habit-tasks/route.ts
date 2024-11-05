@@ -57,16 +57,50 @@ export async function GET(request: Request) {
                 ...habit_task.toObject(), // Convert Mongoose document to plain object
                 entries, // Add the entries array
             };
-
             return new Response(JSON.stringify(habitTaskWithEntries), { status: 200 });
         }
-
-        // const my_life_domains = await LifeDomain.find({ owner: id }); // Use the extracted ID
-        // const my_life_domains = lfs // Use the extracted ID
         return new Response("No filter param", { status: 400})
-
-        
        
+    } catch (error) {
+        console.error(error);
+        return new Response("Failed to fetch life domains created by user", { status: 500 });
+    }
+}
+
+
+
+export async function PATCH(request: Request) {
+    const { title, description, aspect, accessibility, start_date, end_date } = await request.json();
+
+    try {
+       // Parse the URL to get query parameters
+        const url = new URL(request.url);
+        const id = url.searchParams.get("id"); 
+
+        if (id) {
+            console.log("Getting this habit task")
+            await connectToDB();
+            const habit_task = await HabitTask.findById(id); 
+            
+            if (!habit_task) {
+                return new Response("Habit task not found", { status: 404 });
+            }
+
+            // Update the habit task data
+            habit_task.title = title;
+            habit_task.description = description;
+            habit_task.aspect = aspect;
+            habit_task.accessibility = accessibility;
+            // habit_task.start_date = start_date;
+            // habit_task.end_date = end_date;
+
+
+            await habit_task.save()
+
+            return new Response("Successfully updated life domain", { status: 200 })
+        }
+
+        return new Response("No filter param", { status: 400}) 
     } catch (error) {
         console.error(error);
         return new Response("Failed to fetch life domains created by user", { status: 500 });

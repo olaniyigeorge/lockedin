@@ -35,7 +35,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="text-gray-800  relative bg-[url('/grid.png')] backdrop-blur bg-slate-50 w-full min-h-screen h-full flex flex-col items-center justify-between">
+        <div className="text-gray-800  relative bg-opacity-10 bg-[url('/grid.png')] backdrop-blur bg-slate-50 w-full min-h-screen h-full flex flex-col items-center justify-between">
           <div className="bg_gradient " />
           <ToastContainer />
           <nav className="flex sticky z-10 top-0 right-0 w-full items-center justify-between p-2 md:p-6 lg:p-8">

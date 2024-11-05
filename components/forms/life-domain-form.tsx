@@ -64,9 +64,37 @@ export default function LifeDomainForm(data : LifeDomainFormProps) {
         }
     }
 
-    // const editLifeDomain = async (e) => {
-    //     console.log("Editting...")
-    // }
+    const editLifeDomain = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setSubmitting(true)
+        try {
+            console.log({
+                owner: data.user,
+                name: lifeDomain.name,
+                description: lifeDomain.description
+            })
+            const response = await fetch(`/api/lockedin/life-domains?id=${lifeDomain._id}`, {
+                method: "PATCH",
+                body: JSON.stringify({
+                    name: lifeDomain.name,
+                    description: lifeDomain.description
+                })
+            })
+
+            if (response.ok) {
+               toast.success("Life Domain Edited")
+               router.push('/life-domains')
+            } else {
+                toast.error(`Error ${response.status} while editing life domain`)
+            }
+        } catch(error) {
+            toast.error(`Error while editing life domain`)
+            console.log(error)
+            return false
+        } finally {
+            setSubmitting(false)
+        }
+    }
 
     return (
         <div className="w-full flex flex-col items-center">
@@ -98,7 +126,7 @@ export default function LifeDomainForm(data : LifeDomainFormProps) {
                             createLifeDomain(e)
                         }
                         else if(data.type == "Edit") {
-                            // editLifeDomain(e)
+                            editLifeDomain(e)
 
                         }}}
                 >

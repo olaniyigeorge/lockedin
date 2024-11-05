@@ -1,4 +1,5 @@
 import MarkTodayButton from "@/components/mark-today-button";
+import Link from "next/link";
 
 export default async function HabitTaskDetailsPage({ params }: { params: { id: string } }) {
     try {
@@ -10,11 +11,18 @@ export default async function HabitTaskDetailsPage({ params }: { params: { id: s
         if (response.ok) {
               return (
                 <div className="container mx-auto p-4 bg-white bg-opacity-30 backdrop-blur shadow-lg rounded-lg">
-                    <h1 className="text-2xl font-bold mb-2">{habitTask.title}</h1>
+                    <span className='w-full flex items-center justify-between'>
+                    <h1 className="text-2xl font-bold mb-2">{habitTask.title}</h1>  
+                        <Link 
+                            className="shadow bg-orange-200 p-2 rounded-3xl text-sm" href={`/habit-tasks/${params.id}/edit`}>
+                            Edit
+                        </Link> 
+                    </span>
+                    
                     <p className="text-gray-700 mb-4">{habitTask.description}</p>
 
                     <div className="flex justify-between items-center mb-4">
-                        <span className={`badge p-1 rounded-full ${habitTask.accessibility === "public" ? "bg-green-200" : habitTask.accessibility === "private" ? "bg-red-200" : "bg-blue-200"}`}>
+                        <span className={`text-sm p-1 rounded-full ${habitTask.accessibility === "public" ? "bg-green-200" : habitTask.accessibility === "private" ? "bg-red-200" : "bg-blue-200"}`}>
                             {habitTask.accessibility.charAt(0).toUpperCase() + habitTask.accessibility.slice(1)}
                         </span>
                         <span className="text-sm text-gray-500">

@@ -39,7 +39,20 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
 
     useEffect(() => {
         if (type === "Edit") {
+            console.log("Edit: ", task)
             setHabitTask(task); // Reset form state when task changes
+        } else if (type === "Create") {
+            console.log("Create: ")
+            setHabitTask({
+                _id: "",
+                aspect: "",
+                owner: user,
+                title: "",
+                description: "",
+                accessibility: "public",
+                start_date: new Date(),
+                end_date: new Date(new Date().setDate(new Date().getDate() + 21)),
+            })
         }
     }, [task, type]);
 
@@ -74,8 +87,8 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
         e.preventDefault();
         setSubmitting(true);
         try {
-            const response = await fetch(`/api/habit-tasks/${task._id}`, {
-                method: "PUT",
+            const response = await fetch(`/api/lockedin/habit-tasks?id=${task._id}`, {
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -157,14 +170,14 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
                     className="p-2 rounded-md"
                     type="date"
                     name="start_date"
-                    value={habitTask.start_date.toISOString().split("T")[0]} // Format date for input
+                    value={new Date(habitTask.start_date).toISOString().split("T")[0]} // Format date for input
                     onChange={(e) => setHabitTask({ ...habitTask, start_date: new Date(e.target.value) })}
                 />
                 <input
                     className="p-2 rounded-md"
                     type="date"
                     name="end_date"
-                    value={habitTask.end_date.toISOString().split("T")[0]} // Format date for input
+                    value={new Date(habitTask.end_date).toISOString().split("T")[0]} // Format date for input
                     onChange={(e) => setHabitTask({ ...habitTask, end_date: new Date(e.target.value) })}
                 />
                 </div>

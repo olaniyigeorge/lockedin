@@ -7,7 +7,6 @@ import LifeDomainCard from "@/components/life-domain-card"
 export default async function LifeDomains() {
     const session = await auth()
 
-    console.log(session)
     
     const LIFEDOMAINS = await getLifeDomains()
 

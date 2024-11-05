@@ -3,16 +3,15 @@ import { auth } from "@/utils/auth"
 
 
 
-export async function getLifeDomainById(id: string) {
+export async function getHabitTaskById(id: string) {
     const session = await auth()
-    console.log(session)
+
     try {
-        const response = await fetch(`${process.env.DOMAIN}/api/lockedin/life-domains/${id}`, {
+        const response = await fetch(`${process.env.DOMAIN}/api/lockedin/habit-tasks?id=${id}`, {
             method: "GET",
         })
         console.log(response.status)
         const res = await response.json()
-        // console.log("RES: ", res)
 
         return new Response(JSON.stringify(res), {status: response.status})
 

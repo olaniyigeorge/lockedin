@@ -1,5 +1,8 @@
 "use client"
 import { useEffect, useState } from 'react';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+
 
 interface iLifeDomain {
     _id: string;
@@ -34,6 +37,7 @@ export default function LifeDomainPage({ params }: { params: { id: string } }) {
     }, [params.id]);
 
     if (error) {
+        notFound();
         return (
             <div className="text-red-500">
                 <span>{error}</span>
@@ -47,12 +51,17 @@ export default function LifeDomainPage({ params }: { params: { id: string } }) {
     }
 
     return (
-        <div className="border border-gray-300 p-4 rounded-md bg-white shadow-md">
-            <h1 className="text-2xl font-semibold">{lifeDomain.name}</h1>
-            <p className="mt-2 text-gray-700">{lifeDomain.description}</p>
-            <div className="mt-4 text-sm text-gray-500">
-                <span>Life Domain ID: {lifeDomain._id}</span>
-            </div>
+        <div className="p-4 w-full h-full rounded-md bg-white shadow-md">
+            <span className='w-full flex items-center justify-between'>
+                <h1 className="text-2xl md:text-3xl font-semibold">{lifeDomain.name}</h1>
+                
+                <Link className="shadow bg-orange-200 p-2 rounded-3xl text-sm" href={`/life-domains/${params.id}/edit`}>
+                    Edit
+                </Link> 
+            </span>
+
+            <p className="mt-2 text-lg md:text-xl text-gray-700">{lifeDomain.description}</p>
+
         </div>
     );
 }
