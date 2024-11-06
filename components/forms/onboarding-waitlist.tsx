@@ -39,7 +39,7 @@ export default function WaitlistForm(data : WaitlistFormProps) {
                 email: email,
                 discovery_location: discovery_location
             })
-            const response = await fetch(`/api/lockedin/waitlist`, {
+            const response = await fetch(`/api/waitlist`, {
                 method: "POST",
                 body: JSON.stringify({
                     email: email,
@@ -47,9 +47,11 @@ export default function WaitlistForm(data : WaitlistFormProps) {
                 })
             })
 
-            if (response.ok) {
+            if (response.status == 201) {
                toast.success("Wishlist joined")
                router.push('/')
+            } else if(response.status == 409) {
+                toast.success(`You have joined the wishlist with these info`)
             } else {
                 toast.error(`Error ${response.status} while joining wishlist`)
             }
@@ -84,7 +86,7 @@ export default function WaitlistForm(data : WaitlistFormProps) {
                     </option>
                     {DISCOVERY_LOCATION.map((location: string) => (
                         <option key={location} className="bg-transparent   text-slate-900" value={location}>
-                            {location.toUpperCase().replace("_", " ")}
+                            {location.toUpperCase().replaceAll("_", " ")}
                         </option>
                     ))}
                 </select>

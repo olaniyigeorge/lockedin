@@ -43,6 +43,9 @@ export default async function RootLayout({
               <h1 className="text-3xl text-green-600 font-extrabold">Locked<span className="text-white px-1 rounded-md bg-orange-500  border-orange-500">In</span></h1>
               </Link>
               <span className="hidden sm:flex gap-2 items-center">
+                <Link 
+                  className="p-2 rounded-full"
+                  href="/onboarding/waitlist">Join Waitlist</Link>
                   {!session ?
                       <form action={async () => {
                           "use server"
@@ -50,7 +53,7 @@ export default async function RootLayout({
                           }}
                           className=""
                       >
-                          <button className="rounded-full p-2 text-white border" 
+                          <button className="rounded-full p-2 text-white bg-black border" 
                           type="submit">Sign In </button>
                       </form>
                       : 
