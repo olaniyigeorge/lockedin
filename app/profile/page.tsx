@@ -44,11 +44,11 @@ export default async function ProfilePage() {
     }
  
 
-    return ( <div className="w-full flex flex-col p-3 md:p-10 border rounded-xl ">
-        <h1 className="px-1 text-3xl"><>Hi</> <span className="font-extrabold lockedin_text_gradient ">{session.user.name}</span></h1>
-        <span className="text-xs w-fit rounded-full p-1 border border-slate-300">{session.user.email}</span>
+    return ( <div className="w-full glassmorphism flex flex-col p-3 md:p-10 border rounded-xl ">
+        <h1 className="px-1 text-2xl md:text-5xl"><>Hi</> <span className="font-extrabold lockedin_text_gradient ">{session.user.name}</span></h1>
+        <span className="text-[10px] bg-white w-fit rounded-full p-1">{session.user.email}</span>
 
-        <p className="p-1 font-satoshi">Welcome to your profile </p>
+        <p className="p-1 font-satoshi text-2xl">Welcome to your profile </p>
 
         <span className=""> 
             You are currently tracking {habitTasks.length} habit {habitTasks.length > 1 ? "tasks" : "task"}
@@ -57,5 +57,9 @@ export default async function ProfilePage() {
         <span className=""> 
             You are currently working to improve {lifeDomains.length} {lifeDomains.length > 1 ? "aspects" : "aspect"} of your life 
         </span>
+
+        <section className="w-full flex flex-col items-center">
+            <h1 className="font-bold p-2 text-2xl">Partnerships</h1>
+        </section>
     </div>)
 }

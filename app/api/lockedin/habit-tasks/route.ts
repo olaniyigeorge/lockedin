@@ -1,5 +1,6 @@
 import HabitTask from "@/models/lockedin.habit-task";
 import HabitTaskEntry from "@/models/lockedin.task-entry";
+import { auth } from "@/utils/auth";
 import { connectToDB } from "@/utils/database";
 
 export async function GET(request: Request) {
@@ -68,7 +69,6 @@ export async function GET(request: Request) {
 }
 
 
-
 export async function PATCH(request: Request) {
     const { title, description, aspect, accessibility, start_date, end_date } = await request.json();
 
@@ -106,3 +106,27 @@ export async function PATCH(request: Request) {
         return new Response("Failed to fetch life domains created by user", { status: 500 });
     }
 }
+
+
+
+export async function DELETE(request: Request) {
+
+    try {
+        // Parse the URL to get query parameters
+        const url = new URL(request.url);
+        const id = url.searchParams.get("id"); 
+ 
+        if (id) {
+            await connectToDB();
+            // Find the habit task by ID and remove it
+            await HabitTask.findByIdAndDelete(id)
+            return new Response("Habit task deleted successfully", { status: 204 });
+        }
+
+        
+    } catch (error) {
+        console.log(error)
+        return new Response("Error deleting prompt", { status: 500 });
+    }
+};
+
