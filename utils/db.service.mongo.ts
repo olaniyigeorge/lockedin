@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 
-let isConnected = false; // track the connection
+let isConnected = false; 
+
+let MONGODB_URI = process.env.MONGODB_URI as string;
+
 
 export const connectToDB = async () => {
   mongoose.set('strictQuery', true);
@@ -11,7 +14,7 @@ export const connectToDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await mongoose.connect(MONGODB_URI, {
       dbName: "lockedIn",
     })
 

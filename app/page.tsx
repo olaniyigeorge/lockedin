@@ -1,34 +1,19 @@
-import Link from "next/link";
+import { Hero } from "@/components/Hero";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: {
+    default: "LockedIn | Habit and Daily Routine Tracker",
+    template: "%s | LockedIn",
+  },
+  description:
+    "Stay on top of your goals with LockedIn, the ultimate habit and daily routine tracker. Designed to help you build lasting habits, this intuitive app enables users to set, track, and monitor their daily routines with ease. Whether you're aiming to develop better habits, stay consistent, or improve your productivity, LockedIn is your go-to tool for self-improvement. With a clean and user-friendly interface, it helps you stay focused, motivated, and on track towards achieving your long-term objectives. Download today and unlock your full potential! ",
+};
 
-
-export default function LockedInLanding() {
-    const epl  = [
-        "https://x.com/imoctborn",
-        "https://x.com/Onimisea"
-    ]
-
-    // Select a random link from the epl array
-    const randomIndex = Math.floor(Math.random() * epl.length);
-    const randomLink = epl[randomIndex];
-
-    return (
-        <section className="flex-col  w-full flex items-center gap-4 ">
-            <h1 className="w-full font-400 ont-extrabold text-center tracking-wide py-3  text-3xl md:text-5xl lg:text-[60px] ">
-                <h1 className="inline w-full">Build Better Habits!</h1> <br/>
-               <span className="text-green-500 ">Track Habit Forming Tasks 
-                </span> {" "} and Celebrate Your Progress
-            </h1> 
-
-            <span className="w-full flex justify-center">
-                <Link 
-                    className="p-2 w-fit rounded-full bg-white hover:scale-[102%] ease-in-out shadow transition-all duration-500 flex justify-center border bg-opacity-50 " 
-                    href={randomLink}
-                > 
-                    Join the conversation on how to build better habits
-                </Link>
-            </span>
-            
-        </section>
-    )
+export default function Home() {
+  return (
+    <div className="relative">
+      <Hero />
+    </div>
+  );
 }
