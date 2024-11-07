@@ -1,6 +1,9 @@
 import { Schema, model, models } from "mongoose";
 
 const WaitlistSchema = new Schema({
+    full_name: {
+        type: String,
+    },
     email: {
         type: String,
     },

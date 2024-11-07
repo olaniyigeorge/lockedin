@@ -8,15 +8,14 @@ export async function POST(request: Request) {
     try {
         // Parse the body once
         const body = await request.json();
-        const { email, discovery_location } = body;
+        const { full_name, email, discovery_location } = body;
         
         await connectToDB();
 
 
-        // Check for existing entry
+        // Check for existing entry with email
         const existingEntry = await Waitlist.findOne({
             email,
-            discovery_location
         });
 
         if (existingEntry) {
@@ -26,6 +25,7 @@ export async function POST(request: Request) {
 
         // Create a new Waitlist
         const newEntry = await Waitlist.create({
+            full_name,
             email,
             discovery_location
         });

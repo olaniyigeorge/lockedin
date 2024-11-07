@@ -20,6 +20,7 @@ export default function WaitlistForm(data : WaitlistFormProps) {
     const type = new URLSearchParams().get("type")
 
 
+    const [ full_name, setFullname ] = useState<string>("")
     const [ email, setEmail ] = useState<string>("")
     const [ action, setAction ] = useState<"Join" | "update">("Join")
     const [ discovery_location, setDiscovery_location ] = useState<string>("web")
@@ -36,12 +37,14 @@ export default function WaitlistForm(data : WaitlistFormProps) {
         setSubmitting(true)
         try {
             console.log({
+                full_name,
                 email: email,
                 discovery_location: discovery_location
             })
             const response = await fetch(`/api/waitlist`, {
                 method: "POST",
                 body: JSON.stringify({
+                    full_name: full_name,
                     email: email,
                     discovery_location: discovery_location
                 })
@@ -68,6 +71,15 @@ export default function WaitlistForm(data : WaitlistFormProps) {
         <div className="w-full flex flex-col items-center">
             <h1 className="text-3xl lockedin_text_gradient font-extrabold">{data.type} Wishlist</h1>
             <form className="w-full text-gray-800 shadow glassmorphism p-3 flex gap-2 flex-col border rounded-xl"> 
+                <input 
+                    className="p-2 rounded-md" 
+                    type="name" 
+                    name="name"
+                    required
+                    value={full_name}
+                    onChange={(e) => setFullname(e.target.value)}
+                    placeholder={`Fullname `}
+                />
                 <input 
                     className="p-2 rounded-md" 
                     type="email" 
