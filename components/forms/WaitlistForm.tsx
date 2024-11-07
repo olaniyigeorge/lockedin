@@ -17,23 +17,28 @@ import { Button } from "../ui/button";
 import { toast } from "react-toastify";
 
 const waitlistFormSchema = z.object({
+
   full_name: z
     .string()
     .min(2, { message: "Full name must be at least 6 characters." })
     .max(50, { message: "Full name must not exceed 50 characters." }),
-  email_address: z
+  email: z
     .string()
     .email({ message: "Please enter a valid email address." })
     .min(3, { message: "Email must be at least 12 characters." })
     .max(50, { message: "Email must not exceed 50 characters." }),
+  discovery_location: z
+    .string()
 });
+
 
 export const WaitlistForm = () => {
   const form = useForm<z.infer<typeof waitlistFormSchema>>({
     resolver: zodResolver(waitlistFormSchema),
     defaultValues: {
       full_name: "",
-      email_address: "",
+      email: "",
+      discovery_location: "web",
     },
   });
 
@@ -78,10 +83,10 @@ export const WaitlistForm = () => {
 
         <FormField
           control={form.control}
-          name="email_address"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email Address</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
                   placeholder="johndoe@gmail.com"

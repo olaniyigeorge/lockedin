@@ -1,23 +1,22 @@
 import HabitTask from "@/models/lockedin.habit-task";
 import HabitTaskEntry from "@/models/lockedin.task-entry";
-import { auth } from "@/utils/auth";
-import { connectToDB } from "@/utils/database";
+import { connectToDB } from "@/utils/db.service.mongo";
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
 
     try {
-       // Parse the URL to get query parameters
         const url = new URL(request.url);
         const filter : 'owner' | 'id' | null = null
-        const owner = url.searchParams.get("owner"); // Extract the owner from query parameters
-        const id = url.searchParams.get("id"); // Extract the owner from query parameters
+        const owner = url.searchParams.get("owner"); 
+        const id = url.searchParams.get("id");
 
         if (owner) {
             console.log("Getting habit tasks from this user");
             await connectToDB();
         
             // Fetch habit tasks based on the filter
-            const my_habit_tasks = await HabitTask.find({ filter });
+            const my_habit_tasks = await HabitTask.find({ owner: owner });
         
             // Fetch entries for the habit tasks using their IDs
             const habitTaskIds = my_habit_tasks.map(task => task._id);
@@ -37,9 +36,16 @@ export async function GET(request: Request) {
                 ...task.toObject(), // Convert each Mongoose document to a plain object
                 entries: entriesMap[task._id] || [], // Add entries for this task or an empty array if none
             }));
-        
-            return new Response(JSON.stringify(habitTasksWithEntries), { status: 200 });
-        }
+   
+
+            return NextResponse.json(
+                { 
+                    // message: "user's tasks with entries",
+                    habitTasksWithEntries
+                },
+                { status: 200 }
+            );
+            }
         
 
         if (id) {
@@ -64,7 +70,7 @@ export async function GET(request: Request) {
        
     } catch (error) {
         console.error(error);
-        return new Response("Failed to fetch life domains created by user", { status: 500 });
+        return new Response("Failed to fetch habit tasks created by user", { status: 500 });
     }
 }
 
@@ -73,7 +79,6 @@ export async function PATCH(request: Request) {
     const { title, description, aspect, accessibility, start_date, end_date } = await request.json();
 
     try {
-       // Parse the URL to get query parameters
         const url = new URL(request.url);
         const id = url.searchParams.get("id"); 
 
@@ -129,4 +134,3 @@ export async function DELETE(request: Request) {
         return new Response("Error deleting prompt", { status: 500 });
     }
 };
-

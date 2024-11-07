@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
+import { DialogHeader } from "../ui/dialog";
 
 
 export const DISCOVERY_LOCATION: string[] = [
@@ -69,8 +71,22 @@ export default function WaitlistForm(data : WaitlistFormProps) {
 
     return (
         <div className="w-full flex flex-col items-center">
-            <h1 className="text-3xl lockedin_text_gradient font-extrabold">{data.type} Wishlist</h1>
-            <form className="w-full text-gray-800 shadow glassmorphism p-3 flex gap-2 flex-col border rounded-xl"> 
+                    <Dialog>
+            <DialogTrigger className="rounded-full px-10 py-4 text-lg duration-500 transition bg-transparent border border-green-600 text-green-600 hover:text-white hover:bg-green-600 hover:font-bold hover:border-none leading-none">
+              <span>Join Wait List</span>
+            </DialogTrigger>
+            <DialogContent className="md:p-8 w-fit">
+              <DialogHeader className="flex flex-col gap-6">
+                <DialogTitle className="bg-gradient-to-r from-green-600 to-orange-500 bg-clip-text text-transparent">
+                  Experience LockedIn First-hand
+                </DialogTitle>
+                <DialogDescription className="text-md text-gray-700 md:text-justify">
+                  Be among the first set of people to test and use LockedIn app.
+                  Stay informed about its development milestones and launch date
+                  announcements.
+                </DialogDescription>
+              </DialogHeader>
+                <form className="w-full text-gray-800 shadow glassmorphism p-3 flex gap-2 flex-col border rounded-xl"> 
                 <input 
                     className="p-2 rounded-md" 
                     type="name" 
@@ -114,6 +130,9 @@ export default function WaitlistForm(data : WaitlistFormProps) {
                 </span>
                 
             </form>
+            </DialogContent>
+          </Dialog>
+          
         </div>
     )
 }
