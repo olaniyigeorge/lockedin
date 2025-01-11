@@ -3,9 +3,8 @@ import React from 'react'
 
 export const Header = () => {
   return (
-    <header className="relative w-full">
-      <div className="w-[90%] mx-auto flex justify-between items-center py-6">
-        <h1 className="font-extrabold text-4xl font-nunito text-green-600 ">
+    <header className="p-4 bg-black text-white flex justify-between items-center">
+        <h1 className="font-extrabold text-4xl text-green-600 font-nunito">
           Locked
           <span className="bg-orange-500 rounded-[7px] px-1 text-white">
             In
@@ -13,12 +12,11 @@ export const Header = () => {
         </h1>
 
         <Link
-          href=""
-          className="hover:bg-green-600 hover:text-white hover:font-bold rounded-full px-6 py-4 transition-all duration-500 leading-none"
+          href="/get-started"
+          className="font-nunito light_btn"
         >
-          Sign In
+          Get Started
         </Link>
-      </div>
     </header>
   );
 }

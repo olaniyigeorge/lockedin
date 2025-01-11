@@ -12,6 +12,7 @@ const config: Config = {
       fontFamily: {
         comfortaa: ["var(--comfortaa)"],
         nunito: ["var(--nunito)"],
+        noto: ["Noto", 'serif'],
       },
       backgroundImage: {
         grid: "url('/imgs/grid.png')",

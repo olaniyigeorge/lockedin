@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,14 +15,14 @@ body {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+    --primary: 39 100% 50%; /* Orange */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 120 100% 25%; /* Green */
+    --secondary-foreground: 0 0% 0%; /* Black */
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 39 100% 50%; /* Orange */
+    --accent-foreground: 0 0% 100%; /* White */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
@@ -41,9 +42,9 @@ body {
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
+    --primary: 39 100% 50%; /* Orange */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 120 100% 25%; /* Green */
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
@@ -69,4 +70,32 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.light_btn {
+  @apply bg-white border text-black hover:bg-black hover:text-white px-4 py-2 rounded-full;
+}
+
+.outline_btn {
+  @apply border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-4 py-2 rounded-full;
+}
+
+.white_outline_btn {
+  @apply border border-white text-white hover:bg-white hover:text-black px-4 py-2 rounded-full;
+}
+
+.accent_btn {
+  @apply bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded-full;
+}
+
+
+.orange_gradient_bg {
+  @apply bg-gradient-to-b from-yellow-500 via-orange-500 to-orange-600;
+}
+.orange_gradient {
+  @apply bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-600 bg-clip-text text-transparent;
+}
+
+.green_gradient {
+  @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
 }

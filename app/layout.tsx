@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${comfortaa.variable} ${nunito.variable} antialiased font-comfortaa bg-grid bg-center backdrop-blur-sm`}
+        className={`${comfortaa.variable} ${nunito.variable} antialiased bg-black text-white max-w-[1440px] mx-auto font-noto`}
       >
 
         <ToastContainer
@@ -43,10 +43,10 @@ export default function RootLayout({
           theme="colored"
           transition={Slide}
         />
-        <div className="bg-gradient-bg min-h-screen flex flex-col">
+        <div className="flex flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
-          {/* <Footer /> */}
+            <main className="flex-">{children}</main>
+          <Footer />
         </div>
 
       </body>
