@@ -1,13 +1,21 @@
-import WaitlistForm from "@/components/forms/onboarding-waitlist";
+// import WaitlistForm from "@/components/forms/onboarding-waitlist";
 
 
 
-export default async function Waitlist() {
+// export default async function Waitlist() {
 
+
+//     return (
+//         <section className="w-full">
+//                 <WaitlistForm type={"Join"}                />
+//         </section>            
+//     )
+// }
+
+
+export default function Waitlist() {
 
     return (
-        <section className="w-full">
-                <WaitlistForm type={"Join"}                />
-        </section>            
+        <>Waitlist</>
     )
 }
