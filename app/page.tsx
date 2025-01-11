@@ -18,24 +18,24 @@ export default function Home() {
   return (
     <section className="w-full flex-col flex items-center gap-8 py-10">
         <HeroSection 
-            primaryText="Build Better Habits!" 
-            styledText="Track Habit Forming Tasks"
-            secondaryText="and celebrate new habits"
-            image="/hero-image.jpg"
-            flow="reversed"
+          primaryText="Build Better Habits!" 
+          styledText="Track Habit Forming Tasks"
+          secondaryText="and celebrate new habits"
+          image="/hero-image.jpg"
+          flow="reversed"
         />
-        
-        
-            <Link 
-                 className="text-green-600 white_outline_btn my-5 md:my-10 font-nunito text-xl"
-                href=""
-            > 
-                Join the conversation on how to build better habits
-            </Link> 
-            
-
-        
-        <FeatureSlider features={sampleFeatures} className=""/>
+                
+        <Link 
+          className="text-green-600 white_outline_btn my-5 md:my-10 font-nunito text-xl"
+          href=""
+        > 
+          Join the conversation on how to build better habits
+        </Link> 
+      
+        <FeatureSlider 
+          features={sampleFeatures} 
+          className=""
+        />
 
         
     
