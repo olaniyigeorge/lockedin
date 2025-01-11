@@ -3,9 +3,11 @@
 import { useState } from 'react';
 
 export interface Feature {
+    added_at: Date;
     title: string;
     description: string;
     icon: string;
+    status: "dev" | "requested" | "scheduled" | "shipped" 
 }
 
 export interface FeatureSliderProps {
@@ -25,18 +27,21 @@ export default function FeatureSlider({ features, className }: FeatureSliderProp
                 <div className="w-1/2 p-4 flex flex-col items-center">
                     <h2 className="text-4xl font-bold">{activeFeature.title}</h2>
                     <p className="text-2xl text-center font-nunito">{activeFeature.description}</p>
+                    <span className="text-xs p-2 border rounded-lg">{activeFeature.status}</span>
                 </div>
                 <div className="w-1/2 p-4 flex flex-col items-center font-nunito">
                     <ul>
-                        {features.map((feature, index) => (
-                            <li
-                                key={index}
-                                className={`hover:scale-[105%] transition-all ease-in-out duration-300 cursor-pointer p-2 ${index === activeFeatureIndex ? 'orange_gradient font-bold' : ''}`}
-                                onClick={() => setActiveFeatureIndex(index)}
-                            >
-                                {"------"} {feature.title}
-                            </li>
-                        ))}
+                        {features
+                            .sort((a, b) => new Date(a.added_at).getTime() - new Date(b.added_at).getTime())
+                            .map((feature, index) => (
+                                <li
+                                    key={index}
+                                    className={`hover:scale-[105%] transition-all ease-in-out duration-300 cursor-pointer p-2 ${index === activeFeatureIndex ? 'orange_gradient font-bold' : ''}`}
+                                    onClick={() => setActiveFeatureIndex(index)}
+                                >
+                                    {"------"} {feature.title} 
+                                </li>
+                            ))}
                     </ul>
                 </div>
             </div>

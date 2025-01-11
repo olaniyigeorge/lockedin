@@ -99,3 +99,15 @@ body {
 .green_gradient {
   @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
 }
+
+
+
+.glassmorphism {
+  @apply bg-white/5 shadow-[inset_10px_-80px_94px_0_rgb(199,199,199,0.1)] backdrop-blur-lg bg-opacity-10;
+}
+
+
+
+.inputs {
+  @apply  text-white border font-nunito border-gray-700 active:border-orange-500 focus:border-orange-500 px-4 py-3 rounded-xl rounded-md bg-transparent active:bg-transparent;
+}

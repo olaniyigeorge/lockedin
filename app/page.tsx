@@ -43,33 +43,27 @@ export default function Home() {
   );
 }
 
-
-
 // Sample features for the app
 const sampleFeatures: Feature[] = [
   {
-      title: "Feature One",
-      description: "This is the description for feature one.",
-      icon: "icon-one"
+    added_at: new Date('2023-01-01T10:00:00Z'),
+    title: "Join Waitlist",
+    description: "Waitlist form hooked to db.",
+    icon: "icon-one",
+    status: "dev"
   },
   {
-      title: "Feature Two",
-      description: "This is the description for feature two.",
-      icon: "icon-two"
+    added_at: new Date('2023-02-15T14:30:00Z'),
+    title: "Feature Two",
+    description: "This is the description for feature two.",
+    icon: "icon-two",
+    status: "requested"
   },
   {
-      title: "Feature Three",
-      description: "This is the description for feature three.",
-      icon: "icon-three"
+    added_at: new Date('2023-03-30T08:45:00Z'),
+    title: "Feature Three",
+    description: "This is the description for feature three.",
+    icon: "icon-three",
+    status: "shipped"
   }
 ];
-
-
-
-// export default function Home() {
-//   return (
-//     <div className="relative">
-//       <Hero />
-//     </div>
-//   );
-// }
