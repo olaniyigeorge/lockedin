@@ -10,8 +10,6 @@ const handler = NextAuth({
   callbacks: {
     async session({ session }) {
       // store the user id from MongoDB to session
-      const sessionUser = await User.findOne({ email: session.user.email });
-      session.user.id = sessionUser._id.toString();
 
       return session;
     },
@@ -25,18 +23,18 @@ const handler = NextAuth({
             return false;
             }
 
-        // check if user already exists
-        const userExists = await User.findOne({ email: profile?.email });
+        // // check if user already exists
+        // const userExists = await User.findOne({ email: profile?.email });
 
-        // if not, create a new document and save user in MongoDB
-        if (!userExists) {
-            const username = profile.name?.replace(" ", "").toLowerCase() || "user"; // Fallback if name is undefined
-          await User.create({
-            email: profile?.email,
-            username: username,
-            image: profile?.picture || "",
-          });
-        }
+        // // if not, create a new document and save user in MongoDB
+        // if (!userExists) {
+        //     const username = profile.name?.replace(" ", "").toLowerCase() || "user"; // Fallback if name is undefined
+        //   await User.create({
+        //     email: profile?.email,
+        //     username: username,
+        //     image: profile?.picture || "",
+        //   });
+        // }
 
         return true
       } catch (error) {
