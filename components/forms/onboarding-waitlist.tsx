@@ -98,7 +98,7 @@ export default function WaitlistForm({ type }: WaitlistFormProps) {
                             How did you hear about us?
                         </option>
                         {DISCOVERY_LOCATION.map((location) => (
-                            <option key={location} value={location}>
+                            <option key={location} value={location} className="bg-black bg-opacity-80">
                                 {location.toUpperCase().replaceAll("_", " ")}
                             </option>
                         ))}

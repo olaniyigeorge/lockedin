@@ -50,20 +50,20 @@ const sampleFeatures: Feature[] = [
     title: "Join Waitlist",
     description: "Waitlist form hooked to db.",
     icon: "icon-one",
-    status: "dev"
+    status: "staging"
   },
   {
     added_at: new Date('2023-02-15T14:30:00Z'),
-    title: "Feature Two",
-    description: "This is the description for feature two.",
+    title: "Authentication",
+    description: "Sign up and sign in",
     icon: "icon-two",
-    status: "requested"
+    status: "dev"
   },
   {
     added_at: new Date('2023-03-30T08:45:00Z'),
-    title: "Feature Three",
-    description: "This is the description for feature three.",
+    title: "Habit Tasks Management",
+    description: "Create habit tasks with the ability to update its visibility status and extent its end time on the last day",
     icon: "icon-three",
-    status: "shipped"
-  }
+    status: "scheduled"
+  },
 ];

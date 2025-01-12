@@ -12,7 +12,7 @@ export const Header = () => {
         </Link>
 
         <Link
-          href="/onboarding/waitlist"
+          href="/auth/sign-in" // "/onboarding/waitlist"
           className="font-nunito light_btn"
         >
           Get Started

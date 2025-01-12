@@ -7,7 +7,7 @@ export interface Feature {
     title: string;
     description: string;
     icon: string;
-    status: "dev" | "requested" | "scheduled" | "shipped" 
+    status: "dev" | "staging" | "requested" | "scheduled" | "shipped" 
 }
 
 export interface FeatureSliderProps {
@@ -22,14 +22,14 @@ export default function FeatureSlider({ features, className }: FeatureSliderProp
     const activeFeature = features[activeFeatureIndex];
 
     return (
-        <div className={`flex flex-col items-center ${className} max-w-[95%] md:max-w-[70%] w-full `}>
+        <div id="features" className={`flex flex-col items-center ${className} max-w-[95%] md:max-w-[70%] w-full `}>
             <div className="w-full py-5 md:py-10 flex items-center justify-between gap-3 bg-orange-500 bg-white/5 shadow-[inset_10px_-80px_94px_0_rgb(199,199,199,0.1)] backdrop-blur-lg p-5 rounded-lg p-2 bg-opacity-10">
                 <div className="w-1/2 p-4 flex flex-col items-center">
                     <h2 className="text-4xl font-bold">{activeFeature.title}</h2>
                     <p className="text-2xl text-center font-nunito">{activeFeature.description}</p>
                     <span className="text-xs p-2 border rounded-lg">{activeFeature.status}</span>
                 </div>
-                <div className="w-1/2 p-4 flex flex-col items-center font-nunito">
+                <div className="w-1/2 p-4 flex max-h-[220px] overflow-y-auto flex-col items-center font-nunito">
                     <ul>
                         {features
                             .sort((a, b) => new Date(a.added_at).getTime() - new Date(b.added_at).getTime())

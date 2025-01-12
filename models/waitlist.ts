@@ -9,18 +9,12 @@ const WaitlistSchema = new Schema({
     },
     discovery_location: {
         type: String,
-        enum: ["twitter", "family_and_friends", "telegram_bot", "web"],
+        enum: ["twitter", "family_and_friends", "telegram_bot", "web", "linkedin"],
         default: "web`",
     }
 }, {
     timestamps: true,
 });
-
-
-// // Ensure that end_date cannot be before start_date (optional validation)
-// WaitlistSchema.methods.toString = function() {
-//     return `${this.partner} --H: ${this.habit.owner}`;
-// };
 
 
 const Waitlist = models.Waitlist || model("Waitlist", WaitlistSchema);
