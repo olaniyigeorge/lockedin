@@ -21,7 +21,7 @@ export default function Home() {
           primaryText="Build Better Habits!" 
           styledText="Track Habit Forming Tasks"
           secondaryText="and celebrate new habits"
-          image="/hero-image.jpg"
+          image="/images/hero-image.jpg"
           flow="reversed"
         />
                 
@@ -33,7 +33,7 @@ export default function Home() {
         </Link> 
       
         <FeatureSlider 
-          features={sampleFeatures} 
+          features={features} 
           className=""
         />
 
@@ -43,8 +43,8 @@ export default function Home() {
   );
 }
 
-// Sample features for the app
-const sampleFeatures: Feature[] = [
+// Features for the app
+const features: Feature[] = [
   {
     added_at: new Date('2023-01-01T10:00:00Z'),
     title: "Join Waitlist",
@@ -56,6 +56,13 @@ const sampleFeatures: Feature[] = [
     added_at: new Date('2023-02-15T14:30:00Z'),
     title: "Authentication",
     description: "Sign up and sign in",
+    icon: "icon-two",
+    status: "dev"
+  },
+  {
+    added_at: new Date('2023-02-15T14:30:00Z'),
+    title: "Accountability Partnership(Challenge)",
+    description: "Allow users setup tasks, stake a wager to be redeemed little by little for every entry made on th task and invite friends to hold you accountable and join the challenge.",
     icon: "icon-two",
     status: "dev"
   },

@@ -1,4 +1,4 @@
-import LifeDomain from "@/models/lockedin.life-domain";
+import LifeDomain from "@/models/life-domain";
 import { connectToDB } from "@/services/db_mongo";
 import { NextResponse } from "next/server";
 
@@ -38,35 +38,35 @@ export async function GET(request: Request) {
 }
 
 
-// export async function PATCH(request: Request) {
-//     const { name, description } = await request.json();
+export async function PATCH(request: Request) {
+    const { name, description } = await request.json();
 
-//     try {
-//        // Parse the URL to get query parameters
-//         const url = new URL(request.url);
-//         const id = url.searchParams.get("id"); 
+    try {
+       // Parse the URL to get query parameters
+        const url = new URL(request.url);
+        const id = url.searchParams.get("id"); 
 
-//         if (id) {
-//             console.log("Getting this life domain")
-//             await connectToDB();
-//             const life_domain = await LifeDomain.findById(id); 
+        if (id) {
+            console.log("Getting this life domain")
+            await connectToDB();
+            const life_domain = await LifeDomain.findById(id); 
             
-//             if (!life_domain) {
-//                 return new Response("Life domain not found", { status: 404 });
-//             }
+            if (!life_domain) {
+                return new Response("Life domain not found", { status: 404 });
+            }
 
-//             // Update the life domain data
-//             life_domain.name = name;
-//             life_domain.description = description;
+            // Update the life domain data
+            life_domain.name = name;
+            life_domain.description = description;
 
-//             await life_domain.save()
+            await life_domain.save()
 
-//             return new Response("Successfully updated life domain", { status: 200 })
-//         }
+            return new Response("Successfully updated life domain", { status: 200 })
+        }
 
-//         return new Response("No filter param", { status: 400}) 
-//     } catch (error) {
-//         console.error(error);
-//         return new Response("Failed to fetch life domains created by user", { status: 500 });
-//     }
-// }
+        return new Response("No filter param", { status: 400}) 
+    } catch (error) {
+        console.error(error);
+        return new Response("Failed to fetch life domains created by user", { status: 500 });
+    }
+}

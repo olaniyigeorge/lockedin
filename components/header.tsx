@@ -11,12 +11,19 @@ export const Header = () => {
           </span>
         </Link>
 
-        <Link
-          href="/auth/sign-in" // "/onboarding/waitlist"
-          className="font-nunito light_btn"
-        >
-          Get Started
-        </Link>
+        <span className='flex gap-2 items-center'>
+          <Link href="/explore" className='font-nunito'>
+            Explore 
+          </Link>
+          <Link
+            href="/auth/sign-in" // "/onboarding/waitlist"
+            className="font-nunito light_btn"
+          >
+            Get Started
+          </Link>
+        </span>
+
+        
     </header>
   );
 }
