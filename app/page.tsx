@@ -1,4 +1,4 @@
-import HeroSection from "@/components/hero-section";
+import HeroSection from "@/sections/hero-section";
 import FeatureSliderSection, { Feature } from "@/sections/feature-slider";
 import { Metadata } from "next";
 
@@ -22,7 +22,6 @@ export default function Home() {
           image="/images/hero-image.jpg"
           flow="reversed"
         />
-        
         <FeatureSliderSection /> 
     </>
   );

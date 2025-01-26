@@ -69,7 +69,7 @@
         title: "Authentication",
         description: "Sign up and sign in",
         icon: "icon-two",
-        status: "dev"
+        status: "staging"
         },
         {
         added_at: new Date('2023-02-15T14:30:00Z'),

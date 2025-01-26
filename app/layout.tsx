@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ToastContainer, Slide } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { AuthStoreProvider } from "@/providers/auth-store-provider";
 
 const comfortaa = localFont({
   src: "./fonts/comfortaa.ttf",
@@ -28,11 +29,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${comfortaa.variable} ${nunito.variable} antialiased main relative`} >
 
-        <ToastContainer />
-        <Header />
-        <main className="w-full flex-col flex items-center">{children}</main>
-        <Footer />
-
+        <ToastContainer /> 
+        <AuthStoreProvider>
+          <Header />
+          <main className="w-full flex-col flex items-center">
+              {children}
+          </main>
+          <Footer />
+        </AuthStoreProvider>
       </body>
     </html>
   );
