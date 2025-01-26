@@ -36,7 +36,7 @@ import { toast } from "react-toastify";
 
         return (
             <div className="w-full p-3 md:p-6 flex justify-center items-center ">
-                <form className="w-full md:w-2/3 gap-3 glassmorphism p-10 rounded-xl flex flex-col justify-center items-center border border-orange-900" onSubmit={handleSubmit}>
+                <form className="w-full md:w-2/3 gap-3 glassmorphism p-10 rounded-xl flex flex-col justify-center items-center border border-slate-200" onSubmit={handleSubmit}>
                     <div className="w-full flex flex-col justify-center items-center gap-1">
                         <label className="hidden">Email:</label>
                         <input

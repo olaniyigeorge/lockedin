@@ -3,7 +3,7 @@ import React from 'react'
 
 export const Header = () => {
   return (
-    <header className="py-3 px-6 bg-black text-white flex justify-between items-center">
+    <header className="py-3 px-6 bg-orange-500 bg-opacity-20 flex justify-between items-center">
         <Link href="/" className="font-extrabold text-2xl text-green-600 font-nunito">
           Locked
           <span className="bg-orange-500 rounded-[7px] px-1 text-white">
@@ -17,7 +17,7 @@ export const Header = () => {
           </Link>
           <Link
             href="/auth/sign-in" // "/onboarding/waitlist"
-            className="font-nunito light_btn"
+            className="font-nunito accent_btn"
           >
             Get Started
           </Link>

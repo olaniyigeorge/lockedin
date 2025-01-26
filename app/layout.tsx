@@ -26,28 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${comfortaa.variable} ${nunito.variable} antialiased bg-black text-white max-w-[1440px] mx-auto font-noto`}
-      >
+      <body className={`${comfortaa.variable} ${nunito.variable} antialiased main relative`} >
 
-        <ToastContainer
-          position="top-center"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-          transition={Slide}
-        />
-        <div className="flex flex-col">
-          <Header />
-            <main className="flex-">{children}</main>
-          <Footer />
-        </div>
+        <ToastContainer />
+        <Header />
+        <main className="w-full flex-col flex items-center">{children}</main>
+        <Footer />
 
       </body>
     </html>

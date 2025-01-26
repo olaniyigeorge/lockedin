@@ -3,7 +3,7 @@ import React from 'react';
 
 export const Footer = () => {
   return (
-    <nav className="p-4 bg-black text-white flex flex-col gap-3 items-center">
+    <nav className="p-4 bg-orange-500 bg-opacity-20 flex flex-col gap-3 items-center">
       <h1 className="text-2xl text-green-600 font-bold">
         Locked
         <span className="text-white bg-orange-500 p-1 rounded-md">

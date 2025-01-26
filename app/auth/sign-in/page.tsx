@@ -6,7 +6,7 @@ export default function SignInPage() {
 
 
     return (
-        <div className="">
+        <div className="w-full">
             <SignInUpForm />
         </div>
 

@@ -6,6 +6,21 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+@layer utilities {
+  .xs-min-w-100px {
+    min-width: 100px;
+  }
+  .sm-max-w-400 {
+    max-width: 400px;
+  }
+  .md-max-w-1200px {
+    max-width: 1200px;
+  }
+  .lg-max-w-1440px {
+    max-width: 1440px;
+  }
+}
+
 
 @layer base {
   :root {
@@ -72,6 +87,10 @@ body {
   }
 }
 
+.main {
+  @apply xs-min-w-100px sm-max-w-400 md-max-w-1200px lg-max-w-1440px mx-auto font-nunito bg-slate-50 text-gray-800
+}
+
 .light_btn {
   @apply bg-white border text-black hover:bg-black hover:text-white px-4 py-2 rounded-full;
 }
@@ -109,5 +128,5 @@ body {
 
 
 .inputs {
-  @apply  font-nunito text-white border border-gray-700 focus:border-orange-500 px-4 py-3 rounded-xl bg-transparent active:bg-transparent;
+  @apply  font-nunito border border-gray-700 focus:border-orange-500 px-4 py-3 rounded-xl bg-transparent active:bg-transparent outline-none;
 }
