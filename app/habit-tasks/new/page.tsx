@@ -23,10 +23,9 @@ export default function NewHabitTaskPage() {
                     console.error("Failed to fetch aspects:", res);
                 }
             } catch (error) {
-                console.error("Error fetching aspects:", error);
+                console.error("Error fetching aspects: ", error);
             }
         };
-
         fetchAspects();
     }, [user]);
 

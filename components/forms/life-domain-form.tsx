@@ -22,13 +22,10 @@ export default function LifeDomainForm(data: LifeDomainFormProps) {
     const { user } = useAuthStore((state) => state);
     const router = useRouter();
 
-    if (!user!.id) {
-        return <div>Not authenticated</div>;
-    }
     const [lifeDomain, setLifeDomain] = useState<iLifeDomain>({
         name: data.lfd.name,
         description: data.lfd.description,
-        owner: user!.id,
+        owner: user?.id || "",
     });
     const [type, setType] = useState<string>("");
     const [submitting, setSubmitting] = useState<boolean>(false);
@@ -36,6 +33,10 @@ export default function LifeDomainForm(data: LifeDomainFormProps) {
     useEffect(() => {
         setLifeDomain(data.lfd); // Reset form state when lfd changes
     }, [data.lfd]);
+
+    if (!user?.id) {
+        return <div>Not authenticated</div>;
+    }
 
     const createLifeDomain = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
