@@ -1,40 +1,44 @@
+"use client"
 import HabitTaskForm from "@/components/forms/habit-task-form";
-import { auth } from "@/services/auth.nextauth";
 import { redirect } from "next/navigation";
-import { getLifeDomains } from "../../life-domains/action";
 import { iLifeDomain } from "@/components/forms/life-domain-form";
+import { useAuthStore } from "@/providers/auth-store-provider";
+import { useEffect, useState } from "react";
 
-export default async function NewHabitTaskPage() {
-    const session = await auth(); 
-    
-    // Redirect to the auth page if the user is not authenticated
-    if (!session?.user?.id) {
-        redirect("/auth");
+export default function NewHabitTaskPage() {
+    const { user } = useAuthStore((state) => state);
+    const [aspects, setAspects] = useState<iLifeDomain[]>([]);
+
+
+    useEffect(() => {
+        const fetchAspects = async () => {
+            try {
+                const response = await fetch(`/api/life-domains?owner=${user!.id}`, {
+                    method: "GET",
+                });
+                const res = await response.json();
+                if (response.ok) {
+                    setAspects(res.data);
+                } else {
+                    console.error("Failed to fetch aspects:", res);
+                }
+            } catch (error) {
+                console.error("Error fetching aspects:", error);
+            }
+        };
+
+        fetchAspects();
+    }, [user]);
+
+
+    if (!user?.id) {
+        redirect("/auth/signin");
     }
-    const userId = session.user.id;
-    let ASPECTS: iLifeDomain[] = []
-
-    try {
-        const response = await getLifeDomains()
-        const res = await response.json()
-
-        if (response.status == 200) {
-            console.log("returned aspects ", res.length)
-            ASPECTS = res
-        } else{
-            console.log("Error while getting aspects")
-        }
-    }catch(error) {
-        console.log("Error", error)
-    }
-
-
-
 
     return (
         <HabitTaskForm 
             type="Create"
-            user={userId}
+            user={user!.id}
             task={{
                 _id: "",
                 aspect: "",
@@ -45,7 +49,7 @@ export default async function NewHabitTaskPage() {
                 start_date: new Date(),
                 end_date: new Date(new Date().setDate(new Date().getDate() + 21)),
             }} 
-            aspects={ASPECTS}        
+            aspects={aspects}        
         />
     );
 }

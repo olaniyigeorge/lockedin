@@ -7,9 +7,7 @@ export async function GET(request: Request) {
     try {
        // Parse the URL to get query parameters
         const url = new URL(request.url);
-        const filter : 'owner' | 'id' | null = null
         const owner = url.searchParams.get("owner");
-        const id = url.searchParams.get("id"); 
 
         if (owner) {
             console.log("Getting life domains from this user")
@@ -19,7 +17,7 @@ export async function GET(request: Request) {
             return NextResponse.json(
                 {
                     message: "success",
-                    my_life_domains
+                    data: my_life_domains
                 },
                 {
                     status: 200
@@ -68,5 +66,37 @@ export async function PATCH(request: Request) {
     } catch (error) {
         console.error(error);
         return new Response("Failed to fetch life domains created by user", { status: 500 });
+    }
+}
+export async function POST(request: Request) {
+    const { name, description, owner } = await request.json();
+
+    try {
+        await connectToDB();
+
+        const newLifeDomain = new LifeDomain({
+            name,
+            description,
+            owner
+        });
+
+        console.log("\n\n", newLifeDomain, "\n\n")
+
+        await newLifeDomain.save();
+
+        return NextResponse.json(
+            {
+                message: "Successfully created life domain",
+                data: newLifeDomain
+            },
+            { status: 201 }
+        );
+
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json(
+            { message: "Failed to create life domain"},
+            { status: 500 }
+        );
     }
 }

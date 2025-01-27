@@ -1,17 +1,12 @@
-import { auth } from "@/services/auth.nextauth"
 import { redirect } from "next/navigation";
 
 
 
-export async function getLifeDomains() {
-    const session = await auth()
-    console.log(session)
-
-    // Redirect to the auth page if the user is not authenticated
-    if (!session?.user?.id) {
-        redirect("/auth");
+export async function getLifeDomains(userId: string) {
+ 
+    if (userId) {
+        redirect("/auth/signin");
     }
-    const userId = session.user.id;
     try {
         const response = await fetch(`${process.env.DOMAIN}/api/life-domains?owner=${userId}`, {
             method: "GET",

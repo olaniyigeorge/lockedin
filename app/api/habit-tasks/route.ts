@@ -40,8 +40,8 @@ export async function GET(request: Request) {
 
             return NextResponse.json(
                 { 
-                    // message: "user's tasks with entries",
-                    habitTasksWithEntries
+                    message: "habit tasks fetched successfully",
+                    data: habitTasksWithEntries
                 },
                 { status: 200 }
             );
@@ -136,3 +136,39 @@ export async function DELETE(request: Request) {
 };
 
 
+export async function POST(request: Request) {
+    const { title, description, aspect, accessibility, owner, start_date, end_date } = await request.json();
+
+    try {
+        await connectToDB();
+
+        // Create a new habit task
+        const newHabitTask = new HabitTask({
+            title,
+            description,
+            aspect,
+            accessibility,
+            owner,
+            start_date,
+            end_date,
+        });
+
+        // Save the new habit task to the database
+        await newHabitTask.save();
+
+        return NextResponse.json({
+            message: "habit taks created successullly",
+            data: newHabitTask
+             },
+             { status: 201 }
+            );
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json(
+            {
+                message: "Failed to create habit task",
+                data: error
+            },
+            { status: 500 });
+    }
+}

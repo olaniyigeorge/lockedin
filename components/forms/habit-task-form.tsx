@@ -48,7 +48,7 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
         setSubmitting(true);
         try {
             console.log("HBTK: ", habitTask)
-            const response = await fetch(`/api/habit-tasks/new`, {
+            const response = await fetch(`/api/habit-tasks/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -173,7 +173,7 @@ export default function HabitTaskForm({ type, user, aspects, task }: HabitTaskFo
                     <button
                         type="submit"
                         disabled={submitting}
-                        className='border  hover:bg-gray-950 py-2 px-4 md:px-8 w-fit justify-end rounded-md text-white'
+                        className='accent_btn'
                     >
                         {submitting ? `${type}ing...` : type}
                     </button>
