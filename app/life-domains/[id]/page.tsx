@@ -1,5 +1,4 @@
-"use client"
-import { useEffect, useState } from 'react';
+import LifeDomainDetails from "@/components/life-domain-details";
 
 interface iLifeDomain {
     _id: string;
@@ -7,52 +6,33 @@ interface iLifeDomain {
     description: string;
 }
 
-export default function LifeDomainPage({ params }: { params: { id: string } }) {
-    const [lifeDomain, setLifeDomain] = useState<iLifeDomain | null>(null);
-    const [error, setError] = useState<string | null>(null);
+export default async function LifeDomainPage({params,}: {params: Promise<{ id: string }>}) {
+    const { id } = await params;
+    let lifeDomain: iLifeDomain | null = null;
+    try {
+        const response = await fetch(`${process.env.DOMAIN}/api/life-domains/${id}`, {
+            method: "GET",
+        });
 
-    useEffect(() => {
-        const fetchLifeDomain = async () => {
-            try {
-                const response = await fetch(`/api/lockedin/life-domains?id=${params.id}`, {
-                    method: "GET",
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    setLifeDomain(data);
-                } else {
-                    setError(`Error: ${response.status}`);
-                }
-            } catch (err) {
-                console.log(err);
-                setError('An error occurred while fetching the life domain.');
-            }
-        };
-
-        fetchLifeDomain();
-    }, [params.id]);
-
-    if (error) {
-        return (
-            <div className="text-red-500">
-                <span>{error}</span>
-                <div>This Life Domain {params.id}</div>
-            </div>
-        );
+        if (response.ok) {
+            const data = await response.json();
+            lifeDomain = data.data
+        } else {
+            lifeDomain = null
+        }
+    } catch (err) {
+        console.log(err);
+        lifeDomain = null
+        
     }
 
     if (!lifeDomain) {
-        return <div>Loading...</div>;
+        return <div>Life Domain not found</div>;
     }
 
-    return (
-        <div className="border border-gray-300 p-4 rounded-md bg-white shadow-md">
-            <h1 className="text-2xl font-semibold">{lifeDomain.name}</h1>
-            <p className="mt-2 text-gray-700">{lifeDomain.description}</p>
-            <div className="mt-4 text-sm text-gray-500">
-                <span className='hidden'>Life Domain ID: {lifeDomain._id}</span>
-            </div>
-        </div>
-    );
+    return ( 
+        <LifeDomainDetails 
+            {...lifeDomain} 
+        />
+     );
 }

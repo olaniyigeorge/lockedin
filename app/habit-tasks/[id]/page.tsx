@@ -1,11 +1,11 @@
 
-
 import MarkTodayButton from "@/components/mark-today-button";
 import TrackerCalenderView, { eHabitTask } from "@/components/tracker-calender";
 
-export default async function HabitTaskDetailsPage({ params }: { params: { id: string } }) {
+export default async function HabitTaskDetailsPage({params,}: {params: Promise<{ id: string }>}) {
+    const { id } = await params;
     try {
-        const response = await fetch(`${process.env.DOMAIN}/api/habit-tasks?id=${params.id}`, {
+        const response = await fetch(`${process.env.DOMAIN}/api/habit-tasks?id=${id}`, {
             method: "GET",
         });
         const habitTask = await response.json();
@@ -41,7 +41,7 @@ export default async function HabitTaskDetailsPage({ params }: { params: { id: s
                         )}
                     </div>
 
-                    <MarkTodayButton habitId={params.id} />
+                    <MarkTodayButton habitId={id} />
 
                     <TrackerCalenderView {...habitTask}/>
                 </div>
@@ -51,7 +51,7 @@ export default async function HabitTaskDetailsPage({ params }: { params: { id: s
                 <span className="">
                     <>{response.status}</>
                     <div className="">
-                        This Habit Task {params.id}
+                        This Habit Task {id}
                     </div>
                 </span>
             );
@@ -62,7 +62,7 @@ export default async function HabitTaskDetailsPage({ params }: { params: { id: s
             <span className="">
                 <>Error</>
                 <div className="">
-                    This Habit Task {params.id}
+                    This Habit Task {id}
                 </div>
             </span>
         );
