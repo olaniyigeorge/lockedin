@@ -104,7 +104,13 @@ export default function AccountabilityPartnership(challenge: iAccountabilityPart
                         <span 
                             key={challenger.name}
                             className="flex gap-2 items-center">
-                            <img className="w-8 h-8 object-contain rounded-full border" src="/images/logo.png" />
+                            <Image 
+                                className="w-8 h-8 object-contain rounded-full border" 
+                                src="/images/logo.png"
+                                width={10}
+                                height={10}
+                                alt="logo"
+                            />
                             <span className="">
                                 <p className="text-sm">{challenger.name}</p>
                                 <p className="bg-green-500 text-[10px] w-fit px-2 py-[1px] rounded-full text-white">{challenger["ap_status"]}</p>

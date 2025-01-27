@@ -2,8 +2,7 @@ import AccountabilityPartnership, { iAccountabilityPartnership } from "@/compone
 
 
 
-export default function ThisChallenge({ params }: { params: { id: string } }) {
-    // console.log("params: ", params)
+export default function ThisChallenge() {
     const partnership: iAccountabilityPartnership = {
         _id: "",
         task: {
