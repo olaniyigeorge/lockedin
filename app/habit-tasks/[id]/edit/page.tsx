@@ -3,7 +3,11 @@ import { auth } from "@/services/auth.nextauth";
 import { redirect } from "next/navigation";
 import { getLifeDomainById } from "./action";
 
-export default async function EditHabitTask({ params }: { params: { id: string } }) {
+export default async function EditHabitTask({
+    params,
+  }: {
+    params: Promise<{ id: string }>
+  }) {
     const session = await auth();
 
     if (!session?.user?.id) {
@@ -23,7 +27,6 @@ export default async function EditHabitTask({ params }: { params: { id: string }
     return (
         <LifeDomainForm 
             type="Edit" 
-            user={userId} 
             lfd={lifeDomain} 
         />
     );
