@@ -1,6 +1,16 @@
 import { iHabitTask } from "@/components/tracker-calender";
 import Link from "next/link";
 
+async function getPublicTasks() {
+    const response = await fetch(`${process.env.DOMAIN}/api/habit-tasks?accessibility=public`);
+    if (!response.ok) {
+        console.log('Failed to fetch public tasks');
+        return [];
+    }
+    const data = await response.json();
+    return data;
+}
+
 export default async function ExplorePage() {
     const publicTasks = await getPublicTasks();
 
@@ -32,12 +42,4 @@ export default async function ExplorePage() {
     );
 }
 
-async function getPublicTasks() {
-    const response = await fetch(`${process.env.DOMAIN}/api/habit-tasks?accessibility=public`);
-    if (!response.ok) {
-        console.log('Failed to fetch public tasks');
-        return [];
-    }
-    const data = await response.json();
-    return data;
-}
+
