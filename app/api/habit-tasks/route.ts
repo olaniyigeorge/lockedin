@@ -15,7 +15,7 @@ export async function GET(request: Request) {
             console.log("Getting habit tasks from this user");
 
             // Build the filter object
-            const filter: any = { owner: owner };
+            const filter: { owner: string; accessibility?: string } = { owner: owner };
             if (accessibility) {
                 filter.accessibility = accessibility;
             }
