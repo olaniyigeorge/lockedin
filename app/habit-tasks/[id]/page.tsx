@@ -12,7 +12,7 @@ export default async function HabitTaskDetailsPage({params,}: {params: Promise<{
 
         if (response.ok) {
               return (
-                <div className="container mx-auto p-4 bg-white bg-opacity-30 backdrop-blur shadow-lg rounded-lg">
+                <div className="container mx-auto p-4 my-4 bg-white bg-opacity-30 backdrop-blur shadow-lg rounded-lg">
                     <h1 className="text-2xl font-bold mb-2">{habitTask.title}</h1>
                     <p className="text-gray-700 mb-4">{habitTask.description}</p>
 
@@ -23,22 +23,6 @@ export default async function HabitTaskDetailsPage({params,}: {params: Promise<{
                         <span className="text-sm text-gray-500">
                             {new Date(habitTask.start_date).toLocaleDateString()} - {new Date(habitTask.end_date).toLocaleDateString()}
                         </span>
-                    </div>
-
-                    {/* Map through entries and display them */}
-                    <div className="mb-4">
-                        <h2 className="text-xl font-semibold mb-2">Entries</h2>
-                        {habitTask.entries.length > 0 ? (
-                            <ul className="list-disc pl-5">
-                                {habitTask.entries.map((entry: eHabitTask) => (
-                                    <li key={entry._id} className="text-gray-700">
-                                        {new Date(entry.end_date).toLocaleDateString()}: {entry.end_date ? 'Completed' : 'Not Completed'}
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p className="text-gray-500">No entries for today.</p>
-                        )}
                     </div>
 
                     <MarkTodayButton habitId={id} />

@@ -2,26 +2,31 @@ import HabitTask from "@/models/habit-task";
 import HabitTaskEntry from "@/models/task-entry";
 import { connectToDB } from "@/services/db_mongo";
 import { NextResponse } from "next/server";
-
 export async function GET(request: Request) {
-
     try {
         const url = new URL(request.url);
-        const filter : 'owner' | 'id' | null = null
-        const owner = url.searchParams.get("owner"); 
+        const owner = url.searchParams.get("owner");
         const id = url.searchParams.get("id");
+        const accessibility = url.searchParams.get("accessibility");
+
+        await connectToDB();
 
         if (owner) {
             console.log("Getting habit tasks from this user");
-            await connectToDB();
-        
+
+            // Build the filter object
+            const filter: any = { owner: owner };
+            if (accessibility) {
+                filter.accessibility = accessibility;
+            }
+
             // Fetch habit tasks based on the filter
-            const my_habit_tasks = await HabitTask.find({ owner: owner });
-        
+            const my_habit_tasks = await HabitTask.find(filter);
+
             // Fetch entries for the habit tasks using their IDs
             const habitTaskIds = my_habit_tasks.map(task => task._id);
             const entries = await HabitTaskEntry.find({ habit: { $in: habitTaskIds } });
-        
+
             // Create a mapping of entries for easier access
             const entriesMap = entries.reduce((acc, entry) => {
                 if (!acc[entry.habit]) {
@@ -30,23 +35,21 @@ export async function GET(request: Request) {
                 acc[entry.habit].push(entry);
                 return acc;
             }, {});
-        
+
             // Combine the tasks with their respective entries
             const habitTasksWithEntries = my_habit_tasks.map(task => ({
                 ...task.toObject(), // Convert each Mongoose document to a plain object
                 entries: entriesMap[task._id] || [], // Add entries for this task or an empty array if none
             }));
-   
 
             return NextResponse.json(
-                { 
+                {
                     message: "habit tasks fetched successfully",
                     data: habitTasksWithEntries
                 },
                 { status: 200 }
             );
-            }
-        
+        }
 
         if (id) {
             console.log("Getting this habit task");
@@ -58,7 +61,7 @@ export async function GET(request: Request) {
 
             // Fetch entries for the habit task
             const entries = await HabitTaskEntry.find({ habit: id }); // Fetch entries for the habit task
-            
+
             // Create a plain object with the habit task details and entries
             const habitTaskWithEntries = {
                 ...habit_task.toObject(), // Convert Mongoose document to plain object
@@ -66,14 +69,48 @@ export async function GET(request: Request) {
             };
             return new Response(JSON.stringify(habitTaskWithEntries), { status: 200 });
         }
-        return new Response("No filter param", { status: 400})
-       
+
+        if (accessibility === "public") {
+            console.log("Getting all public habit tasks");
+
+            // Fetch all public habit tasks
+            const public_habit_tasks = await HabitTask.find({ accessibility: "public" });
+
+            // Fetch entries for the public habit tasks using their IDs
+            const habitTaskIds = public_habit_tasks.map(task => task._id);
+            const entries = await HabitTaskEntry.find({ habit: { $in: habitTaskIds } });
+
+            // Create a mapping of entries for easier access
+            const entriesMap = entries.reduce((acc, entry) => {
+                if (!acc[entry.habit]) {
+                    acc[entry.habit] = [];
+                }
+                acc[entry.habit].push(entry);
+                return acc;
+            }, {});
+
+            // Combine the tasks with their respective entries
+            const habitTasksWithEntries = public_habit_tasks.map(task => ({
+                ...task.toObject(), // Convert each Mongoose document to a plain object
+                entries: entriesMap[task._id] || [], // Add entries for this task or an empty array if none
+            }));
+
+            return NextResponse.json(
+                {
+                    message: "Public habit tasks fetched successfully",
+                    data: habitTasksWithEntries
+                },
+                { status: 200 }
+            );
+        }
+
+        return new Response("No filter param", { status: 400 });
+
     } catch (error) {
         console.error(error);
-        return new Response("Failed to fetch habit tasks created by user", { status: 500 });
+        return new Response("Failed to fetch habit tasks", { status: 500 });
     }
 }
-
 
 export async function PATCH(request: Request) {
     const { title, description, aspect, accessibility, start_date, end_date } = await request.json();
