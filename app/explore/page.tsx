@@ -29,13 +29,13 @@ export default async function ExplorePage() {
                 <h2 className="text-xl font-semibold mb-2">Habit Tasks</h2>
                 <h3 className="text-lg mb-4">Explore public habit tasks and show support by cheering users on</h3>
                 <ul className="list-disc pl-5">
-                    {publicTasks.data.map((task: iHabitTask) => (
+                    {publicTasks.data ? publicTasks.data.map((task: iHabitTask) => (
                         <li key={task._id} className="mb-2">
                             <Link href={`/habit-tasks/${task._id}`} className="text-blue-500 hover:underline">
                                 {task.title}
                             </Link>
                         </li>
-                    ))}
+                    )) : <li>No public tasks available</li>}
                 </ul>
             </section>
         </div>
