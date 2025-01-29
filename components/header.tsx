@@ -4,9 +4,8 @@ import Link from 'next/link';
 import React from 'react'
 
 export const Header = () => {
-  const { user, isAuthenticated, clearData } = useAuthStore((state) => state);
+  const { isAuthenticated, clearData } = useAuthStore((state) => state);
 
-  console.log("\n\n\n\n\n", user, isAuthenticated,"\n\n\n")
   return (
     <header className="py-3 px-6 bg-orange-500 bg-opacity-20 flex justify-between items-center">
         <Link href="/" className="font-extrabold text-2xl text-green-600 font-nunito">

@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+
+// TODO Update iLifeDomain to include owner's id
 export interface iLifeDomain{
     _id: string;
     name: string;

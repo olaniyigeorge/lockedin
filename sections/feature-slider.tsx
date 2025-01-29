@@ -62,14 +62,14 @@
         title: "Join Waitlist",
         description: "Waitlist form hooked to db.",
         icon: "icon-one",
-        status: "staging"
+        status: "shipped"
         },
         {
         added_at: new Date('2023-02-15T14:30:00Z'),
         title: "Authentication",
         description: "Sign up and sign in",
         icon: "icon-two",
-        status: "staging"
+        status: "shipped"
         },
         {
         added_at: new Date('2023-02-15T14:30:00Z'),
@@ -83,6 +83,6 @@
         title: "Habit Tasks Management",
         description: "Create habit tasks with the ability to update its visibility status and extent its end time on the last day",
         icon: "icon-three",
-        status: "scheduled"
+        status: "staging"
         },
     ];
