@@ -1,10 +1,10 @@
 import HabitTask from "@/models/habit-task";
 import HabitTaskEntry from "@/models/task-entry";
 import { connectToDB } from "@/services/db_mongo";
-import User from "@/models/user"; // Add this line to import the User model
+import User from "@/models/user"; 
 import { NextResponse } from "next/server";
 
-
+console.log("Habit task route", User.schema);
 export async function GET(request: Request) {
     try {
         const url = new URL(request.url);
