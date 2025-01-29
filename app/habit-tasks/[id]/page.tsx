@@ -1,6 +1,4 @@
-
-import MarkTodayButton from "@/components/mark-today-button";
-import TrackerCalenderView, { eHabitTask } from "@/components/tracker-calender";
+import TrackerCalenderView from "@/components/tracker-calender";
 
 export default async function HabitTaskDetailsPage({params,}: {params: Promise<{ id: string }>}) {
     const { id } = await params;
@@ -27,7 +25,7 @@ export default async function HabitTaskDetailsPage({params,}: {params: Promise<{
             );
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return (
             <span className="">
                 <>Error</>

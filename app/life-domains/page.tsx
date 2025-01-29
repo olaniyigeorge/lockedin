@@ -11,12 +11,10 @@ export default function LifeDomains() {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        // Fetch data and update state variables here
         async function fetchData() {
             try {
                 const response = await fetch(`/api/life-domains?owner=${user!.id}`);
                 const data = await response.json();
-                console.log(data);
                 setLifeDomains(data.data);
             } catch (error) {
                 setError(`Failed to fetch data ${error}`);
