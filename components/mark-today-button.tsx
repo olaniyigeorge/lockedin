@@ -46,7 +46,7 @@ const MarkTodayButton: React.FC<MarkTodayButtonProps> = ({ habitId }) => {
 
     return (
         <div>
-            <button onClick={markToday} className="p-2 border rounded-xl cursor-pointer my-2">
+            <button onClick={markToday} className="p-2 border border-green-600 text-green-600 hover:text-white hover:bg-green-600 transition-all duration-500 ease-in-out rounded-xl cursor-pointer my-2">
                 Mark Today
             </button>
             {/* {message && <p>{message}</p>} */}

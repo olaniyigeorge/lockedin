@@ -13,7 +13,6 @@ async function getPublicTasks() {
 
 export default async function ExplorePage() {
     const publicTasks = await getPublicTasks();
-
     return (
         <div className="w-full p-2 md:p-4">
             <h1 className="text-3xl font-bold mb-4">Explore</h1>

@@ -53,14 +53,14 @@ export async function GET(request: Request) {
 
         if (id) {
             console.log("Getting this habit task");
-            const habit_task = await HabitTask.findById(id); // Get the habit task by ID
+            const habit_task = await HabitTask.findById(id).populate('owner', '-password');
 
             if (!habit_task) {
                 return new Response("Habit task not found", { status: 404 });
             }
 
             // Fetch entries for the habit task
-            const entries = await HabitTaskEntry.find({ habit: id }); // Fetch entries for the habit task
+            const entries = await HabitTaskEntry.find({ habit: id });
 
             // Create a plain object with the habit task details and entries
             const habitTaskWithEntries = {
@@ -73,7 +73,7 @@ export async function GET(request: Request) {
         if (accessibility === "public") {
             console.log("Getting all public habit tasks");
 
-            // Fetch all public habit tasks
+            // Fetch all public habit tasks and populate the owner field, excluding the password field
             const public_habit_tasks = await HabitTask.find({ accessibility: "public" });
 
             // Fetch entries for the public habit tasks using their IDs
@@ -82,25 +82,25 @@ export async function GET(request: Request) {
 
             // Create a mapping of entries for easier access
             const entriesMap = entries.reduce((acc, entry) => {
-                if (!acc[entry.habit]) {
-                    acc[entry.habit] = [];
-                }
-                acc[entry.habit].push(entry);
-                return acc;
+            if (!acc[entry.habit]) {
+                acc[entry.habit] = [];
+            }
+            acc[entry.habit].push(entry);
+            return acc;
             }, {});
 
             // Combine the tasks with their respective entries
             const habitTasksWithEntries = public_habit_tasks.map(task => ({
-                ...task.toObject(), // Convert each Mongoose document to a plain object
-                entries: entriesMap[task._id] || [], // Add entries for this task or an empty array if none
+            ...task.toObject(), // Convert each Mongoose document to a plain object
+            entries: entriesMap[task._id] || [], // Add entries for this task or an empty array if none
             }));
 
             return NextResponse.json(
-                {
-                    message: "Public habit tasks fetched successfully",
-                    data: habitTasksWithEntries
-                },
-                { status: 200 }
+            {
+                message: "Public habit tasks fetched successfully",
+                data: habitTasksWithEntries
+            },
+            { status: 200 }
             );
         }
 

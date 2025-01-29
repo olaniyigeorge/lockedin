@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import MarkTodayButton from "./mark-today-button";
+import { useAuthStore } from "@/providers/auth-store-provider";
 
 export interface iHabitTask {
     _id: string;
@@ -19,10 +21,16 @@ export interface iHabitTaskEntry {
     completed: boolean;
 }
 
+export interface publicUser {
+    _id: string;
+    email: string;
+    username: string
+}
+
 export interface eHabitTask {
     _id: string;
     aspect: string;
-    owner: string;
+    owner: publicUser;
     title: string;
     description: string;
     accessibility: "public" | "private" | "partnership";
@@ -63,7 +71,11 @@ const isToday = (date: Date) => {
 };
 
 export default function TrackerCalenderView(hbtk: eHabitTask) {
-    const { accessibility, start_date, end_date, entries } = hbtk;
+    const { accessibility, owner, start_date, end_date, entries } = hbtk;
+
+    const { user } = useAuthStore((state) => state)
+
+
 
     // Create a set of completed entry dates for quick lookup
     const completedDates = new Set(entries.map(entry => new Date(entry.date).toDateString()));
@@ -91,7 +103,17 @@ export default function TrackerCalenderView(hbtk: eHabitTask) {
                 <span className="">{hbtk.description}</span>
             </div>
 
-            <MarkTodayButton habitId={hbtk._id} />
+            <div className="mt-2">
+                {
+                    hbtk.accessibility.toLocaleLowerCase() === 'public' && (
+                        <p className="text-sm text-gray-600">Owner: {owner.username} </p> 
+                    )
+                }
+               
+                {user && user.id === owner._id && (
+                    <MarkTodayButton habitId={hbtk._id} />
+                )}
+            </div>
 
             <div className="flex flex-wrap gap-1 mt-2">
                 {dateRange.map(date => (
