@@ -1,3 +1,5 @@
+"use client"
+import { useAuthStore } from "@/providers/auth-store-provider";
 import Link from "next/link";
 
 export interface iHabitTask {
@@ -28,13 +30,21 @@ const formatDate = (date: Date) => {
 export default function HabitTaskCard(hbtk: iHabitTask) {
     const { accessibility, start_date, end_date } = hbtk;
 
+    const { user } = useAuthStore((state) => state);
+
     return (
         <div className="border w-full h-full border-gray-400 bg-slate-100 p-2 hover:bg-orange-50 rounded-md">
             <div className={`h-[2px] ${accessibilityColors[accessibility]} rounded-t-full`}></div>
             <h1 className="font-bold text-lg flex justify-between items-center hover:text-green-600 w-fit mt-1">
-                <Link href={`/habit-tasks/${hbtk._id}`}>
-                    {hbtk.title}
-                </Link>
+                {user ? (
+                    <Link href={`/habit-tasks/${hbtk._id}`}>
+                        {hbtk.title}
+                    </Link>
+                ) : (
+                    <Link href="/auth/sign-in">
+                        {hbtk.title}
+                    </Link>
+                )}
             </h1>
             <span className="text- line-clamp-3">{hbtk.description}</span>
             <div className="text-sm text-gray-600 mt-2">

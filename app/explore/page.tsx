@@ -1,3 +1,4 @@
+import HabitTaskCard from "@/components/habit-task-card";
 import { iHabitTask } from "@/components/tracker-calender";
 import Link from "next/link";
 
@@ -27,12 +28,10 @@ export default async function ExplorePage() {
             <section>
                 <h2 className="text-xl font-semibold mb-2">Habit Tasks</h2>
                 <h3 className="text-lg mb-4">Explore public habit tasks and show support by cheering users on</h3>
-                <ul className="list-disc pl-5">
+                <ul className=" pl-2">
                     {publicTasks.data ? publicTasks.data.map((task: iHabitTask) => (
                         <li key={task._id} className="mb-2">
-                            <Link href={`/habit-tasks/${task._id}`} className="text-blue-500 hover:underline">
-                                {task.title}
-                            </Link>
+                            <HabitTaskCard {...task} />
                         </li>
                     )) : <li>No public tasks available</li>}
                 </ul>
