@@ -1,12 +1,10 @@
 import { eHabitTask } from "./tracker-calender";
 
-
-
 const sampleTasks: eHabitTask[] = [
   {
     _id: "task1",
     aspect: "Health",
-    owner: "user123",
+    owner: { _id: "user123", email: "user123@example.com", username: "user123" },
     title: "Morning Jog",
     description: "A daily 30-minute jog to improve cardiovascular health.",
     accessibility: "public",
@@ -20,7 +18,7 @@ const sampleTasks: eHabitTask[] = [
   {
     _id: "task2",
     aspect: "Learning",
-    owner: "user456",
+    owner: { _id: "user456", email: "user456@example.com", username: "user456" },
     title: "Daily Coding Practice",
     description: "Spend 1 hour daily practicing algorithms and data structures.",
     accessibility: "private",
@@ -34,7 +32,7 @@ const sampleTasks: eHabitTask[] = [
   {
     _id: "task3",
     aspect: "Wellness",
-    owner: "user789",
+    owner: { _id: "user789", email: "user789@example.com", username: "user789" },
     title: "Daily Meditation",
     description: "Practice mindfulness meditation for 15 minutes every day.",
     accessibility: "partnership",
