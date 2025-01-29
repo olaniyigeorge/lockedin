@@ -1,16 +1,19 @@
 import AccountabilityPartnership, { iAccountabilityPartnership } from "@/components/accountability-partnership";
 
 
-
 export default function ThisChallenge() {
     const partnership: iAccountabilityPartnership = {
         _id: "",
         task: {
             _id: "f2n4ruiv3br9bvu",
             aspect: "Health",
-            owner: "John Doe",
+            owner: {
+                _id: "user1",
+                email: "john.doe@example.com",
+                username: "John Doe"
+            },
             title: "Gym Challenge: 5x Weekly",
-            description: "Must attend the gym at least five times in a week for the next 3 months. Each sessin must be at least 45 mins long",
+            description: "Must attend the gym at least five times in a week for the next 3 months. Each session must be at least 45 mins long",
             accessibility: "public",
             start_date: new Date("2024-12-30"),
             end_date: new Date("2025-02-01"),
@@ -31,19 +34,19 @@ export default function ThisChallenge() {
         },
         participants: [
             {
-                "name": "Abeleje Olaniyi",
-                "ap_status": "accepted",
-                "amount_staked": 400
+                name: "Abeleje Olaniyi",
+                ap_status: "accepted",
+                amount_staked: 400
             },
             {
-                "name": "John Doe",
-                "ap_status": "accepted",
-                "amount_staked": 5000
+                name: "John Doe",
+                ap_status: "accepted",
+                amount_staked: 5000
             },
             {
-                "name": "Femi Falana",
-                "ap_status": "pending",
-                "amount_staked": 250
+                name: "Femi Falana",
+                ap_status: "pending",
+                amount_staked: 250
             },
         ]
     } 
@@ -51,4 +54,3 @@ export default function ThisChallenge() {
         <AccountabilityPartnership  {...partnership}/>
     )
 }
-
