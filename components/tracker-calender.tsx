@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MarkTodayButton from "./mark-today-button";
 
 export interface iHabitTask {
     _id: string;
@@ -71,18 +72,26 @@ export default function TrackerCalenderView(hbtk: eHabitTask) {
     const dateRange = getDaysInRange(new Date(start_date), new Date(end_date));
 
     return (
-        <div className="border w-full border-gray-700 bg-transparent p-2 rounded-md">
-            <div className={`h-1 ${accessibilityColors[accessibility]} rounded-t-full`}></div>
+        <div className="border w-full border-gray-400 bg-transparent p-2 rounded-md">
+            <div className={`h-[2px] ${accessibilityColors[accessibility]} rounded-full`}></div>
             <div className="">
-                <h1 className="font-bold flex justify-between items-center w-fit mt-1">
-                    <Link 
-                        href={`/i/lockedin/habit-tasks/${hbtk._id}`}
-                        className="">
-                        {hbtk.title}
-                    </Link>
-                </h1>
+                <section className="flex justify-between items-center my-1">
+                    <h1 className="font-bold flex justify-between items-center w-fit mt-1">
+                        <Link 
+                            href={`/i/lockedin/habit-tasks/${hbtk._id}`}
+                            className="">
+                            {hbtk.title}
+                        </Link>
+                    </h1>
+                    <span className={`p-1 h-fit w-fit text-xs flex justify-center rounded-full ${hbtk.accessibility === "public" ? "bg-green-200" : hbtk.accessibility === "private" ? "bg-red-200" : "bg-blue-200"}`}>
+                        {hbtk.accessibility.toLocaleLowerCase()}
+                    </span>
+                </section>
+                
                 <span className="">{hbtk.description}</span>
             </div>
+
+            <MarkTodayButton habitId={hbtk._id} />
 
             <div className="flex flex-wrap gap-1 mt-2">
                 {dateRange.map(date => (

@@ -40,9 +40,9 @@ export default function LifeDomains() {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full  p-2 md:p-4">
             <span className="w-full flex items-center justify-between">
-                <>Define tags for the areas where you want to build better habits..</>
+                <h1 className="text-2xl md:text-3xl font-bold">Life Domains</h1>
                 <>{user ?
                     <Link 
                         className="border border-black hover:border-gray-900 p-1 rounded-md"
@@ -50,9 +50,13 @@ export default function LifeDomains() {
                     > 
                         Add Domain
                     </Link>
-                : <>Login</>
+                :   <Link href="/auth/sign-in" className="light_btn">
+                        Sign In
+                    </Link>
                 }</>
             </span>
+            <p className="text-gray-700 text-lg md:text-xl">Life domains are areas of your life where you want to build better habits and achieve personal growth.</p>
+           
             <section className="w-full my-4 gap-2 grid grid-cols-1 md:grid-cols-3">
                 {lifeDomains.map((lfd: iLifeDomain) => (
                     <LifeDomainCard 

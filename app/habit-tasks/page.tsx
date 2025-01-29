@@ -17,14 +17,13 @@ export default function HabitTasksPage() {
                     method: "GET",
                 })
                 const res = await response.json()
-                console.log(res)
                 if (response.ok) {
                     setHabitTasks(res.data)
                 } else {
                     setError("Failed to fetch habit tasks")
                 }
             } catch (error) {
-                console.log(error)
+                console.error(error)
                 setError("Error fetching habit tasks")
             }
         }
@@ -36,7 +35,7 @@ export default function HabitTasksPage() {
 
     if (error) {
         return (
-            <div className="w-full">
+            <div className="w-full p-2 md:p-4">
                 <span className="w-full flex items-center justify-between">
                     <>Habit Tasks</>
                     <>{user ?
@@ -52,20 +51,26 @@ export default function HabitTasksPage() {
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full p-2 md:p-4">
             <span className="w-full flex items-center justify-between">
-                <span className="">Build new habits one task at a time</span>
+                <h1 className="text-2xl md:text-3xl font-bold">Habit Tasks</h1>
                 <>{user ?
-                    <Link
+                    <Link 
                         className="border border-black hover:border-gray-900 p-1 rounded-md"
                         href="/habit-tasks/new"
-                    >
-                        Add Habit task
+                    > 
+                        Create Task
                     </Link>
-                    : <>Login</>
+                :   <Link href="/auth/sign-in" className="light_btn">
+                        Sign In
+                    </Link>
                 }</>
             </span>
-            <section className="w-full my-4 gap-2 grid grid-cols-1 md:grid-cols-3">
+            <p className="mt-2 text-lg md:text-xl">
+                A habit task is a specific action or behavior that you want to turn into a habit. 
+                By consistently completing these tasks, you can build new habits and improve your life domains.
+            </p>
+            <section className="w-full my-6 gap-2 grid grid-cols-1 md:grid-cols-3">
                 {habitTasks.map((ht: iHabitTask) => (
                     <div key={ht._id} className="w-full flex flex-col">
                         <HabitTaskCard {...ht} />

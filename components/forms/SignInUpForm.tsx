@@ -3,20 +3,24 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useAuthStore } from "@/providers/auth-store-provider";
+import { useRouter } from "next/navigation";
 
 export default function SignInUpForm() {
     const [authType, setAuthType] = useState<"signin" | "signup">("signin");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [submitting, setSubmitting] = useState<boolean>(false);
 
-    const { user, isAuthenticated, setUser } = useAuthStore((state) => state);
-
-    console.log("\n\n\n\n\n", user, "\n\n\n")
+    const { setUser } = useAuthStore((state) => state);
+    const router = useRouter();
+    
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setSubmitting(true);
         if (authType === "signup" && password !== confirmPassword) {
             alert("Passwords do not match");
+            setSubmitting(false);
             return;
         }
         const response = await fetch("/api/auth/signin", {
@@ -27,6 +31,7 @@ export default function SignInUpForm() {
             body: JSON.stringify({ email, password, authType }),
         });
         const data = await response.json();
+        setSubmitting(false);
         if (response.ok) {
             setUser({
                 id: data.user._id,
@@ -36,6 +41,7 @@ export default function SignInUpForm() {
             });
 
             toast.success(`Successfully ${authType === "signin" ? "signed in" : "signed up"}`);
+            router.push("/");
         } else {
             toast.error(`Failed to ${authType === "signin" ? "sign in" : "sign up"}`);
         }
@@ -58,6 +64,7 @@ export default function SignInUpForm() {
                         required
                         className="inputs w-full md:w-2/3"
                         placeholder="email"
+                        disabled={submitting}
                     />
                 </div>
 
@@ -71,6 +78,7 @@ export default function SignInUpForm() {
                         required
                         className="inputs w-full md:w-2/3"
                         placeholder="password"
+                        disabled={submitting}
                     />
                 </div>
                 {authType === "signup" && (
@@ -83,20 +91,23 @@ export default function SignInUpForm() {
                             required
                             className="inputs w-full md:w-2/3"
                             placeholder="confirm password"
+                            disabled={submitting}
                         />
                     </div>
                 )}
                 <button 
                     type="submit"
                     className="outline_btn mt-10"
+                    disabled={submitting}
                 >
-                    {authType === "signin" ? "Sign In" : "Sign Up"}
+                    {submitting ? "Submitting..." : (authType === "signin" ? "Sign In" : "Sign Up")}
                 </button>
 
                 <button 
                     type="button"
                     onClick={toggleAuthType}
                     className="light_btn mt-2"
+                    disabled={submitting}
                 >
                     {authType === "signin" ? "Switch to Sign Up" : "Switch to Sign In"}
                 </button>

@@ -43,7 +43,6 @@ export const WaitlistForm = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof waitlistFormSchema>) => {
-    console.log(data);
     const response = await fetch("/api/waitlist", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -29,14 +29,14 @@ export default function HabitTaskCard(hbtk: iHabitTask) {
     const { accessibility, start_date, end_date } = hbtk;
 
     return (
-        <div className="border w-full h-full border-gray-700 bg-slate-100 p-2 hover:bg-orange-100 rounded-md">
-            <div className={`h-1 ${accessibilityColors[accessibility]} rounded-t-full`}></div>
-            <h1 className="font-medium flex justify-between items-center hover:text-green-600 w-fit mt-1">
+        <div className="border w-full h-full border-gray-400 bg-slate-100 p-2 hover:bg-orange-50 rounded-md">
+            <div className={`h-[2px] ${accessibilityColors[accessibility]} rounded-t-full`}></div>
+            <h1 className="font-bold text-lg flex justify-between items-center hover:text-green-600 w-fit mt-1">
                 <Link href={`/habit-tasks/${hbtk._id}`}>
                     {hbtk.title}
                 </Link>
             </h1>
-            <span className="text-sm ">{hbtk.description}</span>
+            <span className="text- line-clamp-3">{hbtk.description}</span>
             <div className="text-sm text-gray-600 mt-2">
                 <p className="text-xs">Starts: {formatDate(start_date)}</p>
                 <p className="text-xs">Ends: {formatDate(end_date)}</p>

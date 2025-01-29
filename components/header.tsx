@@ -5,7 +5,6 @@ import React from 'react'
 
 export const Header = () => {
   const { isAuthenticated, clearData } = useAuthStore((state) => state);
-
   return (
     <header className="py-3 px-6 bg-orange-500 bg-opacity-20 flex justify-between items-center">
         <Link href="/" className="font-extrabold text-2xl text-green-600 font-nunito">
@@ -21,11 +20,14 @@ export const Header = () => {
           </Link>
           {
             isAuthenticated ? (
-              <button 
-                onClick={clearData}
+                <button 
+                onClick={() => {
+                  clearData();
+                  window.location.href = "/";
+                }}
                 className="font-nunito light_btn">
                 Sign Out
-              </button>
+                </button>
             ) : 
             (
               <Link
