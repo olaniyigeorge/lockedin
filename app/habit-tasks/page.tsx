@@ -25,6 +25,7 @@ export default function HabitTasksPage() {
             } catch (error) {
                 console.error(error)
                 setError("Error fetching habit tasks")
+                throw new Error("Error fetching habit tasks")
             }
         }
 

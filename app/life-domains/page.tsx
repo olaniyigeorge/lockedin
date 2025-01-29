@@ -18,6 +18,7 @@ export default function LifeDomains() {
                 setLifeDomains(data.data);
             } catch (error) {
                 setError(`Failed to fetch data ${error}`);
+                throw new Error(`Failed to fetch data ${error}`);
             } finally {
                 setLoading(false);
             }
