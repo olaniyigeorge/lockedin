@@ -15,7 +15,7 @@ export default function Error({
  
   return (
     <div className='w-full h-screen flex justify-center items-center'>
-      <h2 className='text-3xl font-extrabold'>Something went wrong !</h2>
+      <h2 className='text-3xl font-extrabold'>Something went wrong in Habit Tasks !</h2>
       <button
         onClick={
             () => reset()

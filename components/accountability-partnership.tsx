@@ -9,28 +9,38 @@ interface iPartner{
 }
 
 
-export interface iAccountabilityPartnership{
+export interface iChallengeInfo {
     _id: string
-    task: eHabitTask
-
-    status: "Active" | "Ended"
+    title: string
+    description: string
+    aspect: string
+    status?: "active" | "inactive"
+    entries: iHabitTaskEntry[]
+    accessibility: string
+    owner: string
+    habit: string
+    start_date: string
+    end_date: string
     wager_amount: number
-
     financial_summary: {
         total_collected: number,
         total_paid_out: number,
         remaining_pool: number
     }
-    participants : iPartner[]
+    participants: iPartner[]
+    accountability_partners: iPartner[]
+    createdAt: string
+    updatedAt: string
+    __v: number
 }
 
-export default function AccountabilityPartnership(challenge: iAccountabilityPartnership) {
+export default function ChallengePage(challenge: iChallengeInfo) {
     
 
     return (
         <div className="w-full flex flex-col gap-3 px-2 md:px-4 py-4 font-nunito">
             <span className="flex flex-col md:flex-row justify-between  items-center gap-2 transition-all transform ease-in-out duration-500">
-                <h1 className="text-2xl font-bold">{challenge.task.title}</h1>
+                <h1 className="text-2xl font-bold">{challenge.title}</h1>
                 
                 <span className="flex items-center gap-2 text-sm">
                     <button className="hover:scale-[105%] transition-all ease-in-out px-2 py-1 bg-white text-black rounded-md border flex items-center gap-1">
@@ -51,7 +61,7 @@ export default function AccountabilityPartnership(challenge: iAccountabilityPart
                 <section id="the-bet" className="w-full md:w-2/3 rounded-lg border  min-h-[200px]  p-2 md:p-3 flex flex-col gap-1">
                     <h2 className="font-medium">The Bet</h2>
                     <p className="text-xs border py-[1px] px-2 w-fit rounded-full">{challenge.status}</p>
-                    <h2 className="">{challenge.task.description}</h2>
+                    <h2 className="">{challenge.description}</h2>
                     <span className="flex flex-col gap-1">
                         <h2 className="text-gray-400 text-xs">Wager Amount</h2>
                         <p className="font-extrabold">${challenge.wager_amount}</p>
@@ -76,7 +86,7 @@ export default function AccountabilityPartnership(challenge: iAccountabilityPart
 
             <section className="w-full h-full flex flex-col md:flex-row justify-between items-stretch gap-3">
                 <section id="calender" className="w-full md:w-2/3 rounded-lg border  min-h-[200px]  p-2 md:p-3 flex flex-col gap-1">
-                    <TrackerCalenderView {...challenge.task} />
+                    {/* <TrackerCalenderView {...challenge.task} /> */}
                 </section>
 
                 <section id="participants" className="w-full md:w-1/3 rounded-lg border min-h-[200px] overflow-y-auto p-2 md:p-3 flex flex-col">
@@ -116,13 +126,13 @@ export default function AccountabilityPartnership(challenge: iAccountabilityPart
                     <h2 className="font-bold text-xl">Activity Timeline</h2>
                     
                     <span className="flex flex-col">
-                        {challenge.task.entries.map((entry) => (
+                        {challenge.entries.map((entry) => (
                             <span 
                                 key={entry._id}
                                 className="flex gap-4 items-start"
                             >
                                 <span className="flex flex-col gap-1 items-center ">
-                                    <p className="text-sm text-gray-500">{entry.date.toDateString().slice(3,10)} </p>
+                                    <p className="text-sm text-gray-500">{new Date(entry.date).toDateString().slice(3,10)} </p>
                                     <span className="border-l border-gray- h-[50px]"></span>
                                 </span>
 
@@ -132,7 +142,7 @@ export default function AccountabilityPartnership(challenge: iAccountabilityPart
                                 />
 
                                 <span className="">
-                                    <p className="text-sm text-white">{challenge.task.owner._id} {entry.completed ? "marked" : "missed"} {"an entry on this challenge"}</p>
+                                    <p className="text-sm text-white">{challenge.owner} {entry.completed ? "marked" : "missed"} {"an entry on this challenge"}</p>
                                     <p className={`${entry.completed ? "bg-green-500" : "bg-red-500"} text-[10px] w-fit px-2 py-[1px] rounded-full text-white`}>{entry.completed ? "Done" : "Missed"}</p>
                                 </span>
                             </span>

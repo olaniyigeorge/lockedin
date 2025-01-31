@@ -24,6 +24,9 @@ export default async function ExplorePage() {
                 <Link href="/life-domains" className="text-blue-500 hover:underline">
                     Your Life Domains
                 </Link>
+                <Link href="/challenge" className="text-blue-500 hover:underline">
+                    Join a challenge
+                </Link>
             </span>
             <section>
                 <h2 className="text-xl font-semibold mb-2">Habit Tasks</h2>

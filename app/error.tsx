@@ -14,9 +14,10 @@ export default function Error({
   }, [error])
  
   return (
-    <div>
-      <h2>Something went wrong!</h2>
+    <div className='w-full flex flex-col items-center gap-8 py-4 px-2'>
+      <h2 className="font-medium text-2xl">Something went wrong!</h2>
       <button
+        className="font-extrabold text-xl"
         onClick={
             () => reset()
         }
