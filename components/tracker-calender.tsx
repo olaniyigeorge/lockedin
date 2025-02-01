@@ -2,6 +2,7 @@
 import Link from "next/link";
 import MarkTodayButton from "./mark-today-button";
 import { useAuthStore } from "@/providers/auth-store-provider";
+import { formatDate, getDaysInRange, isToday } from "@/lib/utils";
 
 export interface iHabitTask {
     _id: string;
@@ -45,30 +46,7 @@ const accessibilityColors: Record<iHabitTask["accessibility"], string> = {
     partnership: "bg-blue-500",
 };
 
-const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    }).format(new Date(date));
-};
 
-const getDaysInRange = (startDate: Date, endDate: Date) => {
-    const dates: Date[] = [];
-    const currentDate = new Date(startDate);
-    while (currentDate <= endDate) {
-        dates.push(new Date(currentDate));
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
-    return dates;
-};
-
-const isToday = (date: Date) => {
-    const today = new Date();
-    return date.getDate() === today.getDate() &&
-           date.getMonth() === today.getMonth() &&
-           date.getFullYear() === today.getFullYear();
-};
 
 export default function TrackerCalenderView(hbtk: eHabitTask) {
     const { accessibility, owner, start_date, end_date, entries } = hbtk;
@@ -90,7 +68,7 @@ export default function TrackerCalenderView(hbtk: eHabitTask) {
                 <section className="flex justify-between items-center my-1">
                     <h1 className="font-bold flex justify-between items-center w-fit mt-1">
                         <Link 
-                            href={`/i/lockedin/habit-tasks/${hbtk._id}`}
+                            href={`/habit-tasks/${hbtk._id}`}
                             className="">
                             {hbtk.title}
                         </Link>

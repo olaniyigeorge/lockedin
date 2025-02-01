@@ -1,6 +1,7 @@
 import HabitTask from "@/models/habit-task";
 import HabitTaskEntry from "@/models/task-entry";
 import { connectToDB } from "@/services/db_mongo";
+import User from "@/models/user"; // Import the User model
 
 import { NextResponse } from "next/server";
 
