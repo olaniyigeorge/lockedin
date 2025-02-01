@@ -20,22 +20,12 @@ export default function ChallengeForm() {
     const [accessibility, setAccessibility] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
-
-    if (!user) {
-        return (
-            <div className="w-full h-screen flex flex-col justify-center items-center gap-4">
-                <h1 className=""> You have to be logged in to create a challenge.</h1>
-                <Link href="/auth/sign-in" className="border px-6 py-3 hover:bg-slate-200">
-                    Sign In
-                </Link>
-            </div>
-        );
-    }
+    const [wager, setWager] = useState<number>(0);
 
     useEffect(() => {
         const fetchHabitTasks = async () => {
             try {
-                const response = await fetch(`/api/habit-tasks?owner=${user.id}`);
+                const response = await fetch(`/api/habit-tasks?owner=${user!.id}`);
                 if (response.ok) {
                     const data = await response.json();
                     setHabitTasks(data.data);
@@ -55,7 +45,7 @@ export default function ChallengeForm() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const challengeData: ChallengeData = {
-            wager_amount: 100, // Example value
+            wager_amount: wager,
             owner_name: user!.username || "",
             title,
             description,
@@ -141,6 +131,14 @@ export default function ChallengeForm() {
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
+            required
+            className="w-full p-2 border rounded"
+            />
+            <input
+            type="number"
+            value={wager}
+            onChange={(e) => setWager(Number(e.target.value))}
+            placeholder="Wager Amount"
             required
             className="w-full p-2 border rounded"
             />

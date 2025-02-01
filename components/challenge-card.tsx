@@ -23,7 +23,7 @@ export interface iChallenge {
     end_date: string;
     wager_amount: number;
     participants: Participant[];
-    accountability_partners: any[];
+    accountability_partners: Participant[];
     createdAt: string;
     updatedAt: string;
     __v: number;
