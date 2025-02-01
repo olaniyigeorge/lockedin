@@ -142,8 +142,8 @@ export default function ChallengeForm() {
             required
             className="w-full p-2 border rounded"
             />
-            <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Create Challenge
+            <button type="submit" className="w-full p-2  orange_gradient_bg text-white rounded-md hover:font-medium hover:scale-[102%] duration-500 transition-all ease-in-out ">
+                Create Challenge
             </button>
         </form>
     );
