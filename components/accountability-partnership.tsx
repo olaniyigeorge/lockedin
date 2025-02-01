@@ -84,7 +84,7 @@ export default function ChallengePage(challenge: iChallengeInfo) {
 
 
     return (
-        <div className="w-full flex flex-col gap-3 px-2 md:px-4 py-4 font-nunito">
+        <div className="w-full flex flex-col gap-3 px-2 md:px-4 py-4 font-nunito z-0">
             <span className="flex flex-col md:flex-row justify-between  items-center gap-2 transition-all transform ease-in-out duration-500">
                 <h1 className="text-2xl font-bold">{challenge.title}</h1>
                 
