@@ -17,14 +17,14 @@ export default function Home() {
   return (
     <>
         <HeroSection 
-          primaryText="Build Better Habits!" 
-          styledText="Track Habit Forming Tasks"
-          secondaryText="and celebrate new habits"
+          primaryText="Stay LockedIn!" 
+          styledText="Stay Accountable"
+          secondaryText="Build Lasting Habits."
           image="/images/hero-image.jpg"
           flow="reversed"
         />
 
-        <section className="w-full my-10 flex justify-center">
+        <section className="w-full my-10 p-10 flex justify-center">
             <Link
               href="/onboarding/waitlist" 
               className="font-nunito accent_btn"
@@ -32,7 +32,7 @@ export default function Home() {
               Join Waitlist
             </Link>
         </section>
-        <FeatureSliderSection /> 
+        
     </>
   );
 }

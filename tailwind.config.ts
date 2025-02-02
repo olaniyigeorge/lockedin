@@ -13,7 +13,9 @@ const config: Config = {
       fontFamily: {
         comfortaa: ["var(--comfortaa)"],
         nunito: ["var(--nunito)"],
+        bebas: ['Bebas', 'sans-serif'],
         noto: ["Noto", 'serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
         grid: "url('/imgs/grid.png')",

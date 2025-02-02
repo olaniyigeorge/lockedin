@@ -3,6 +3,7 @@ import Link from "next/link";
 import MarkTodayButton from "./mark-today-button";
 import { useAuthStore } from "@/providers/auth-store-provider";
 import { formatDate, getDaysInRange, isToday } from "@/lib/utils";
+import Image from "next/image";
 
 export interface iHabitTask {
     _id: string;
@@ -25,7 +26,8 @@ export interface iHabitTaskEntry {
 export interface publicUser {
     _id: string;
     email: string;
-    username: string
+    username: string;
+    image?: string
 }
 
 export interface eHabitTask {
@@ -81,16 +83,30 @@ export default function TrackerCalenderView(hbtk: eHabitTask) {
                 <span className="">{hbtk.description}</span>
             </div>
 
-            <div className="mt-2">
-                {
-                    hbtk.accessibility.toLocaleLowerCase() === 'public' && (
-                        <p className="text-sm text-gray-600">Owner: {owner.username} </p> 
-                    )
-                }
-               
+            <div className="w-full flex justify-between items-center mt-2">
                 {user && user.id === owner._id && (
                     <MarkTodayButton habitId={hbtk._id} />
                 )}
+
+                {
+                    hbtk.accessibility.toLocaleLowerCase() === 'public' && (
+                        <div className="flex items-center gap-2">
+                            
+                                <Image 
+                                    src={owner.image || ""}
+                                    className="border w-10 h-10 object-contain rounded-full"
+                                    width={20}
+                                    height={20}
+                                    alt="user"
+                                />
+                            <div className="">
+                                <p className="text-sm font-medium  text-gray-800">{owner.username} </p> 
+                                <p className="text-xs text-gray-600">{owner.email} </p> 
+                            </div>
+                        </div>
+
+                    )
+                }
             </div>
 
             <div className="flex flex-wrap gap-1 mt-2">
