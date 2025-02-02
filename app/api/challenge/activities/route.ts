@@ -1,4 +1,5 @@
 import { ChallengeActivity } from "@/models/challenge";
+import User from "@/models/user";
 import { connectToDB } from "@/services/db_mongo";
 import { NextResponse } from "next/server";
 
