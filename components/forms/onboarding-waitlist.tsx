@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 export default function WaitlistForm({ type }: WaitlistFormProps) {
@@ -68,6 +69,7 @@ export default function WaitlistForm({ type }: WaitlistFormProps) {
                         Stay informed about its development milestones and launch date
                         announcements.
                     </p>
+
                 </div>
                 <form className="w-full flex flex-col gap-4 glassmorphism rounded-lg p-3">
                     <input

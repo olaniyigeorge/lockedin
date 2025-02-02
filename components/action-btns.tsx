@@ -5,7 +5,7 @@ export default function ActionBtns() {
 
 
     return (
-        <span className="w-full flex flex-col md:flex-row justify-center gap-4 md:gap-6 my-10">
+        <span className="w-full flex flex-col md:flex-row justify-center gap-4 md:gap-6 my-10 p-2 md:p-4">
             <Link href="/habit-tasks" className="flex justify-center border-gray-300 items-center gap-1 p-4 border rounded hover:scale-[103%] duration-400 animate_style glassmorphism font-medium text-gray-900 hover:bg-orange-200">
                 <ListIcon className="w-5 h-5"/> <>Habit Tasks</> 
             </Link>
