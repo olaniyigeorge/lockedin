@@ -32,10 +32,10 @@ export const Header = () => {
             ) : 
             (
               <Link
-                href="/auth/sign-in" // "/onboarding/waitlist"
+                href="/onboarding/waitlist" // ""
                 className="accent_btn font-medium transition-all duration-300 ease-in-out"
               >
-                Get Started
+                Join Us
               </Link>
             )
           }

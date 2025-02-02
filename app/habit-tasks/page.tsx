@@ -2,6 +2,7 @@
 import HabitTaskCard from "@/components/habit-task-card"
 import { iHabitTask } from "@/components/tracker-calender"
 import { useAuthStore } from "@/providers/auth-store-provider"
+import { CalendarPlusIcon } from "lucide-react";
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
@@ -53,21 +54,21 @@ export default function HabitTasksPage() {
 
     return (
         <div className="w-full p-2 md:p-4">
-            <span className="w-full flex items-center justify-between">
+            <span className="w-full flex gap-4 justify-center items-center">
                 <h1 className="text-2xl md:text-3xl font-bold">Habit Tasks</h1>
                 <>{user ?
                     <Link 
-                        className="border border-black hover:border-gray-900 p-1 rounded-md"
+                        className=""
                         href="/habit-tasks/new"
                     > 
-                        Create Task
+                        <CalendarPlusIcon className="w-8 h-8 text-green-500"/>
                     </Link>
                 :   <Link href="/auth/sign-in" className="light_btn">
                         Sign In
                     </Link>
                 }</>
             </span>
-            <p className="mt-2 text-lg md:text-xl">
+            <p className="mt-4 text-gray-600 text-lg md:text-2xl lg:text-3xl text-center">
                 A habit task is a specific action or behavior that you want to turn into a habit. 
                 By consistently completing these tasks, you can build new habits and improve your life domains.
             </p>

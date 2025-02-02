@@ -29,10 +29,10 @@ export default function Home() {
         
         <section className="w-full my-10 flex justify-center">
             <Link
-              href="/onboarding/waitlist" 
+              href="/auth/sign-in" 
               className="font-nunito accent_btn"
             >
-              Join Waitlist
+              Get Started
             </Link>
         </section>
 

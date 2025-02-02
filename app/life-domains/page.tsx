@@ -3,6 +3,7 @@ import Link from "next/link"
 import LifeDomainCard, { iLifeDomain } from "@/components/life-domain-card"
 import { useAuthStore } from "@/providers/auth-store-provider";
 import { useState, useEffect } from "react";
+import { LayoutTemplateIcon, Loader } from "lucide-react";
 
 export default function LifeDomains() {
     const { user } = useAuthStore((state) => state);
@@ -31,7 +32,9 @@ export default function LifeDomains() {
     }, [user]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="min-h-[500px] flex justify-center items-center">
+            <Loader className="w-8 h-8 animate-spin" />
+        </div>;
     }
 
     if (error) {
@@ -40,21 +43,21 @@ export default function LifeDomains() {
 
     return (
         <div className="w-full  p-2 md:p-4">
-            <span className="w-full flex items-center justify-between">
+            <span className="w-full flex gap-4 justify-center items-center">
                 <h1 className="text-2xl md:text-3xl font-bold">Life Domains</h1>
                 <>{user ?
                     <Link 
-                        className="border border-black hover:border-gray-900 p-1 rounded-md"
+                        className=""
                         href="/life-domains/new"
                     > 
-                        Add Domain
+                        <LayoutTemplateIcon className="w-8 h-8 text-green-500"/>
                     </Link>
                 :   <Link href="/auth/sign-in" className="light_btn">
                         Sign In
                     </Link>
                 }</>
             </span>
-            <p className="text-gray-700 text-lg md:text-xl">Life domains are areas of your life where you want to build better habits and achieve personal growth.</p>
+            <p className="mt-4 text-gray-600 text-lg md:text-2xl lg:text-3xl text-center">Life domains are areas of your life where you want to build better habits and achieve personal growth.</p>
            
             <section className="w-full my-4 gap-2 grid grid-cols-1 md:grid-cols-3">
                 {lifeDomains.map((lfd: iLifeDomain) => (
