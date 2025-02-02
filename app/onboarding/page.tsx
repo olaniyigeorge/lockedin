@@ -1,3 +1,16 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: {
+      default: "Join Us At LockedIn ",
+      template: "%s | LockedIn",
+    },
+    description:
+      "Stay on top of your goals with LockedIn, the ultimate habit and daily routine tracker. Designed to help you build lasting habits, this intuitive app enables users to set, track, and monitor their daily routines with ease. Whether you're aiming to develop better habits, stay consistent, or improve your productivity, LockedIn is your go-to tool for self-improvement. With a clean and user-friendly interface, it helps you stay focused, motivated, and on track towards achieving your long-term objectives. Download today and unlock your full potential! ",
+  };
+  
+
+
 export default async function Onboarding() {
     return (
         <div className="onboarding-container">
@@ -78,15 +91,15 @@ export default async function Onboarding() {
                 </ol>
                 <p className="onboarding-text"><strong>Gamification</strong>: Show badges, XP pop-ups, and a leaderboard snippet.</p>
                 <h3 className="onboarding-subheading">Slide 4: AI & Analytics</h3>
-                <p className="onboarding-text"><strong>Mockup</strong>: Dashboard with insights like <em>“You’re 30% more consistent after 8 PM. Adjust schedule?”</em></p>
+                <p className="onboarding-text"><strong>Mockup</strong>: Dashboard with insights like <em>&quot;You&quot;re 30% more consistent after 8 PM. Adjust schedule?”</em></p>
                 <h3 className="onboarding-subheading">Slide 5: Competitive Edge</h3>
                 <p className="onboarding-text"><strong>Comparison Table</strong>: LockedIn vs. competitors, highlighting <strong>accountability</strong> and <strong>integration</strong> features.</p>
                 <h3 className="onboarding-subheading">Slide 6: Call to Action for UI/UX</h3>
-                <p className="onboarding-text"><strong>Question</strong>: <em>“How do we design an experience that makes users feel truly ‘LockedIn’?”</em></p>
+                <p className="onboarding-text"><strong>Question</strong>: <em>“How do we design an experience that makes users feel truly &quot;LockedIn&quot;?”</em></p>
                 <p className="onboarding-text"><strong>Next Steps</strong>: Brainstorm onboarding flows, gamification UI, and commitment visualizations.</p>
             </section>
             <section className="onboarding-section">
-                <p className="onboarding-text"><strong>Final Note</strong>: LockedIn’s success hinges on balancing <strong>enforcement</strong> and <strong>empathy</strong>. The design must feel supportive, not punitive, while ensuring users take their commitments seriously.</p>
+                <p className="onboarding-text"><strong>Final Note</strong>: LockedIn&quot;s success hinges on balancing <strong>enforcement</strong> and <strong>empathy</strong>. The design must feel supportive, not punitive, while ensuring users take their commitments seriously.</p>
             </section>
         </div>
     )
