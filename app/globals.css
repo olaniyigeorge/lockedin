@@ -164,3 +164,36 @@ body {
   z-index: -2000; /* Ensure it is behind other elements */
   fill-opacity: 0.5;
 }
+
+
+.onboarding-container {
+  @apply p-6 rounded-lg shadow-md;
+}
+
+.onboarding-title {
+  @apply text-3xl font-bold mb-4 text-center;
+}
+
+.onboarding-section {
+  @apply mb-8;
+}
+
+.onboarding-subtitle {
+  @apply text-2xl font-semibold mb-2;
+}
+
+.onboarding-subheading {
+  @apply text-xl font-semibold mb-2;
+}
+
+.onboarding-text {
+  @apply text-base mb-4;
+}
+
+.onboarding-list {
+  @apply list-disc list-inside mb-4;
+}
+
+.onboarding-list-item {
+  @apply mb-2;
+}
