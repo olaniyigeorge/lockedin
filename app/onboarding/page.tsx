@@ -65,7 +65,7 @@ export default async function Onboarding() {
                 <h3 className="onboarding-subheading">2. Core Features & Differentiation</h3>
                 <p className="onboarding-text">Contrast LockedIn&quot;s <strong>commitment contracts</strong> and <strong>AI insights</strong> with basic trackers like Habitica or Streaks. Show mockups of key interactions (habit setup, penalty selection, streak protection).</p>
                 <h3 className="onboarding-subheading">3. Design Philosophy</h3>
-                <p className="onboarding-text"><strong>Simplicity</strong>: Clean interface with progress visualized as a "lock" that strengthens with consistency.</p>
+                <p className="onboarding-text"><strong>Simplicity</strong>: Clean interface with progress visualized as a &quot;lock&quot; that strengthens with consistency.</p>
                 <p className="onboarding-text"><strong>Engagement</strong>: Bold CTAs, progress animations, and celebratory micro-interactions.</p>
                 <p className="onboarding-text"><strong>Behavioral Science</strong>: Leverage loss aversion (e.g., “Don&quot;t break the chain!” warnings).</p>
                 <h3 className="onboarding-subheading">4. Onboarding Goals for UI/UX</h3>
