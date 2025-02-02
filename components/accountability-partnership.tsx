@@ -84,7 +84,7 @@ export default function ChallengePage(challenge: iChallengeInfo) {
 
 
     return (
-        <div className="w-full flex flex-col gap-3 px-2 md:px-4 py-4 font-nunito z-0">
+        <div className="w-full flex flex-col gap-3 bg-white bg-opacity-60  px-2 md:px-4 py-4 font-nunito z-0">
             <span className="flex flex-col md:flex-row justify-between  items-center gap-2 transition-all transform ease-in-out duration-500">
                 <h1 className="text-2xl font-bold">{challenge.title}</h1>
                 
@@ -104,7 +104,7 @@ export default function ChallengePage(challenge: iChallengeInfo) {
             </span>
 
             <section className="w-full h-full flex flex-col md:flex-row justify-between items-stretch gap-3 transition-all transform ease-in-out duration-500">
-                <section id="the-bet" className="w-full md:w-2/3 rounded-lg border  min-h-[200px]  p-2 md:p-3 flex flex-col gap-1">
+                <section id="the-bet" className="w-full glassimorphism md:w-2/3 rounded-lg border border-slate-300 min-h-[200px]  p-2 md:p-3 flex flex-col gap-1">
                     <h2 className="font-medium">The Bet</h2>
                     <p className="text-xs border py-[1px] px-2 w-fit rounded-full">{challenge.status}</p>
                     <h2 className="">{challenge.description}</h2>
@@ -113,7 +113,7 @@ export default function ChallengePage(challenge: iChallengeInfo) {
                         <p className="font-extrabold">${challenge.wager_amount}</p>
                     </span>
                 </section>
-                <section id="financial-summary" className="w-full md:w-1/3 rounded-lg border  min-h-[200px]  p-2 md:p-3 flex flex-col">
+                <section id="financial-summary" className="w-full glassimorphism md:w-1/3 rounded-lg border  min-h-[200px]  p-2 md:p-3 flex flex-col">
                     <h2 className="font-bold">Financial Summary</h2>
                     <span className="flex flex-col">
                         <h2 className="text-gray-400 text-xs">Total Collected</h2>
@@ -130,8 +130,8 @@ export default function ChallengePage(challenge: iChallengeInfo) {
                 </section>
             </section>
 
-            <section className="w-full h-full flex flex-col md:flex-row justify-between items-stretch gap-3">
-                <section id="calender" className="w-full md:w-2/3 rounded-lg border  min-h-[200px]  p-2 md:p-3 flex flex-col gap-1">
+            <section className="w-full h-full flex flex-col  md:flex-row justify-between items-stretch gap-3">
+                <section id="calender" className="w-full glassimorphism md:w-2/3 rounded-lg border  min-h-[200px]  p-2 md:p-3 flex flex-col gap-1">
                     
                     <div className="w-full">
                     <div className={`h-[2px] ${accessibilityColors[challenge.habit.accessibility]} rounded-full`}></div>
@@ -173,7 +173,7 @@ export default function ChallengePage(challenge: iChallengeInfo) {
 
                 </section>
 
-                <section id="participants" className="w-full md:w-1/3 rounded-lg border min-h-[200px] max-h-[400px] overflow-y-auto p-2 md:p-3 flex flex-col">
+                <section id="participants" className="w-full glassimorphism md:w-1/3 rounded-lg border min-h-[200px] max-h-[400px] overflow-y-auto p-2 md:p-3 flex flex-col">
                     <span className="flex justify-between items-center gap-2">
                         <span className="flex items-center gap-2">
                             <h2 className="font-bold text-xl">Participants</h2>
@@ -237,7 +237,7 @@ export default function ChallengePage(challenge: iChallengeInfo) {
                 </section>
             </section>
 
-            <section id="activity-timeline" className="w-full h-full flex flex-col md:flex-row justify-between items-stretch gap-3">
+            <section id="activity-timeline" className="w-full glassimorphism h-full flex flex-col md:flex-row justify-between items-stretch gap-3">
                 <section id="participants" className="w-full rounded-lg border min-h-[200px] overflow-y-auto p-2 md:p-3 flex flex-col">
                     <h2 className="font-bold text-xl">Activity Timeline</h2>
                     

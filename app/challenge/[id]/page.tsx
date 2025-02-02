@@ -14,11 +14,6 @@ export default async function ThisChallenge({params,}: {params: Promise<{ id: st
 
 
 
-
-// import AccountabilityPartnership, { iAccountabilityPartnership } from "@/components/accountability-partnership";
-
-
-// export default function ThisChallenge() {
 //     const partnership: iAccountabilityPartnership = {
 //         _id: "",
 //         task: {
@@ -67,7 +62,3 @@ export default async function ThisChallenge({params,}: {params: Promise<{ id: st
 //             },
 //         ]
 //     } 
-//     return (
-//         <AccountabilityPartnership  {...partnership}/>
-//     )
-// }

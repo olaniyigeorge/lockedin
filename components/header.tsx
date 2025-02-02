@@ -7,7 +7,7 @@ import React from 'react'
 export const Header = () => {
   const { isAuthenticated, clearData } = useAuthStore((state) => state);
   return (
-    <header className="py-3 px-6 bg-orange-300 font-bebas sticky top-0 right-0 shadow shadow-orange-100 bg-opacity-20 backdrop-blur-md flex justify-between items-center z-1000">
+    <header className="py-3 px-6 bg-orange-200 font-bebas sticky top-0 right-0  bg-opacity-20 backdrop-blur-md flex justify-between items-center z-1000">
         <Link href="/" className="font-black  text-2xl text-green-600 ">
           Locked
           <span className="text-white rounded-[7px] px-1 bg-orange-500">

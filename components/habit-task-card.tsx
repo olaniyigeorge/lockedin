@@ -48,8 +48,7 @@ export default function HabitTaskCard(hbtk: iHabitTask) {
             </h1>
             <span className="text- line-clamp-3">{hbtk.description}</span>
             <div className="text-sm text-gray-600 mt-2">
-                <p className="text-xs">Starts: {formatDate(start_date)}</p>
-                <p className="text-xs">Ends: {formatDate(end_date)}</p>
+                <p className="text-xs">Duration: {formatDate(start_date)} -- {formatDate(end_date)}</p>
             </div>
         </div>
     );
