@@ -2,6 +2,7 @@ import HeroSection from "@/sections/hero-section";
 import FeatureSliderSection, { Feature } from "@/sections/feature-slider";
 import { Metadata } from "next";
 import Link from "next/link";
+import ActionBtns from "@/components/action-btns";
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +25,9 @@ export default function Home() {
           flow="reversed"
         />
 
-        <section className="w-full my-10 p-10 flex justify-center">
+        <ActionBtns />
+        
+        <section className="w-full my-10 flex justify-center">
             <Link
               href="/onboarding/waitlist" 
               className="font-nunito accent_btn"
@@ -32,6 +35,8 @@ export default function Home() {
               Join Waitlist
             </Link>
         </section>
+
+        
         
     </>
   );
