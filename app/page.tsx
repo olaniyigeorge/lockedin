@@ -1,5 +1,5 @@
 import HeroSection from "@/sections/hero-section";
-import FeatureSliderSection, { Feature } from "@/sections/feature-slider";
+import FeatureSliderSection from "@/sections/feature-slider";
 import { Metadata } from "next";
 import Link from "next/link";
 import ActionBtns from "@/components/action-btns";
@@ -36,6 +36,7 @@ export default function Home() {
             </Link>
         </section>
 
+      <FeatureSliderSection />
         
         
     </>
