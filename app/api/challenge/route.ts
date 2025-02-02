@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectToDB } from '@/services/db_mongo';
 import HabitChallenge from '@/models/challenge';
 import HabitTaskEntry from '@/models/task-entry';
+import HabitTask from '@/models/habit-task';
 
 export async function GET(request: Request) {
     try {
@@ -14,7 +15,7 @@ export async function GET(request: Request) {
             console.log("Getting specific challenge by id ");
 
             // Fetch challenge by id
-            const challenge = await HabitChallenge.findById(id).populate("habit");
+            const challenge = await HabitChallenge.findById(id).populate({ path: 'habit', model: HabitTask });
             
             if (challenge && challenge.habit) {
             // Fetch all HabitTaskEntries for the habit

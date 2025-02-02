@@ -56,7 +56,7 @@ export async function GET(request: Request) {
 
         if (id) {
             console.log("Getting this habit task");
-            const habit_task = await HabitTask.findById(id).populate('owner', '-password');
+            const habit_task = await HabitTask.findById(id).populate({ path: "owner", select: "-password", model: User });
 
             if (!habit_task) {
                 return new Response("Habit task not found", { status: 404 });

@@ -13,7 +13,7 @@ export async function GET(request: Request) {
             console.log("Getting challenge activities for this challenge by challengeId");
 
             // Fetch challenge by id
-            const activities = await ChallengeActivity.find({ challenge: challengeId }).populate("user");
+            const activities = await ChallengeActivity.find({ challenge: challengeId }).populate({ path: 'user', model: User });
 
             return NextResponse.json(
                 {
