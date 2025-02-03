@@ -16,7 +16,7 @@ export const Header = () => {
         </Link>
 
         <span className='flex gap-2 items-center'>
-          <Link href="/explore" className='flex items-center gap-1 p-2 border hover:scale-105 duration-400 animate_style glassmorphism'>
+          <Link href="/explore" className='flex items-center gap-1 p-2 border hover:scale-x-105 duration-400 animate_style glassmorphism'>
             <ListIcon className='w-5 h-5' /><>Explore</>
           </Link>
           {

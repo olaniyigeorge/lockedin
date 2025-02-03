@@ -22,6 +22,20 @@ export default function ChallengeForm() {
     const [endDate, setEndDate] = useState<string>("");
     const [wager, setWager] = useState<number>(0);
 
+    if (!user) {
+        return (
+            <div className="flex flex-col items-center justify-center h-screen">
+                <p>You need to be logged in to create a challenge</p>
+                <Link 
+                    href="/auth/sign-in"
+                    className="px-4 py-2 mt-4 text-white bg-orange-500 rounded hover:bg-orange-600"
+                >
+                    Sign In
+                </Link>
+            </div>
+        );
+    }
+    
     useEffect(() => {
         const fetchHabitTasks = async () => {
             try {

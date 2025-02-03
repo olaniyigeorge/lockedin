@@ -113,7 +113,7 @@ export default function TrackerCalenderView(hbtk: eHabitTask) {
                 {dateRange.map(date => (
                     <div
                         key={date.toDateString()}
-                        className={`h-4 w-4 flex items-center justify-center rounded ${completedDates.has(date.toDateString()) ? 'bg-green-500' : 'bg-gray-200'} ${isToday(date) ? 'border-2 border-orange-500' : ''}`}
+                        className={`h-4 w-4 flex items-center border justify-center rounded ${completedDates.has(date.toDateString()) ? 'bg-green-500' : 'bg-gray-200'} ${isToday(date) ? 'border-2 border-orange-500' : ''}`}
                     >
                         {completedDates.has(date.toDateString()) && (
                             <span className="text-white text-xs">✔️</span>
