@@ -26,15 +26,14 @@ export default function Home() {
         />
 
         <ActionBtns />
+
+          <Link
+            href="/onboarding/waitlist" // /auth/sign-in
+            className="font-nunito page_section accent_btn text-2xl"
+          >
+            Early Access
+          </Link>
         
-        <section className="w-full my-10 flex justify-center">
-            <Link
-              href="/auth/sign-in" 
-              className="font-nunito accent_btn"
-            >
-              Get Started
-            </Link>
-        </section>
 
       <FeatureSliderSection />
         
