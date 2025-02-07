@@ -63,8 +63,8 @@ export default function HabitTasksPage() {
                     > 
                         <CalendarPlusIcon className="w-8 h-8 text-green-500"/>
                     </Link>
-                :   <Link href="/auth/sign-in" className="light_btn">
-                        Sign In
+                :   <Link href="/onboarding/waitlist" className="light_btn"> 
+                        
                     </Link>
                 }</>
             </span>
@@ -73,11 +73,24 @@ export default function HabitTasksPage() {
                 By consistently completing these tasks, you can build new habits and improve your life domains.
             </p>
             <section className="w-full my-6 gap-2 grid grid-cols-1 md:grid-cols-3">
-                {habitTasks.map((ht: iHabitTask) => (
-                    <div key={ht._id} className="w-full flex flex-col">
-                        <HabitTaskCard {...ht} />
-                    </div>
-                ))}
+                {
+                    habitTasks.length > 0 ? (
+                        <>
+                            {habitTasks.map((ht: iHabitTask) => (
+                                <div key={ht._id} className="w-full flex flex-col">
+                                    <HabitTaskCard {...ht} />
+                                </div>
+                            ))}
+                        </>
+                    ) : (
+                        <div className="flex min-h-[300px] gap-3 justify-center items-center border w-screen">
+                            <Link href="/onboarding/waitlist" className="flex gap-2 w-fit items-center border hover:border-green-500 glassimorphism p-3">
+                                <CalendarPlusIcon className="w-8 h-8 text-green-500"/>
+                                <>Add Habit Task</>
+                            </Link>
+                        </div>
+                    )
+                }
             </section>
         </div>
     )

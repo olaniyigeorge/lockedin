@@ -59,14 +59,29 @@ export default function LifeDomains() {
             </span>
             <p className="mt-4 text-gray-600 text-lg md:text-2xl lg:text-3xl text-center">Life domains are areas of your life where you want to build better habits and achieve personal growth.</p>
            
-            <section className="w-full my-4 gap-2 grid grid-cols-1 md:grid-cols-3">
-                {lifeDomains.map((lfd: iLifeDomain) => (
-                    <LifeDomainCard 
-                        key={lfd._id}
-                        {...lfd}
-                    />
-                ))}
+
+            <section className="w-full my-6 gap-2 grid grid-cols-1 md:grid-cols-3">
+                {
+                    lifeDomains.length > 0 ? (
+                        <>
+                            {lifeDomains.map((lfd: iLifeDomain) => (
+                                <LifeDomainCard 
+                                    key={lfd._id}
+                                    {...lfd}
+                                />
+                            ))}
+                        </>
+                    ) : (
+                        <div className="flex min-h-[300px] gap-3 justify-center items-center border w-screen">
+                            <Link href="/onboarding/waitlist" className="flex gap-2 w-fit items-center border hover:border-green-500 glassimorphism p-3">
+                                <LayoutTemplateIcon className="w-8 h-8 text-green-500"/>
+                                <>Add Habit Task</>
+                            </Link>
+                        </div>
+                    )
+                }
             </section>
+
         </div>
     );
 }
