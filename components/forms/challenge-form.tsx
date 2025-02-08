@@ -49,15 +49,15 @@ export default function ChallengeForm() {
             <div className="flex flex-col items-center justify-center h-screen">
                 <p>You need to be logged in to create a challenge</p>
                 <Link 
-                    href="/auth/sign-in"
+                    href="/onboarding/waitlist"
                     className="px-4 py-2 mt-4 text-white bg-orange-500 rounded hover:bg-orange-600"
                 >
-                    Sign In
+                    Early Access
                 </Link>
             </div>
         );
     }
-    
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const challengeData: ChallengeData = {
