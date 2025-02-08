@@ -64,11 +64,11 @@ export default function TrackerCalenderView(hbtk: eHabitTask) {
     const dateRange = getDaysInRange(new Date(start_date), new Date(end_date));
 
     return (
-        <div className="border w-full border-gray-400 bg-transparent p-2 rounded-md">
+        <div className="border w-full md:w-1/2  border-gray-400 bg-transparent p-2 rounded-md">
             <div className={`h-[2px] ${accessibilityColors[accessibility]} rounded-full`}></div>
             <div className="">
-                <section className="flex justify-between items-center my-1">
-                    <h1 className="font-bold flex justify-between items-center w-fit mt-1">
+                <section className="flex justify-between items-start my-1">
+                    <h1 className="font-bold text-xl md:text-2xl flex justify-between items-center w-fit mt-1">
                         <Link 
                             href={`/habit-tasks/${hbtk._id}`}
                             className="">

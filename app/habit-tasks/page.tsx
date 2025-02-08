@@ -63,8 +63,8 @@ export default function HabitTasksPage() {
                     > 
                         <CalendarPlusIcon className="w-8 h-8 text-green-500"/>
                     </Link>
-                :   <Link href="/onboarding/waitlist" className="light_btn"> 
-                        
+                :   <Link hidden href="/onboarding/waitlist" className="light_btn"> 
+                        Sign In
                     </Link>
                 }</>
             </span>

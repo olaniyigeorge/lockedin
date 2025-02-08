@@ -10,27 +10,20 @@ export default async function HabitTaskDetailsPage({params,}: {params: Promise<{
 
         if (response.ok) {
               return (
-                <div className="flex p-4 my-4 ">
+                <div className="w-full flex items-center justify-center p-4 my-4  ">
                     <TrackerCalenderView {...habitTask}/>
                 </div>
             );
         } else {
-            return (
-                <span className="">
-                    <>{response.status}</>
-                    <div className="">
-                        This Habit Task {id}
-                    </div>
-                </span>
-            );
+            throw Error("Error getting this habit tasks!!!")
         }
     } catch (error) {
         console.error(error);
         return (
             <span className="">
-                <>Error</>
+                <h1 className="text-red-500 font-bold text-xl md:text-3xl">Error</h1>
                 <div className="">
-                    This Habit Task {id}
+                    Error getting this habit tasks!!!
                 </div>
             </span>
         );

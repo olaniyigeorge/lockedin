@@ -27,7 +27,7 @@ import { ListIcon, ProportionsIcon, SwordsIcon } from "lucide-react";
                     <h3 className="mb-4 text-xl md:text-2xl">Explore public habit tasks and show support by cheering users on</h3>
                     <ul className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" >
                         {publicTasks ? publicTasks.data.map((task: iHabitTask) => (
-                            <li key={task._id} className="mb-2">
+                            <li key={task._id} className="">
                                 <HabitTaskCard {...task} />
                             </li>
                         )) : <li>No public tasks available</li>}

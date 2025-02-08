@@ -52,7 +52,7 @@ export default function LifeDomains() {
                     > 
                         <LayoutTemplateIcon className="w-8 h-8 text-green-500"/>
                     </Link>
-                :   <Link href="/auth/sign-in" className="light_btn">
+                :   <Link hidden href="/onboarding/waitlist" className="light_btn">
                         Sign In
                     </Link>
                 }</>
@@ -75,7 +75,7 @@ export default function LifeDomains() {
                         <div className="flex min-h-[300px] gap-3 justify-center items-center border w-screen">
                             <Link href="/onboarding/waitlist" className="flex gap-2 w-fit items-center border hover:border-green-500 glassimorphism p-3">
                                 <LayoutTemplateIcon className="w-8 h-8 text-green-500"/>
-                                <>Add Habit Task</>
+                                <>Add Life Domain</>
                             </Link>
                         </div>
                     )
