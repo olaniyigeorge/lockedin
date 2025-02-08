@@ -41,7 +41,7 @@ export default function HabitTaskCard(hbtk: iHabitTask) {
                         {hbtk.title}
                     </Link>
                 ) : (
-                    <Link href="/auth/sign-in">
+                    <Link href="/onboarding/waitlist">
                         {hbtk.title}
                     </Link>
                 )}

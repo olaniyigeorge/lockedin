@@ -1,4 +1,7 @@
+"use client";
+import { useAuthStore } from "@/providers/auth-store-provider";
 import Link from "next/link";
+import { useActionState } from "react";
 
 interface Participant {
     user_id: string;
@@ -31,12 +34,20 @@ export interface iChallenge {
 
 
 export default function ChallengeCard(challenge: iChallenge ) {
+    const { user } = useAuthStore((state) => state);
     return (
         <div className="w-full border p-4 rounded shadow-md">
             <h2 className="font-bold text-xl mb-2">
-                <Link href={`/challenge/${challenge._id}`}>
-                    {challenge.title}
-                </Link>
+                
+                {user ? (
+                    <Link href={`/challenge/${challenge._id}`}>
+                        {challenge.title}
+                    </Link>
+                ) : (
+                    <Link href="/onboarding/waitlist">
+                        {challenge.title}
+                    </Link>
+                )}
             </h2>
             <p className="text-gray-700 mb-2">{challenge.description}</p>
             <p className="text-gray-500">Aspect: {challenge.aspect}</p>
