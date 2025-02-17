@@ -1,3 +1,4 @@
+import FeatureSliderSection from "@/sections/feature-slider";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -101,6 +102,8 @@ export default async function Onboarding() {
             <section className="onboarding-section">
                 <p className="onboarding-text"><strong>Final Note</strong>: LockedIn&quot;s success hinges on balancing <strong>enforcement</strong> and <strong>empathy</strong>. The design must feel supportive, not punitive, while ensuring users take their commitments seriously.</p>
             </section>
+
+            <FeatureSliderSection />
         </div>
     )
 }

@@ -13,7 +13,7 @@ export const Footer = () => {
       
       <div className="text-center">
         <p className="">
-          © {new Date().getFullYear()} <Link className="underline" href="/">LockedIn</Link>. All Rights Reserved.
+          © {new Date().getFullYear()} <Link className="underline" href="/auth/sign-in">LockedIn</Link>. All Rights Reserved.
         </p>
       </div>
     </nav>
