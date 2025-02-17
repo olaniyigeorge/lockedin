@@ -17,27 +17,23 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-        <HeroSection 
-          primaryText="Stay LockedIn!" 
-          styledText="Stay Accountable"
-          secondaryText="Build Lasting Habits."
-          image="/images/hero-image.jpg"
-          flow="reversed"
-        />
+      <HeroSection 
+        primaryText="Stay LockedIn!" 
+        styledText="Stay Accountable"
+        secondaryText="Build Lasting Habits."
+        image="/images/hero-image.jpg"
+        flow="reversed"
+      />
 
-        <ActionBtns />
+      <ActionBtns />
 
-          <Link
-            href="/onboarding/waitlist" // /auth/sign-in
-            className="font-nunito page_section accent_btn text-2xl"
-          >
-            Early Access
-          </Link>
-        
-
-      <FeatureSliderSection />
-        
-        
+      <Link
+        href="/onboarding/waitlist" // /auth/sign-in
+        className="font-nunito page_section accent_btn text-2xl my-10"
+      >
+        Early Access
+      </Link>
+               
     </>
   );
 }

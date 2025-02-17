@@ -71,7 +71,7 @@ export default function WaitlistForm({ type }: WaitlistFormProps) {
                     </p>
 
                 </div>
-                <form className="w-full flex flex-col gap-4 glassmorphism rounded-lg p-3">
+                <form className="w-full flex flex-col gap-4 glassmorphism rounded-lg p-3 my-3">
                     <input
                         className="inputs"
                         type="text"
