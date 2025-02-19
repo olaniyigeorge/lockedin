@@ -15,15 +15,13 @@ export async function GET(request: Request) {
         await connectToDB();
 
         if (owner) {
-            console.log("Getting habit tasks from this user");
-
-            // Build the filter object
+            console.log("Getting habit tasks from user... \n");
+            
+            // Build the filter object & fetch HTs based on filter
             const filter: { owner: string; accessibility?: string } = { owner: owner };
             if (accessibility) {
                 filter.accessibility = accessibility;
             }
-
-            // Fetch habit tasks based on the filter
             const my_habit_tasks = await HabitTask.find(filter);
 
             // Fetch entries for the habit tasks using their IDs
@@ -41,13 +39,13 @@ export async function GET(request: Request) {
 
             // Combine the tasks with their respective entries
             const habitTasksWithEntries = my_habit_tasks.map(task => ({
-                ...task.toObject(), // Convert each Mongoose document to a plain object
-                entries: entriesMap[task._id] || [], // Add entries for this task or an empty array if none
+                ...task.toObject(),
+                entries: entriesMap[task._id] || [],
             }));
 
             return NextResponse.json(
                 {
-                    message: "habit tasks fetched successfully",
+                    message: "Habit tasks(& entries) fetched successfully",
                     data: habitTasksWithEntries
                 },
                 { status: 200 }
@@ -55,9 +53,9 @@ export async function GET(request: Request) {
         }
 
         if (id) {
-            console.log("Getting this habit task");
-            const habit_task = await HabitTask.findById(id).populate({ path: "owner", select: "-password", model: User });
+            console.log("Getting this habit task... \n");
 
+            const habit_task = await HabitTask.findById(id).populate({ path: "owner", select: "-password", model: User });
             if (!habit_task) {
                 return new Response("Habit task not found", { status: 404 });
             }
@@ -67,17 +65,19 @@ export async function GET(request: Request) {
 
             // Create a plain object with the habit task details and entries
             const habitTaskWithEntries = {
-                ...habit_task.toObject(), // Convert Mongoose document to plain object
-                entries, // Add the entries array
+                ...habit_task.toObject(), 
+                entries, 
             };
-            return new Response(JSON.stringify(habitTaskWithEntries), { status: 200 });
+            return new Response(
+                            JSON.stringify(habitTaskWithEntries), 
+                            { status: 200 }
+            );
         }
 
-        if (accessibility === "public") {
-            console.log("Getting all public habit tasks");
+        if (accessibility) {
+            console.log("Getting all public habit tasks... \n"); // TODO take pagination params
 
-            // Fetch all public habit tasks and populate the owner field, excluding the password field
-            const public_habit_tasks = await HabitTask.find({ accessibility: "public" });
+            const public_habit_tasks = await HabitTask.find({ accessibility: accessibility });
 
             // Fetch entries for the public habit tasks using their IDs
             const habitTaskIds = public_habit_tasks.map(task => task._id);
@@ -94,8 +94,8 @@ export async function GET(request: Request) {
 
             // Combine the tasks with their respective entries
             const habitTasksWithEntries = public_habit_tasks.map(task => ({
-            ...task.toObject(), // Convert each Mongoose document to a plain object
-            entries: entriesMap[task._id] || [], // Add entries for this task or an empty array if none
+            ...task.toObject(), 
+            entries: entriesMap[task._id] || [], 
             }));
 
             return NextResponse.json(
@@ -151,8 +151,6 @@ export async function PATCH(request: Request) {
         return new Response("Failed to fetch life domains created by user", { status: 500 });
     }
 }
-
-
 
 export async function DELETE(request: Request) {
 

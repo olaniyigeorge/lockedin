@@ -14,6 +14,8 @@ const LifeDomainSchema = new Schema({
         type: String,
         required: [false, "Description is required"]
     }
+},{
+    timestamps: true
 })
 
 const LifeDomain = models.LifeDomain || model("LifeDomain", LifeDomainSchema)

@@ -1,6 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
 const AccountabilityPartnershipSchema = new Schema({
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
     habit: {
         type: Schema.Types.ObjectId,
         ref: "HabitTask",
@@ -19,14 +23,11 @@ const AccountabilityPartnershipSchema = new Schema({
 });
 
 
-// Ensure that end_date cannot be before start_date (optional validation)
 AccountabilityPartnershipSchema.methods.toString = function() {
     return `${this.partner} --H: ${this.habit.owner}`;
 };
-// AccountabilityPartnershipSchema.methods.habit__owner = function() {
-//     return `${this.habit.owner}`;
-// };
 
-const HabitTask = models.HabitTask || model("HabitTask", AccountabilityPartnershipSchema);
 
-export default HabitTask;
+const AccountabilityPartnership = models.AccountabilityPartnership || model("AccountabilityPartnership", AccountabilityPartnershipSchema);
+
+export default AccountabilityPartnership;

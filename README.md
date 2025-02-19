@@ -8,7 +8,7 @@
 2. **Install Dependencies**
     Ensure `npm` is installed globally:
     ```sh
-    npm install -g npm
+    npm install npm
     ```
     Then, install the project dependencies:
     ```sh
