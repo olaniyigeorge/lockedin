@@ -15,7 +15,7 @@ export const connectToDB = async () => {
     }
     try {
         await mongoose.connect(MONGODB_URI, {
-            dbName: "lockedIn",
+            dbName: "lockedIn_v1" // "lockedIn",
         })
 
         isConnected = true;
