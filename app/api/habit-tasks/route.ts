@@ -142,13 +142,13 @@ export async function PATCH(request: Request) {
 
             await habit_task.save()
 
-            return new Response("Successfully updated life domain", { status: 200 })
+            return new Response("Successfully updated habit task", { status: 200 })
         }
 
         return new Response("No filter param", { status: 400}) 
     } catch (error) {
         console.error(error);
-        return new Response("Failed to fetch life domains created by user", { status: 500 });
+        return new Response("Error updating habit task", { status: 500 });
     }
 }
 
@@ -168,7 +168,7 @@ export async function DELETE(request: Request) {
         
     } catch (error) {
         console.log(error)
-        return new Response("Error deleting prompt", { status: 500 });
+        return new Response("Error deleting habit task", { status: 500 });
     }
 };
 
