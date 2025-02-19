@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
         if (existingEntry) {
             console.log("Entry exists: ", existingEntry)
-            return new Response("An entry for today already exists", { status: 409 }); // Conflict status
+            return new Response("An entry for today already exists", { status: 409 });
         }
 
         // Create a new HabitTaskEntry

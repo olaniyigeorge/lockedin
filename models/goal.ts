@@ -29,6 +29,8 @@ const GoalSchema = new Schema({
         type: Boolean,
         default: false
     },
+}, {
+    timestamps: true
 })
 
 // Ensure that end_date cannot be before start_date (optional validation)

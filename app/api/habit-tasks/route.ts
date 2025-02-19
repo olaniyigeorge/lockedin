@@ -155,13 +155,12 @@ export async function PATCH(request: Request) {
 export async function DELETE(request: Request) {
 
     try {
-        // Parse the URL to get query parameters
         const url = new URL(request.url);
         const id = url.searchParams.get("id"); 
  
         if (id) {
             await connectToDB();
-            // Find the habit task by ID and remove it
+            
             await HabitTask.findByIdAndDelete(id)
             return new Response("Habit task deleted successfully", { status: 204 });
         }
@@ -173,29 +172,42 @@ export async function DELETE(request: Request) {
     }
 };
 
-
 export async function POST(request: Request) {
-    const { title, description, aspect, accessibility, owner, start_date, end_date } = await request.json();
+    const { 
+        owner, 
+        goal, 
+        aspect, 
+        title, 
+        description, 
+        accessibility, 
+        interval,
+        frequency,
+        isActive,
+        start_date, 
+        end_date 
+    } = await request.json();
 
     try {
         await connectToDB();
 
-        // Create a new habit task
         const newHabitTask = new HabitTask({
-            title,
-            description,
-            aspect,
-            accessibility,
-            owner,
-            start_date,
-            end_date,
+            owner, 
+            goal, 
+            aspect, 
+            title, 
+            description, 
+            accessibility, 
+            interval,
+            frequency,
+            isActive,
+            start_date, 
+            end_date 
         });
 
-        // Save the new habit task to the database
         await newHabitTask.save();
 
         return NextResponse.json({
-            message: "habit taks created successullly",
+            message: "Habit task created successullly",
             data: newHabitTask
              },
              { status: 201 }

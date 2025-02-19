@@ -12,10 +12,9 @@ export async function POST(req: NextRequest) {
                 { status: 400 }
             );
         }
+
         const hashedPass = await bcrypt.hash(password, 10);
-
         await connectToDB();
-
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {

@@ -4,14 +4,12 @@ import LifeDomain from '@/models/life-domain';
 
 export async function GET(request: Request) {
     try {
-        // Parse the URL to get the dynamic ID
         const url = new URL(request.url);
         const id = url.pathname.split('/').pop();
 
         if (id) {
-            console.log(`Getting life domain with ID: ${id}`);
             await connectToDB();
-            const lifeDomain = await LifeDomain.findById(id); // Use the extracted ID
+            const lifeDomain = await LifeDomain.findById(id); 
 
             if (lifeDomain) {
                 return NextResponse.json(
@@ -46,5 +44,37 @@ export async function GET(request: Request) {
     } catch (error) {
         console.error(error);
         return new Response("Failed to fetch life domain", { status: 500 });
+    }
+}
+
+
+export async function PATCH(request: Request) {
+    const { name, description } = await request.json();
+
+    try {
+        const url = new URL(request.url);
+        const id = url.pathname.split('/').pop();
+
+
+        if (id) {
+            console.log("Getting this life domain")
+            await connectToDB();
+            const life_domain = await LifeDomain.findById(id); 
+            
+            if (!life_domain) {
+                return new Response("Life domain not found", { status: 404 });
+            }
+            life_domain.name = name;
+            life_domain.description = description;
+
+            await life_domain.save()
+
+            return new Response("Successfully updated life domain", { status: 200 })
+        }
+
+        return new Response("Couldn't get ID", { status: 400}) 
+    } catch (error) {
+        console.error(error);
+        return new Response("Error while attempting Life Domain update", { status: 500 });
     }
 }
