@@ -1,7 +1,14 @@
-import HeroSection from "@/sections/hero-section";
+import HeroSection from "@/components/sections/hero-section";
 import { Metadata } from "next";
 import Link from "next/link";
 import ActionBtns from "@/components/action-btns";
+import { SocialProof } from "@/components/sections/social-proof";
+import { Features } from "@/components/sections/features";
+import { Pricing } from "@/components/sections/pricing";
+import { FAQs } from "@/components/sections/faqs";
+import { CTA } from "@/components/sections/ctas";
+import Testimonials from "@/components/sections/testimonials";
+import { Hero } from "@/components/Hero";
 // import { Hero } from "@/components/Hero";
 
 export const metadata: Metadata = {
@@ -17,24 +24,14 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* <Hero /> */}
-      <HeroSection 
-        primaryText="Stay LockedIn!" 
-        styledText="Stay Accountable"
-        secondaryText="Build Lasting Habits."
-        image="/images/hero-image.jpg"
-        flow="reversed"
-      />
-
-      <ActionBtns />
-
-      <Link
-        href="/onboarding/waitlist" // /auth/sign-in
-        className="font-nunito page_section accent_btn text-2xl my-10"
-      >
-        Early Access
-      </Link>
-               
+      <Hero />
+      <SocialProof />
+      <Features />
+      <Pricing />
+      <Testimonials />
+      <FAQs />
+      <CTA />
+         
     </>
   );
 }

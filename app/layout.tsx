@@ -27,12 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${comfortaa.variable} ${nunito.variable} antialiased main relative min-h-screen bg-[url('/imgs/grid.png')] backdrop-blur-lg bg-opacity-80`} >
+      <body className={`${comfortaa.variable} ${nunito.variable} font-nunito w-full order-4 border-blac  h-full lockedin_bg_gradient  antialiased  relative min-h-screen  `} >
 
         <ToastContainer /> 
         <AuthStoreProvider>
           <Header />
-          <main className="w-full h-full flex-1 flex-col flex lockedin_bg_gradient  items-center min-h-[500px]  ">
+          <main className="w-full flex-1 flex-col flex  items-center min-h-[500px]  ">
               {children}
           </main>
           <Footer />

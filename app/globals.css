@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -95,7 +96,7 @@ body {
 }
 
 .main {
-  @apply xs-min-w-100px sm-max-w-400 md-max-w-1200px lg-max-w-1440px mx-auto font-nunito bg-slate-50 text-gray-800
+  @apply xs-min-w-100px sm-max-w-400 md-max-w-1200px lg-max-w-1440px mx-auto 
 }
 
 .light_btn {
@@ -122,11 +123,23 @@ body {
   @apply bg-gradient-to-r from-yellow-500 via-orange-500 to-orange-600 bg-clip-text text-transparent;
 }
 
+.black_green_gradient {
+  @apply bg-gradient-to-b from-black via-green-900 to-green-500 bg-clip-text text-transparent;
+}
+
 .green_gradient {
   @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
 }
 
-
+.tag{
+  @apply border border-green-900 w-fit text-center text-xs px-2 py-1 rounded-md;
+}
+.section-title {
+  @apply text-center text-3xl  font-extrabold black_green_gradient;
+}
+.section-description{
+  @apply text-center text-green-800 text-xl md:text-2xl  max-w-2xl;
+}
 
 .glassmorphism {
   @apply bg-white/50 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur;

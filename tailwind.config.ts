@@ -1,3 +1,5 @@
+
+
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -16,6 +18,9 @@ const config: Config = {
         bebas: ['Bebas', 'sans-serif'],
         noto: ["Noto", 'serif'],
         poppins: ['Poppins', 'sans-serif'],
+        bricolage: ['Bricolage', 'sans-serif'],
+        "Bricolage-Black": ['Bricolage-Black', 'sans-serif'],
+
       },
       backgroundImage: {
         grid: "url('/imgs/grid.png')",

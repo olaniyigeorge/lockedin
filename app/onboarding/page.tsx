@@ -1,4 +1,4 @@
-import FeatureSliderSection from "@/sections/feature-slider";
+import FeatureSliderSection from "@/components/sections/feature-slider";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
