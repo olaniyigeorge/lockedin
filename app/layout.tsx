@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${comfortaa.variable} ${nunito.variable} font-nunito w-full order-4 border-blac  h-full lockedin_bg_gradient  antialiased  relative min-h-screen  `} >
+      <body className={`${comfortaa.variable} ${nunito.variable} font-nunito w-full order-4 border-blac  h-full   antialiased  relative min-h-screen  `} >
 
         <ToastContainer /> 
         <AuthStoreProvider>

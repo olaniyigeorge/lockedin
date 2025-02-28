@@ -13,11 +13,11 @@ import { WaitlistForm } from "./forms/WaitlistForm";
 
 export const Hero = () => {
   return (
-    <div className="bg-gradient-to-br from-green-200 via-white to-orange-50 w-full py-16">
-      <div className="relative w-full py-16">
+    <div className="bg-gradient-to-tr from-green-300 via-green-50 to-white w-full py-16">
+      <div className="relative w-full py-10">
         <div className="w-[90%] mx-auto flex flex-col justify-center items-center ">
           <div className="flex flex-col items-center justify-center text-center gap-8 md:text-lg lg:text-xl">
-            <h1 className="w-[80%] md:w-[70%] lg:w-[55%] xl:w-[40%] text-[30px] md:text-4xl lg:text-[60px] xl:text-[80xl] font-bricolage tracking-tight leading-relaxed py-3 font-black bg-gradient-to-r from-green-600 to-orange-500 bg-clip-text text-transparent">
+            <h1 className="w-[80%] md:w-[70%] lg:w-[55%] xl:w-[40%] text-[30px] md:text-[40px] lg:text-[60px] xl:text-[80xl] font-bricolage tracking-tight leading-snug py-3 font-black bg-gradient-to-r from-green-600 to-orange-500 bg-clip-text text-transparent">
               Build Better Habits, One Day at a Time!
             </h1>
             <p className="w-[90%] md:w-[70%] lg:w-[50%] leading-[35px] md:leading-[42px]">
