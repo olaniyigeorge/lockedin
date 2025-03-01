@@ -86,7 +86,7 @@ const TestimonialsColumn = (props:
 
 export default function Testimonials () {
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-white px-2">
         <div className="main flex flex-col justify-center items-center py-10">
             <div className="text-center w-full flex flex-col justify-center items-center">
               <div className="tag">Testimonials</div>

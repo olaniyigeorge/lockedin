@@ -39,7 +39,7 @@ const faqs = [
 
 export function FAQs() {
   return (
-    <div className="w-full py-16 bg-white text-center">
+    <div className="w-full py-16 bg-white text-center px-2">
       <section id="faqs" className="main">
         <h2 className="text-2xl md:text-3xl black_green_gradient font-black">You Questions, Answered</h2>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 max-w-2xl mx-auto">

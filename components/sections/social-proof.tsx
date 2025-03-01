@@ -12,7 +12,7 @@ export function SocialProof() {
       >
       
         <h2 hidden className="text-2xl font-medium py-1">Trusted by Thousands</h2>
-        <motion.div className='w-full flex justify-around gap-24 py-6 flex-none pr-14' animate={{
+        <motion.div className='w-full flex justify-around gap-24 py-3 flex-none pr-14' animate={{
                   translateX: "-20%"
                 }}
                 transition={{
@@ -24,63 +24,35 @@ export function SocialProof() {
         >
           {/* Add brand logos here */}
           
+ 
           <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
-          />
-          <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
+            src="/imgs/bellzstudios.png"
+            width={100}
+            height={45}
+            className="object-contain"
+            alt="bellzstudio"
           />
           <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
+            src="/imgs/onimisea.png"
+            width={100}
+            height={45}
+            className="object-contain "
+            alt="onimisea"
           />
           <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
-          />
-                    <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
+            src="/imgs/bellzstudios.png"
+            width={100}
+            height={45}
+            className="object-contain"
+            alt="bellzstudio"
           />
           <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
+            src="/imgs/onimisea.png"
+            width={100}
+            height={45}
+            className="object-contain "
+            alt="onimisea"
           />
-                    <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
-          />
-          <Image
-            src="/globe.svg"
-            width={20}
-            height={20}
-            className="object-cotain"
-            alt=""
-          />
-
         </motion.div>
       
       </section>

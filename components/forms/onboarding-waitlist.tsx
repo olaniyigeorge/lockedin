@@ -61,7 +61,7 @@ export default function WaitlistForm({ type }: WaitlistFormProps) {
         <div className="w-full flex flex-col justify-center items-center min-h-[500px]">
             <div className="flex flex-col md:flex-row max-w-[80%] gap-4 justify-between">
                 <div className="flex flex-col items-center gap-4 text-center">
-                    <h2 className="text-[60px] font-extrabold leading-tighter tracking-tighter">
+                    <h2 className="text-[60px] font-extrabold black_green_gradient leading-tighter tracking-tighter">
                         Experience LockedIn First-hand
                     </h2>
                     <p className="text-[20px] text-center">
