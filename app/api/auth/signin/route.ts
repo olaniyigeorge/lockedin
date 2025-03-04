@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         const { email, password } = await req.json();
+        // console.log("\n\nin auth post: ", email, " | ", password, "\n\n")
         if (!password || !email) {
             return NextResponse.json(
                 { error: "Both email and password are required." },
@@ -20,6 +21,7 @@ export async function POST(req: NextRequest) {
         if (existingUser) {
             const passwordMatch = await bcrypt.compare(password, existingUser.password);
             if (passwordMatch) {
+                
                 return NextResponse.json(
                     { 
                         message: "Successfully signed in", 
@@ -32,7 +34,8 @@ export async function POST(req: NextRequest) {
         const newUser = await User.create({
             email: email,
             username: email.split("@")[0],
-            password: hashedPass
+            password: hashedPass,
+            image: ""
         });
 
         return NextResponse.json(

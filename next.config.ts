@@ -8,12 +8,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'bellzstudios.vercel.app',
       },
-      {
-        protocol: 'https',
-        hostname: 'onimisea.azurewebsites.net',
-      },
+      // cloudinary for entries contents
     ],
   },
+
 };
 
 export default nextConfig;

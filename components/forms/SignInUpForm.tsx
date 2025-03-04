@@ -23,7 +23,7 @@ export default function SignInUpForm() {
             setSubmitting(false);
             return;
         }
-        const response = await fetch("/api/auth/signin", {
+        const response = await fetch("/api/acc/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

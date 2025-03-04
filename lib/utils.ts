@@ -1,5 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
+import { NextRequest } from "next/server";
 import { twMerge } from "tailwind-merge"
+import { SignJWT, jwtVerify } from "jose";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -31,3 +33,37 @@ export const isToday = (date: Date) => {
          date.getMonth() === today.getMonth() &&
          date.getFullYear() === today.getFullYear();
 };
+
+
+
+// Auth Helpers
+const encryptionKey = process.env.ENCRYPTION_KEY as string;
+const key = new TextEncoder().encode(encryptionKey);
+
+export async function isAuthenticated(request: NextRequest): Promise<boolean> {
+  if (request.cookies.has("session")) {
+    const sessionCookie = `${request.cookies.get("session")?.value}`;
+    const decryptedSession = await decrypt(sessionCookie);
+    
+    if (decryptedSession.expires && new Date(decryptedSession.expires) > new Date()) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export async function encrypt(payload: any) {
+  return await new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('3h')
+    .sign(key)
+}
+
+export async function decrypt(input: string): Promise<any> {
+  const { payload } = await jwtVerify(input, key, { 
+    algorithms: ['HS256'] })
+  
+  return payload;
+}

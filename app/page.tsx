@@ -1,15 +1,11 @@
-import HeroSection from "@/components/sections/hero-section";
 import { Metadata } from "next";
-import Link from "next/link";
-import ActionBtns from "@/components/action-btns";
-import { SocialProof } from "@/components/sections/social-proof";
 import { Features } from "@/components/sections/features";
 import { Pricing } from "@/components/sections/pricing";
 import { FAQs } from "@/components/sections/faqs";
 import { CTA } from "@/components/sections/ctas";
 import Testimonials from "@/components/sections/testimonials";
 import { Hero } from "@/components/Hero";
-// import { Hero } from "@/components/Hero";
+import { Partners } from "@/components/sections/partners";
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +21,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <SocialProof />
+      <Partners />
       <Features />
       <Pricing />
       <Testimonials />

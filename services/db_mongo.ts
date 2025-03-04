@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 let isConnected = false; 
 
 let MONGODB_URI = process.env.MONGODB_URI as string;
+let DB_NAME = process.env.DB_NAME as string;
 
 
 export const connectToDB = async () => {
@@ -15,7 +16,7 @@ export const connectToDB = async () => {
     }
     try {
         await mongoose.connect(MONGODB_URI, {
-            dbName: "lockedIn_v1" // "lockedIn",
+            dbName: DB_NAME  // "lockedIn_v1 ---- lockedIn",
         })
 
         isConnected = true;

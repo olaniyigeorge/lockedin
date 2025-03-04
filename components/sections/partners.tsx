@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image"
 import {motion} from 'framer-motion'
 
-export function SocialProof() {
+export function Partners() {
   return (
     <div className="w-full [mask-image:linear-gradient(to_right,transparent,black,transparent)]">
       <section 
