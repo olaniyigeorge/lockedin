@@ -7,7 +7,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-
+export type iSession = {
+  expires: string,
+  user: {
+    email: string,
+    username: string,
+    role: string,
+    id: string
+  },
+  iat: number,
+  exp: number
+}
 
 export const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat('en-US', {
@@ -52,6 +62,20 @@ export async function isAuthenticated(request: NextRequest): Promise<boolean> {
 
   return false;
 }
+
+
+export async function getSessionData(request: NextRequest): Promise<iSession | null> {
+  if (request.cookies.has("session")) {
+    const sessionCookie = `${request.cookies.get("session")?.value}`;
+    const decryptedSession = await decrypt(sessionCookie);
+    
+    return decryptedSession
+  }
+
+  return null
+}
+
+
 
 export async function encrypt(payload: any) {
   return await new SignJWT(payload)

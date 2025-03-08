@@ -3,7 +3,7 @@
 import { DumbbellIcon, PlusIcon, Share2Icon, Users2Icon } from "lucide-react";
 import TrackerCalenderView, { iHabitTaskEntry } from "./tracker-calender";
 import Image from "next/image";
-import { formatDate, getDaysInRange, isToday } from "@/lib/utils";
+import { formatDate, getDaysInRange, isToday } from "@/utils/helpers";
 import Link from "next/link";
 import { iHabitTask } from "./habit-task-card";
 import { useEffect, useState } from "react";

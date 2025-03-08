@@ -3,18 +3,29 @@ import HabitTaskEntry from "@/models/task-entry";
 import { connectToDB } from "@/services/db_mongo";
 import User from "@/models/user"; // Import the User model
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getSessionData } from "@/lib/utils";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+    const sessionData = await getSessionData(request);
+    console.log("\n", sessionData, "\n")
     try {
         const url = new URL(request.url);
         const owner = url.searchParams.get("owner");
-        const id = url.searchParams.get("id");
         const accessibility = url.searchParams.get("accessibility");
 
         await connectToDB();
 
         if (owner) {
+            if (owner !== sessionData?.user.id) {
+                return NextResponse.json( 
+                    {
+                        "message": "You are not authorised to view this habit tasks",
+                        "data": []
+                    },
+                    {status: 401}
+                )
+            }
             console.log("Getting habit tasks from user... \n");
             
             // Build the filter object & fetch HTs based on filter
@@ -49,28 +60,6 @@ export async function GET(request: Request) {
                     data: habitTasksWithEntries
                 },
                 { status: 200 }
-            );
-        }
-
-        if (id) {
-            console.log("Getting this habit task... \n");
-
-            const habit_task = await HabitTask.findById(id).populate({ path: "owner", select: "-password", model: User });
-            if (!habit_task) {
-                return new Response("Habit task not found", { status: 404 });
-            }
-
-            // Fetch entries for the habit task
-            const entries = await HabitTaskEntry.find({ habit: id });
-
-            // Create a plain object with the habit task details and entries
-            const habitTaskWithEntries = {
-                ...habit_task.toObject(), 
-                entries, 
-            };
-            return new Response(
-                            JSON.stringify(habitTaskWithEntries), 
-                            { status: 200 }
             );
         }
 
@@ -152,25 +141,6 @@ export async function PATCH(request: Request) {
     }
 }
 
-export async function DELETE(request: Request) {
-
-    try {
-        const url = new URL(request.url);
-        const id = url.searchParams.get("id"); 
- 
-        if (id) {
-            await connectToDB();
-            
-            await HabitTask.findByIdAndDelete(id)
-            return new Response("Habit task deleted successfully", { status: 204 });
-        }
-
-        
-    } catch (error) {
-        console.log(error)
-        return new Response("Error deleting habit task", { status: 500 });
-    }
-};
 
 export async function POST(request: Request) {
     const { 
@@ -204,6 +174,7 @@ export async function POST(request: Request) {
             end_date 
         });
 
+        console.log("Saving... ", newHabitTask)
         await newHabitTask.save();
 
         return NextResponse.json({

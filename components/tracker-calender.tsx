@@ -2,7 +2,7 @@
 import Link from "next/link";
 import MarkTodayButton from "./mark-today-button";
 import { useAuthStore } from "@/providers/auth-store-provider";
-import { formatDate, getDaysInRange, isToday } from "@/lib/utils";
+import { formatDate, getDaysInRange, isToday } from "@/utils/helpers";
 import Image from "next/image";
 
 export interface iHabitTask {

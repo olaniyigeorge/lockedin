@@ -21,7 +21,7 @@ export default function HabitTasksPage() {
                 if (response.ok) {
                     setHabitTasks(res.data)
                 } else {
-                    setError("Failed to fetch habit tasks")
+                    setError(res.message)
                 }
             } catch (error) {
                 console.error(error)
@@ -37,7 +37,7 @@ export default function HabitTasksPage() {
 
     if (error) {
         return (
-            <div className="w-full p-2 md:p-4">
+            <div className="w-full p-2 md:p-4 min-h-[500px]">
                 <span className="w-full flex items-center justify-between">
                     <>Habit Tasks</>
                     <>{user ?
@@ -45,8 +45,8 @@ export default function HabitTasksPage() {
                         : <>Login</>
                     }</>
                 </span>
-                <section className="w-full grid grid-cols-1 md:grid-cols-3">
-                    Error {error}
+                <section className="w-full h-full justify-center items-center">
+                    Error: {error}
                 </section>
             </div>
         )

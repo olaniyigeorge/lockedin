@@ -7,7 +7,8 @@ const HabitTaskSchema = new Schema({
     },
     goal: {
         type: Schema.Types.ObjectId,
-        ref: "Goal"
+        ref: "Goal",
+        required: [false, "A habit task might not have a goal"]
     },
     aspect: {
         type: Schema.Types.ObjectId,

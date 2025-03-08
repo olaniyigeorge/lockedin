@@ -3,7 +3,7 @@ import TrackerCalenderView from "@/components/tracker-calender";
 export default async function HabitTaskDetailsPage({params,}: {params: Promise<{ id: string }>}) {
     const { id } = await params;
     try {
-        const response = await fetch(`${process.env.DOMAIN}/api/habit-tasks?id=${id}`, {
+        const response = await fetch(`${process.env.DOMAIN}/api/habit-tasks/${id}`, {
             method: "GET",
         });
         const habitTask = await response.json();

@@ -25,33 +25,34 @@ export function Partners() {
           {/* Add brand logos here */}
           
  
-          <Image
-            src="/imgs/bellzstudios.png"
-            width={100}
-            height={45}
-            className="object-contain"
-            alt="bellzstudio"
-          />
+
           <Image
             src="/imgs/onimisea.png"
             width={100}
-            height={45}
-            className="object-contain "
+            height={100}
+            className="w-[250px] h-[50px] object-contain "
             alt="onimisea"
           />
           <Image
             src="/imgs/bellzstudios.png"
             width={100}
-            height={45}
-            className="object-contain"
+            height={100}
+            className="w-[250px] h-[50px] object-contain"
             alt="bellzstudio"
           />
           <Image
             src="/imgs/onimisea.png"
             width={100}
-            height={45}
-            className="object-contain "
+            height={100}
+            className="w-[250px] h-[50px] object-contain "
             alt="onimisea"
+          />
+          <Image
+            src="/imgs/bellzstudios.png"
+            width={100}
+            height={100}
+            className="w-[250px] h-[50px] object-contain"
+            alt="bellzstudio"
           />
         </motion.div>
       
