@@ -38,7 +38,7 @@ const HabitTaskEntrySchema = new Schema({
 });
 
 // Unique constraint on habit and date
-HabitTaskEntrySchema.index({ habit: 1, date: 1 }, { unique: true });
+// HabitTaskEntrySchema.index({ habit: 1, date: 1 }, { unique: true });
 
 HabitTaskEntrySchema.methods.toString = function() {
     return `${this.date.getDate()}'s entry on ${this.habit.title}: (${this.completed})`;

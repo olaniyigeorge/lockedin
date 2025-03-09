@@ -50,9 +50,6 @@ export interface GetGoalsSuccessResponse {
         limit: number;
       };
 }
-  
-
-
 /**
  * Goal object type.
  */

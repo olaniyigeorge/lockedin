@@ -2,6 +2,9 @@
  * ===========================
  * User API Documentation
  * ===========================
+  * @description API documentation for the `/api/users[id]` route. 
+ * This file defines the types and interfaces used for handling individual users
+ * and their related entries.
  */
 
 /**

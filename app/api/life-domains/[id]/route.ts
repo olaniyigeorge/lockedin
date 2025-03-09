@@ -10,6 +10,7 @@ import { LifeDomainType } from './docs';
  * @returns JSON response with life domain data or error message
  */
 export async function GET(request: NextRequest): Promise<NextResponse<{ message: string; data?: LifeDomainType }>> {
+    const sessionData = await getSessionData(request);
     try {
         const url = new URL(request.url);
         const id = url.pathname.split('/').pop();
@@ -23,6 +24,9 @@ export async function GET(request: NextRequest): Promise<NextResponse<{ message:
 
         if (!lifeDomain) {
             return NextResponse.json({ message: "Life domain not found" }, { status: 404 });
+        }
+        if (sessionData?.user.id !== lifeDomain.owner && sessionData?.user.role !== "admin") {
+            return NextResponse.json({ message: "You are not authorised to view this life domain" }, { status: 401 });
         }
 
         return NextResponse.json({ message: "Success", data: lifeDomain }, { status: 200 });
@@ -39,6 +43,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<{ message:
  * @returns Response indicating success or failure
  */
 export async function PATCH(request: NextRequest): Promise<NextResponse<{ message: string } | { error: string }>> {
+    const sessionData = await getSessionData(request);
     try {
         const url = new URL(request.url);
         const id = url.pathname.split('/').pop();

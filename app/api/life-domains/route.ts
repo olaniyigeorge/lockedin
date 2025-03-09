@@ -79,7 +79,8 @@ export async function GET(request: NextRequest): Promise<NextResponse<GetLifeDom
  * @param request The incoming Next.js request object.
  * @returns A JSON response containing the newly created life domain or an error message.
  */
-export async function POST(request: Request): Promise<NextResponse<PostLifeDomainResponse | { error: string }>> {
+export async function POST(request: NextRequest): Promise<NextResponse<PostLifeDomainResponse | { error: string }>> {
+    const sessionData = await getSessionData(request);
     try {
         const { name, description, owner }: PostLifeDomainRequest = await request.json();
 
@@ -90,6 +91,15 @@ export async function POST(request: Request): Promise<NextResponse<PostLifeDomai
                     data: null
                  },
                 { status: 400 }
+            );
+        }
+        if (sessionData?.user.id !== owner) {
+            return NextResponse.json(
+                { 
+                    message: "You are not authorised to make this life domain. Sign in",
+                    data: null
+                 },
+                { status: 401 }
             );
         }
 

@@ -175,13 +175,13 @@ export const JoinWaitlistModal: React.FC = () => {
                           </SelectTrigger>
                           <SelectContent className="bg-white text-lockedin-green border border-gray-300 rounded-lg shadow-md">
                             <SelectItem
-                              value="google"
+                              value="web"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
                             >
                               Google Search
                             </SelectItem>
                             <SelectItem
-                              value="social_media"
+                              value="twitter"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
                             >
                               Social Media (Twitter, Instagram, etc.)
@@ -193,13 +193,13 @@ export const JoinWaitlistModal: React.FC = () => {
                               YouTube
                             </SelectItem>
                             <SelectItem
-                              value="friend"
+                              value="family_and_friends"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
                             >
                               A Friend or Colleague
                             </SelectItem>
                             <SelectItem
-                              value="blog"
+                              value="web"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
                             >
                               Blog or News Article

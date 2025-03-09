@@ -1,4 +1,3 @@
-
 /**
  * ===========================
  * Habit Tasks API Documentation
@@ -45,14 +44,16 @@ export interface iHabitTaskEntry {
  * @description Defines the filter parameters available for querying habit tasks.
  */
 export interface HabitTaskFilter {
-    owner?: string; 
-    goal?: string; 
-    aspect?: string; 
-    accessibility?: "public" | "private" | "partnership"; 
-    isActive?: boolean; 
-    start_date?: { $gte: Date }; 
-    end_date?: { $lte: Date }; 
-}
+    owner?: string;
+    goal?: string;
+    aspect?: string;
+    accessibility?: "public" | "private" | "partnership";
+    isActive?: boolean;
+    start_date?: { $gte: Date };
+    end_date?: { $lte: Date };
+    $or?: HabitTaskFilter[];
+    $and?: HabitTaskFilter[];
+  }
 
 /**
  * @interface GetHabitTasksResponse
@@ -61,6 +62,12 @@ export interface HabitTaskFilter {
 export interface FetchHabitTasksResponse {
     message: string;
     data: (iHabitTask & { entries: iHabitTaskEntry[] })[]; // Array of habit tasks with their respective entries
+    pagination: {
+        totalHabitTasks: number;
+        totalPages: number;
+        currentPage: number;
+        limit: number;
+      };
 }
 
 /**
@@ -95,5 +102,5 @@ export interface PostHabitTaskRequest {
  */
 export interface PostHabitTaskResponse {
     message: string; 
-    data: iHabitTask; 
+    data: iHabitTask | null; 
 }
