@@ -1,21 +1,24 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
 export const Footer = () => {
   return (
-    <nav className="w-full p-4 text-white bg-black flex flex-col gap-2 items-center">
-      <h1 className="text-2xl text-green-600 font-extrabold">
-        Locked
-        <span className="bg-white text-orange-500 px-1 rounded-md">
-          In
-        </span>
-      </h1>
-      
-      <div className="text-center">
-        <p className="">
-          © {new Date().getFullYear()} <Link className="underline" href="/auth/sign-in">LockedIn</Link>. All Rights Reserved.
+    <nav className="relative w-full ">
+      <div className="w-[90%] mx-auto flex flex-col gap-2 items-center py-6">
+        <Link href="/">
+          <h1 className="font-bold text-xl text-lockedin-green">
+            Locked
+            <span className="bg-lockedin-orange rounded-[4px] px-1 text-white">
+              In
+            </span>
+          </h1>
+        </Link>
+
+        <p className="text-[15px]">
+          Copyright &copy; {new Date().getFullYear()}{" "}
+          <span className="font-bold">LockedIn</span>
         </p>
       </div>
     </nav>
   );
-}
+};

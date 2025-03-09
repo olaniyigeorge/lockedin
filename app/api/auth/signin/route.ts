@@ -3,6 +3,7 @@ import { cookies } from "next/headers"
 import { encrypt } from "@/utils/helpers";
 import { AuthenticatedUser, AuthPayload, AuthResponse } from "./docs";
 
+
 const DOMAIN = process.env.DOMAIN as string;
 const SESSION_VALIDITY_DURATION_IN_MINUTES = process.env.SESSION_VALIDITY_DURATION_IN_MINUTES as string;
 

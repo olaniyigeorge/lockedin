@@ -1,195 +1,144 @@
 import HabitTask from "@/models/habit-task";
 import HabitTaskEntry from "@/models/task-entry";
 import { connectToDB } from "@/services/db_mongo";
-import User from "@/models/user"; // Import the User model
 
 import { NextRequest, NextResponse } from "next/server";
-import { getSessionData } from "@/lib/utils";
+import { getSessionData } from "@/utils/helpers";
+import { GetHabitTasksResponse, HabitTaskFilter, PostHabitTaskRequest, PostHabitTaskResponse } from "./docs";
 
-export async function GET(request: NextRequest) {
+
+export async function GET(request: NextRequest): Promise<NextResponse<GetHabitTasksResponse>> {
     const sessionData = await getSessionData(request);
-    console.log("\n", sessionData, "\n")
+    console.log("\n", sessionData, "\n");
+
     try {
         const url = new URL(request.url);
-        const owner = url.searchParams.get("owner");
-        const accessibility = url.searchParams.get("accessibility");
-
         await connectToDB();
 
+        // Build the filter object dynamically
+        const filter: HabitTaskFilter = {};
+
+        const owner = url.searchParams.get("owner");
+        const goal = url.searchParams.get("goal");
+        const aspect = url.searchParams.get("aspect");
+        const accessibility = url.searchParams.get("accessibility") as "public" | "private" | "partnership";
+        const isActive = url.searchParams.get("isActive");
+        const startDate = url.searchParams.get("start_date");
+        const endDate = url.searchParams.get("end_date");
+
+        // Pagination parameters
+        const page = Math.max(parseInt(url.searchParams.get("page") || "1", 10), 1);
+        const limit = Math.min(parseInt(url.searchParams.get("limit") || "10", 10), 100); // Max limit = 100
+        const skip = (page - 1) * limit;
+
+        // Apply filtering conditions
         if (owner) {
             if (owner !== sessionData?.user.id) {
-                return NextResponse.json( 
+                return NextResponse.json(
                     {
-                        "message": "You are not authorised to view this habit tasks",
-                        "data": []
+                        message: "You are not authorized to view these habit tasks",
+                        data: [],
+                        pagination: { totalHabitTasks: 0, totalPages: 0, currentPage: page, limit },
                     },
-                    {status: 401}
-                )
+                    { status: 401 }
+                );
             }
-            console.log("Getting habit tasks from user... \n");
-            
-            // Build the filter object & fetch HTs based on filter
-            const filter: { owner: string; accessibility?: string } = { owner: owner };
-            if (accessibility) {
-                filter.accessibility = accessibility;
-            }
-            const my_habit_tasks = await HabitTask.find(filter);
-
-            // Fetch entries for the habit tasks using their IDs
-            const habitTaskIds = my_habit_tasks.map(task => task._id);
-            const entries = await HabitTaskEntry.find({ habit: { $in: habitTaskIds } });
-
-            // Create a mapping of entries for easier access
-            const entriesMap = entries.reduce((acc, entry) => {
-                if (!acc[entry.habit]) {
-                    acc[entry.habit] = [];
-                }
-                acc[entry.habit].push(entry);
-                return acc;
-            }, {});
-
-            // Combine the tasks with their respective entries
-            const habitTasksWithEntries = my_habit_tasks.map(task => ({
-                ...task.toObject(),
-                entries: entriesMap[task._id] || [],
-            }));
-
-            return NextResponse.json(
-                {
-                    message: "Habit tasks(& entries) fetched successfully",
-                    data: habitTasksWithEntries
-                },
-                { status: 200 }
-            );
+            filter.owner = owner;
         }
 
-        if (accessibility) {
-            console.log("Getting all public habit tasks... \n"); // TODO take pagination params
+        if (goal) filter.goal = goal;
+        if (aspect) filter.aspect = aspect;
+        if (accessibility) filter.accessibility = accessibility;
+        if (isActive !== null) filter.isActive = isActive === "true";
 
-            const public_habit_tasks = await HabitTask.find({ accessibility: accessibility });
+        // Apply date filtering
+        if (startDate) filter.start_date = { $gte: new Date(startDate) };
+        if (endDate) filter.end_date = { $lte: new Date(endDate) };
 
-            // Fetch entries for the public habit tasks using their IDs
-            const habitTaskIds = public_habit_tasks.map(task => task._id);
-            const entries = await HabitTaskEntry.find({ habit: { $in: habitTaskIds } });
+        console.log("Fetching habit tasks with filters: ", filter);
 
-            // Create a mapping of entries for easier access
-            const entriesMap = entries.reduce((acc, entry) => {
+        // Fetch total count for pagination
+        const totalHabitTasks = await HabitTask.countDocuments(filter);
+        const totalPages = Math.ceil(totalHabitTasks / limit);
+
+        // Fetch paginated habit tasks
+        const habitTasks = await HabitTask.find(filter).skip(skip).limit(limit);
+
+        // Fetch entries for the habit tasks using their IDs
+        const habitTaskIds = habitTasks.map((task) => task._id);
+        const entries = await HabitTaskEntry.find({ habit: { $in: habitTaskIds } });
+
+        // Create a mapping of entries for easier access
+        const entriesMap: Record<string, any[]> = entries.reduce((acc, entry) => {
             if (!acc[entry.habit]) {
                 acc[entry.habit] = [];
             }
             acc[entry.habit].push(entry);
             return acc;
-            }, {});
+        }, {});
 
-            // Combine the tasks with their respective entries
-            const habitTasksWithEntries = public_habit_tasks.map(task => ({
-            ...task.toObject(), 
-            entries: entriesMap[task._id] || [], 
-            }));
+        // Combine the tasks with their respective entries
+        const habitTasksWithEntries = habitTasks.map((task) => ({
+            ...task.toObject(),
+            entries: entriesMap[task._id] || [],
+        }));
 
-            return NextResponse.json(
+        return NextResponse.json(
             {
-                message: "Public habit tasks fetched successfully",
-                data: habitTasksWithEntries
+                message: "Habit tasks (& entries) fetched successfully",
+                data: habitTasksWithEntries,
+                pagination: { totalHabitTasks, totalPages, currentPage: page, limit },
             },
             { status: 200 }
-            );
-        }
-
-        return new Response("No filter param", { status: 400 });
-
-    } catch (error) {
-        console.error(error);
-        return new Response("Failed to fetch habit tasks", { status: 500 });
-    }
-}
-
-export async function PATCH(request: Request) {
-    const { title, description, aspect, accessibility, start_date, end_date } = await request.json();
-
-    try {
-        const url = new URL(request.url);
-        const id = url.searchParams.get("id"); 
-
-        if (id) {
-            console.log("Getting this habit task")
-            await connectToDB();
-            const habit_task = await HabitTask.findById(id); 
-            
-            if (!habit_task) {
-                return new Response("Habit task not found", { status: 404 });
-            }
-
-            // Update the habit task data
-            habit_task.title = title;
-            habit_task.description = description;
-            habit_task.aspect = aspect;
-            habit_task.accessibility = accessibility;
-            // habit_task.start_date = start_date;
-            // habit_task.end_date = end_date;
-
-
-            await habit_task.save()
-
-            return new Response("Successfully updated habit task", { status: 200 })
-        }
-
-        return new Response("No filter param", { status: 400}) 
-    } catch (error) {
-        console.error(error);
-        return new Response("Error updating habit task", { status: 500 });
-    }
-}
-
-
-export async function POST(request: Request) {
-    const { 
-        owner, 
-        goal, 
-        aspect, 
-        title, 
-        description, 
-        accessibility, 
-        interval,
-        frequency,
-        isActive,
-        start_date, 
-        end_date 
-    } = await request.json();
-
-    try {
-        await connectToDB();
-
-        const newHabitTask = new HabitTask({
-            owner, 
-            goal, 
-            aspect, 
-            title, 
-            description, 
-            accessibility, 
-            interval,
-            frequency,
-            isActive,
-            start_date, 
-            end_date 
-        });
-
-        console.log("Saving... ", newHabitTask)
-        await newHabitTask.save();
-
-        return NextResponse.json({
-            message: "Habit task created successullly",
-            data: newHabitTask
-             },
-             { status: 201 }
-            );
+        );
     } catch (error) {
         console.error(error);
         return NextResponse.json(
-            {
-                message: "Failed to create habit task",
-                data: error
-            },
-            { status: 500 });
+            { error: "Failed to fetch habit tasks" },
+            { status: 500 }
+        );
     }
 }
+
+
+export async function POST(request: NextRequest): Promise<NextResponse<PostHabitTaskResponse | { message: string }>> {
+    try {
+      const {
+        owner,
+        goal,
+        aspect,
+        title,
+        description,
+        accessibility,
+        interval,
+        frequency,
+        isActive,
+        start_date,
+        end_date,
+      }: PostHabitTaskRequest = await request.json();
+  
+      await connectToDB();
+  
+      const newHabitTask = new HabitTask({
+        owner,
+        goal,
+        aspect,
+        title,
+        description,
+        accessibility,
+        interval,
+        frequency,
+        isActive,
+        start_date,
+        end_date,
+      });
+  
+      console.log("Saving... ", newHabitTask);
+      await newHabitTask.save();
+  
+      return NextResponse.json({ message: "Habit task created successfully", data: newHabitTask }, { status: 201 });
+    } catch (error) {
+      console.error(error);
+      return NextResponse.json({ message: "Failed to create habit task" }, { status: 500 });
+    }
+  }

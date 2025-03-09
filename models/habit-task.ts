@@ -33,7 +33,7 @@ const HabitTaskSchema = new Schema({
     },
     frequency: {
         type: String,
-        enum: ["daily", "weekly", "every_x_days", ],
+        enum: ["daily", "weekly", "every_x_days", "every_x_day_of_the _week"],
     },
     isActive: {
         type: Boolean,

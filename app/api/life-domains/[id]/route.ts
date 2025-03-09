@@ -1,80 +1,118 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { connectToDB } from '@/services/db_mongo';
 import LifeDomain from '@/models/life-domain';
+import { getSessionData } from '@/utils/helpers';
+import { LifeDomainType } from './docs';
 
-export async function GET(request: Request) {
+/**
+ * @description Fetch a single life domain by ID
+ * @param request - Incoming request object
+ * @returns JSON response with life domain data or error message
+ */
+export async function GET(request: NextRequest): Promise<NextResponse<{ message: string; data?: LifeDomainType }>> {
     try {
         const url = new URL(request.url);
         const id = url.pathname.split('/').pop();
 
-        if (id) {
-            await connectToDB();
-            const lifeDomain = await LifeDomain.findById(id); 
-
-            if (lifeDomain) {
-                return NextResponse.json(
-                    {
-                        message: "success",
-                        data: lifeDomain
-                    },
-                    {
-                        status: 200
-                    }
-                );
-            } else {
-                return NextResponse.json(
-                    {
-                        message: "Life domain not found"
-                    },
-                    {
-                        status: 404
-                    }
-                );
-            }
+        if (!id) {
+            return NextResponse.json({ message: "No ID provided" }, { status: 400 });
         }
 
-        return NextResponse.json(
-            {
-                message: "No ID provided"
-            },
-            {
-                status: 400
-            }
-        );
+        await connectToDB();
+        const lifeDomain = await LifeDomain.findById(id);
+
+        if (!lifeDomain) {
+            return NextResponse.json({ message: "Life domain not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ message: "Success", data: lifeDomain }, { status: 200 });
+
     } catch (error) {
-        console.error(error);
-        return new Response("Failed to fetch life domain", { status: 500 });
+        console.error("Error fetching life domain:", error);
+        return NextResponse.json({ message: "Failed to fetch life domain" }, { status: 500 });
     }
 }
 
-
-export async function PATCH(request: Request) {
-    const { name, description } = await request.json();
-
+/**
+ * @description Update a life domain (only owner or admin can update)
+ * @param request - Incoming request object
+ * @returns Response indicating success or failure
+ */
+export async function PATCH(request: NextRequest): Promise<NextResponse<{ message: string } | { error: string }>> {
     try {
         const url = new URL(request.url);
         const id = url.pathname.split('/').pop();
 
-
-        if (id) {
-            console.log("Getting this life domain")
-            await connectToDB();
-            const life_domain = await LifeDomain.findById(id); 
-            
-            if (!life_domain) {
-                return new Response("Life domain not found", { status: 404 });
-            }
-            life_domain.name = name;
-            life_domain.description = description;
-
-            await life_domain.save()
-
-            return new Response("Successfully updated life domain", { status: 200 })
+        if (!id) {
+            return NextResponse.json({ message: "No ID provided" }, { status: 400 });
         }
 
-        return new Response("Couldn't get ID", { status: 400}) 
+        const { name, description } = await request.json();
+        const sessionData = await getSessionData(request);
+
+        await connectToDB();
+        const lifeDomain = await LifeDomain.findById(id);
+
+        if (!lifeDomain) {
+            return NextResponse.json({ message: "Life domain not found" }, { status: 404 });
+        }
+
+        // Check if the user is the owner or an admin
+        if (sessionData?.user.role !== "admin" && sessionData?.user.id !== lifeDomain.owner) {
+            return NextResponse.json({ message: "Unauthorized: You can only update your own life domains" }, { status: 403 });
+        }
+
+        lifeDomain.name = name;
+        lifeDomain.description = description;
+        await lifeDomain.save();
+
+        return NextResponse.json({ message: "Successfully updated life domain" }, { status: 200 });
+
     } catch (error) {
-        console.error(error);
-        return new Response("Error while attempting Life Domain update", { status: 500 });
+        console.error("Error updating life domain:", error);
+        return NextResponse.json({ error: "Error while attempting life domain update" }, { status: 500 });
+    }
+}
+
+/**
+ * @description Delete a life domain (only owner or admin can delete)
+ * @param request - Incoming request object
+ * @returns Response indicating success or failure
+ */
+export async function DELETE(request: NextRequest): Promise<NextResponse<{ message: string }| null | {error: string}>> {
+    try {
+        const url = new URL(request.url);
+        const id = url.pathname.split('/').pop();
+
+        if (!id) {
+            return NextResponse.json({ message: "No ID provided" }, { status: 400 });
+        }
+
+        const sessionData = await getSessionData(request);
+
+        await connectToDB();
+        const lifeDomain = await LifeDomain.findById(id);
+
+        if (!lifeDomain) {
+            return NextResponse.json({ message: "Life domain not found" }, { status: 404 });
+        }
+
+        // Check if the user is the owner or an admin
+        if (sessionData?.user.role !== "admin" && sessionData?.user.id !== lifeDomain.owner) {
+            return NextResponse.json({ message: "Unauthorized: You can only delete your own life domains" }, { status: 403 });
+        }
+
+        await LifeDomain.findByIdAndDelete(id);
+
+        return new NextResponse(null, {status: 204 });
+
+    } catch (error) {
+        console.error("Error deleting life domain:", error);
+        return NextResponse.json(
+            { 
+                error: "Error while attempting life domain deletion",
+            },
+            { status: 500 }
+        );
     }
 }

@@ -1,23 +1,20 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+"use client";
+
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/Footer";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/axios/query-client";
 import { ToastContainer, Slide } from "react-toastify";
+import { useVerifyJWT } from "@/hooks/use-verify-jwt";
 
-import "react-toastify/dist/ReactToastify.css";
-import { AuthStoreProvider } from "@/providers/auth-store-provider";
-
-const comfortaa = localFont({
-  src: "./fonts/comfortaa.ttf",
-  variable: "--comfortaa",
-  display: "swap",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 });
 
-const nunito = localFont({
-  src: "./fonts/nunito.ttf",
-  variable: "--nunito",
-  display: "swap",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export default function RootLayout({
@@ -25,18 +22,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const verifyJWT = useVerifyJWT();
+
+  const handleTokenVerification = async () => {
+    await verifyJWT();
+  };
+
+  handleTokenVerification();
+
   return (
     <html lang="en">
-        <body className={`${comfortaa.variable} ${nunito.variable} font-nunito w-full  h-full   antialiased  relative min-h-screen  `} >
-
-        <ToastContainer /> 
-        <AuthStoreProvider>
-          <Header />
-          <main className="w-full flex-1 flex-col flex  items-center min-h-[500px]  ">
-              {children}
-          </main>
-          <Footer />
-        </AuthStoreProvider>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-linear-to-r from-white via-[#E85D041a] to-white text-black`}
+      >
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          transition={Slide}
+        />
+        <QueryClientProvider client={queryClient}>
+          <div className="max-w-[1600px] mx-auto">{children}</div>
+        </QueryClientProvider>
       </body>
     </html>
   );

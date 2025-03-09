@@ -49,6 +49,12 @@ export interface JoinWaitlistSuccessResponse {
 export interface ListWaitlistResponse {
     message: string;
     entries: WaitlistEntry[];
+    pagination: {
+      totalWaitlisters: number;
+      totalPages: number;
+      currentPage: number;
+      limit: number;
+    };
 }
 
 /**

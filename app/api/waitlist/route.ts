@@ -26,7 +26,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<WaitlistRespo
                     message: "A waitlist entry with this email already exists.",
                     entry: existingEntry
                 },
-                { status: 200 }
+                { status: 409 }
             );
         }
 
@@ -56,11 +56,16 @@ export async function POST(req: NextRequest): Promise<NextResponse<WaitlistRespo
 
 export async function GET(req: NextRequest): Promise<NextResponse<GetWaitlistResponse>> {
     try {
+        const url = new URL(req.url)
         await connectToDB();
 
         // Extract query parameters
         const { search, discovery_location, startDate, endDate }: WaitlistFilterPayload = Object.fromEntries(req.nextUrl.searchParams);
         
+        // Pagination parameters
+        const page = parseInt(url.searchParams.get("page") || "1", 10);
+        const limit = Math.min(parseInt(url.searchParams.get("limit") || "10", 10), 100); // Max limit = 100
+
         // Build the query object
         let query: any = {};
 
@@ -81,11 +86,20 @@ export async function GET(req: NextRequest): Promise<NextResponse<GetWaitlistRes
             if (endDate) query.createdAt.$lte = new Date(endDate);
         }
 
-        const waitlistEntries = await Waitlist.find(query).sort({ createdAt: -1 });
+        // Fetch goals with pagination
+        const totalWaitlisters = await Waitlist.countDocuments(query);
+        const totalPages = Math.ceil(totalWaitlisters / limit);
+
+        const waitlistEntries = await Waitlist.find(query)
+        .sort({ createdAt: -1 })
+        .skip((page - 1) * limit)
+        .limit(limit);;
 
         return NextResponse.json({
             message: "Waitlist entries retrieved successfully",
-            entries: waitlistEntries
+            entries: waitlistEntries,
+            pagination: {totalWaitlisters, totalPages, currentPage: page, limit }
+
         }, { status: 200 });
     } catch (error) {
         console.error(error);
