@@ -2,9 +2,11 @@
  * ===========================
  * Habit Task Entries API Documentation
  * ===========================
+ * @description API documentation for the `/api/task-entries/` route. 
+ * This file defines the types and interfaces used for handling habit task entries
+ * and their related entries.
  */
 
-import { PublicUserInfo } from "../habit-tasks/[id]/docs";
 
 /**
  * Payload for creating a new habit task entry.
@@ -34,24 +36,6 @@ export interface iHabitTaskEntry {
     createdAt: string;
     updatedAt: string;
 }
-
-/**
- * An extended habit task entry object with prepopulated fields(owner).
- */
-export interface eHabitTaskEntry {
-    _id: string;
-    owner: PublicUserInfo;
-    habit_challenge?: string;
-    habit: string;
-    date: string;
-    note?: string;
-    status: "logged" | "in-review" | "completed";
-    proof_link?: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-
 
 /**
  * Successful creation response.
