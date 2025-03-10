@@ -1,3 +1,4 @@
 export const AllRoutes = {
-  addresses: `${process.env.API_DOMAIN}/addresses`,
+  waitlist: `/api/waitlist`,
+  auth: `/api/auth`,
 };
