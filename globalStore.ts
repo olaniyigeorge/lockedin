@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { IUser } from "./interface";
+import { User } from "./interface";
 
 interface GlobalState {
   mobileNav: boolean;
@@ -11,8 +11,8 @@ interface GlobalState {
   setAuthToken: (authToken: string | null) => void;
   isWaitlistModalOpen: boolean;
   setIsWaitlistModalOpen: (isWaitlistModalOpen: boolean) => void;
-  loggedInUser: IUser | null;
-  setLoggedInUser: (user: IUser | null) => void;
+  loggedInUser: User | null;
+  setLoggedInUser: (user: User | null) => void;
 }
 
 export const useGlobalState = create<GlobalState>()(
@@ -37,7 +37,7 @@ export const useGlobalState = create<GlobalState>()(
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         authToken: state.authToken,
-        // loggedInUser: state.loggedInUser,
+        loggedInUser: state.loggedInUser,
       }),
     }
   )

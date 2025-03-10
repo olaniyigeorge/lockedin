@@ -11,8 +11,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
+// import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { InlineLoader } from "@/components/InlineLoader";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
@@ -20,21 +21,13 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useSafeMutation } from "@/axios/query-client";
 import { toast } from "react-toastify";
 import { AllRoutes } from "@/routes";
-import { InlineLoader } from "@/components/InlineLoader";
-import { useState } from "react";
 import { AuthResponse } from "@/interface";
-import { useGlobalState } from "@/globalStore";
+import { useState } from "react";
+// import { useState } from "react";
+// import { useGlobalState } from "@/globalStore";
 
 export const formSchema = z
   .object({
-    email: z
-      .string()
-      .email({ message: "Please enter a valid email address." })
-      .min(12, { message: "Email must be at least 12 characters long." })
-      .max(60, { message: "Email must not exceed 60 characters." })
-      .refine((email) => email.includes(".com"), {
-        message: "Email must contain '.com'.",
-      }),
     password: z
       .string()
       .min(4, { message: "Password must be at least 4 characters long." })
@@ -57,36 +50,36 @@ export const formSchema = z
     path: ["confirm_password"],
   });
 
-type SignupFormData = z.infer<typeof formSchema>;
+type ResetPasswordFormData = z.infer<typeof formSchema>;
 
-export const SignupForm = () => {
+export const ResetPasswordForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
       password: "",
       confirm_password: "",
     },
   });
 
   const router = useRouter();
-  const { setLoggedInUser } = useGlobalState();
+  // const { setLoggedInUser } = useGlobalState();
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const { mutate, isPending } = useSafeMutation<
+  // mutate,
+  const { isPending } = useSafeMutation<
     AuthResponse,
     Error,
-    SignupFormData
+    ResetPasswordFormData
   >(`${AllRoutes.auth}/signin`, "post", {
     onSuccess: (data) => {
       if (data?.message) {
-        setLoggedInUser(data?.user);
+        // setLoggedInUser(data?.user);
         toast.success(data.message);
-        router.push(`/`);
+        // router.push(`/`);
       }
     },
     onError: (error: any) => {
@@ -97,7 +90,10 @@ export const SignupForm = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    mutate(data);
+    console.log(data);
+    router.push("/signin");
+
+    // mutate(data);
   };
 
   return (
@@ -108,26 +104,6 @@ export const SignupForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <section className="w-full flex flex-col gap-6">
-            <div className="w-full">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-lockedin-green">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="John@doe.com"
-                        className="outline-none focus-visible:ring-[1px] focus-visible:ring-lockedin-orange bg-white text-grey focus:border-lockedin-green border-[2px] focus-visible:border-none rounded-lg px-2 transition-all duration-300 hover:border-lockedin-green"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
             <div className="w-full">
               <FormField
                 control={form.control}
@@ -195,19 +171,9 @@ export const SignupForm = () => {
               {isPending ? (
                 <InlineLoader color="white" size="30" textSize="10" />
               ) : (
-                "Sign Up"
+                "Save Password"
               )}
             </Button>
-
-            <p className="text-black text-sm text-center">
-              <span>Have an account?</span>
-              <Link
-                href="/signin"
-                className="text-lockedin-orange hover:text-lockedin-green underline transaitio-all duration-300 ml-1"
-              >
-                Sign In
-              </Link>
-            </p>
           </div>
         </form>
       </Form>

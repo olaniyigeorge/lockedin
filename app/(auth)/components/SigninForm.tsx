@@ -25,47 +25,40 @@ import { useState } from "react";
 import { AuthResponse } from "@/interface";
 import { useGlobalState } from "@/globalStore";
 
-export const formSchema = z
-  .object({
-    email: z
-      .string()
-      .email({ message: "Please enter a valid email address." })
-      .min(12, { message: "Email must be at least 12 characters long." })
-      .max(60, { message: "Email must not exceed 60 characters." })
-      .refine((email) => email.includes(".com"), {
-        message: "Email must contain '.com'.",
-      }),
-    password: z
-      .string()
-      .min(4, { message: "Password must be at least 4 characters long." })
-      .max(40, { message: "Password must not exceed 40 characters." })
-      .refine(
-        (password) =>
-          /[A-Z]/.test(password) &&
-          /[a-z]/.test(password) &&
-          /\d/.test(password) &&
-          /[!@#$%^&*()_\-+=\[\]{};:'",.<>?/\\|`~]/.test(password),
-        {
-          message:
-            "Password must contain at least one uppercase letter, one lowercase letter, one number, and one of these symbols (!@#$%^&*()_-+=[]{};:'\",.<>?/\\|`~).",
-        }
-      ),
-    confirm_password: z.string(),
-  })
-  .refine((data) => data.password === data.confirm_password, {
-    message: "Passwords do not match.",
-    path: ["confirm_password"],
-  });
+export const formSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "Please enter a valid email address." })
+    .min(12, { message: "Email must be at least 12 characters long." })
+    .max(60, { message: "Email must not exceed 60 characters." })
+    .refine((email) => email.includes(".com"), {
+      message: "Email must contain '.com'.",
+    }),
+  password: z
+    .string()
+    .min(4, { message: "Password must be at least 4 characters long." })
+    .max(40, { message: "Password must not exceed 40 characters." })
+    .refine(
+      (password) =>
+        /[A-Z]/.test(password) &&
+        /[a-z]/.test(password) &&
+        /\d/.test(password) &&
+        /[!@#$%^&*()_\-+=\[\]{};:'",.<>?/\\|`~]/.test(password),
+      {
+        message:
+          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one of these symbols (!@#$%^&*()_-+=[]{};:'\",.<>?/\\|`~).",
+      }
+    ),
+});
 
-type SignupFormData = z.infer<typeof formSchema>;
+type SigninFormData = z.infer<typeof formSchema>;
 
-export const SignupForm = () => {
+export const SigninForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
-      confirm_password: "",
     },
   });
 
@@ -80,7 +73,7 @@ export const SignupForm = () => {
   const { mutate, isPending } = useSafeMutation<
     AuthResponse,
     Error,
-    SignupFormData
+    SigninFormData
   >(`${AllRoutes.auth}/signin`, "post", {
     onSuccess: (data) => {
       if (data?.message) {
@@ -162,29 +155,17 @@ export const SignupForm = () => {
                 )}
               />
             </div>
-            <div className="w-full">
-              <FormField
-                control={form.control}
-                name="confirm_password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-lockedin-green">
-                      Confirm Password
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="P@ss96"
-                        className="outline-none focus-visible:ring-[1px] focus-visible:ring-lockedin-orange bg-white text-grey focus:border-lockedin-green border-[2px] focus-visible:border-none rounded-lg px-2 transition-all duration-300 hover:border-lockedin-green"
-                        type="password"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
           </section>
+
+          <div className="w-full">
+            <Link
+              rel="prefetch"
+              href="/forgot-password"
+              className="text-lockedin-orange hover:font-bold transition-all duration-300 text-[min(10vw,14px)]"
+            >
+              I forgot my password
+            </Link>
+          </div>
 
           <div className="flex flex-col gap-4">
             <Button
@@ -195,17 +176,17 @@ export const SignupForm = () => {
               {isPending ? (
                 <InlineLoader color="white" size="30" textSize="10" />
               ) : (
-                "Sign Up"
+                "Sign In"
               )}
             </Button>
 
             <p className="text-black text-sm text-center">
-              <span>Have an account?</span>
+              <span>Don&apos;t have an account?</span>
               <Link
-                href="/signin"
-                className="text-lockedin-orange hover:text-lockedin-green underline transaitio-all duration-300 ml-1"
+                href="/signup"
+                className="text-lockedin-orange hover:text-lockedin-green underline transaition-all duration-300 ml-1"
               >
-                Sign In
+                Sign Up
               </Link>
             </p>
           </div>

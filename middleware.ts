@@ -1,21 +1,33 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { isAuthenticated } from './utils/helpers'
- 
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { isAuthenticated } from "./utils/helpers";
+import { NextURL } from "next/dist/server/web/next-url";
 
 export async function middleware(request: NextRequest) {
-    const url = request.url;
+  const url = request.url;
+  const url2 = request.nextUrl.clone();
+  const isAuth = await isAuthenticated(request);
+  console.log("-------------------------");
+  console.log("Request Url:", url);
+  console.log("isAuth:", isAuth);
+  console.log("-------------------------");
 
-    console.log("isAuth? ->", await isAuthenticated(request));
+  const redirectResponse = (url: string | NextURL) => {
+    const response = NextResponse.redirect(url);
+    return response;
+  };
 
+  if (url.includes("/signin") && isAuth) {
+    console.log("User is already logged in!");
+    url2.pathname = "/dashboard";
+    return redirectResponse(url2);
+  }
 
-    return NextResponse.next()
+  return NextResponse.next();
 }
- 
 
 export const config = {
-	matcher: [
-
-	'/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-	],
-}
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+  ],
+};

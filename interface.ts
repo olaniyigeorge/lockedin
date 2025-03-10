@@ -24,3 +24,19 @@ export interface WaitlistEntryInput {
   email: string;
   discovery_location: string;
 }
+
+export interface User {
+  _id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  username: string;
+  image: string;
+  isVerified: boolean;
+  role: string;
+}
+
+export interface AuthResponse {
+  message: string;
+  user: User;
+}
