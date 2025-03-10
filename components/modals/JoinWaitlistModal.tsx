@@ -30,6 +30,7 @@ import { useRef } from "react";
 import { MdClose } from "react-icons/md";
 import { InlineLoader } from "../InlineLoader";
 import useClickOutside from "@/hooks/use-click-outside";
+import { WaitlistEntryInput, WaitlistResponse } from "@/interface";
 
 const waitlistFormSchema = z.object({
   full_name: z
@@ -64,26 +65,29 @@ export const JoinWaitlistModal: React.FC = () => {
     setIsWaitlistModalOpen(false);
   });
 
-  const { mutate: joinWaitlist, isPending } = useSafeMutation<any, Error, any>(
-    `/api/waitlist`,
-    "post",
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        // router.refresh();
-      },
-      onError: (error: any) => {
-        console.log(error);
+  const { mutate: joinWaitlist, isPending } = useSafeMutation<
+    WaitlistResponse,
+    Error,
+    WaitlistEntryInput
+  >(`/api/waitlist`, "post", {
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.entry._id && data.message.includes("Successfully")) {
+        toast.success(data.message);
+      }
+      // router.refresh();
+    },
+    onError: (error: any) => {
+      console.log(error);
 
-        if (error.message) {
-          toast.error(error?.message);
-        }
-        if (typeof error === "object" && error?.errorMessage) {
-          toast.error(error?.errorMessage);
-        }
-      },
-    }
-  );
+      if (error.message) {
+        toast.error(error?.message);
+      }
+      if (typeof error === "object" && error?.errorMessage) {
+        toast.error(error?.errorMessage);
+      }
+    },
+  });
 
   const onSubmit = async (data: z.infer<typeof waitlistFormSchema>) => {
     console.log(data);
@@ -184,14 +188,9 @@ export const JoinWaitlistModal: React.FC = () => {
                               value="twitter"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
                             >
-                              Social Media (Twitter, Instagram, etc.)
+                              Twitter
                             </SelectItem>
-                            <SelectItem
-                              value="youtube"
-                              className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
-                            >
-                              YouTube
-                            </SelectItem>
+
                             <SelectItem
                               value="family_and_friends"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
@@ -199,28 +198,16 @@ export const JoinWaitlistModal: React.FC = () => {
                               A Friend or Colleague
                             </SelectItem>
                             <SelectItem
-                              value="web"
+                              value="telegram_bot"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
                             >
-                              Blog or News Article
+                              Telegram Bot
                             </SelectItem>
                             <SelectItem
-                              value="email"
+                              value="linkedin"
                               className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
                             >
-                              Email Newsletter
-                            </SelectItem>
-                            <SelectItem
-                              value="forum"
-                              className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
-                            >
-                              Online Forum (Reddit, Quora, etc.)
-                            </SelectItem>
-                            <SelectItem
-                              value="other"
-                              className="focus:bg-lockedin-orange focus:text-white px-3 py-2"
-                            >
-                              Other
+                              LinkedIn
                             </SelectItem>
                           </SelectContent>
                         </Select>

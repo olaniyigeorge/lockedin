@@ -61,7 +61,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<GetGoalsRe
     const page = parseInt(url.searchParams.get("page") || "1", 10);
     const limit = Math.min(parseInt(url.searchParams.get("limit") || "10", 10), 100); // Max limit = 100
 
-    let filters: any = {};
+    const filters: any = {};
 
     if (owner) filters.owner = owner;
     if (privacy) filters.privacy = privacy;
