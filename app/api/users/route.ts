@@ -32,7 +32,6 @@ export async function POST(req: NextRequest): Promise<NextResponse<CreateUserRes
         const hashedPass = await bcrypt.hash(password, 10);
         await connectToDB();
         const existingUser = await User.findOne({ email });
-
         if (existingUser) {
             const passwordMatch = await bcrypt.compare(password, existingUser.password);
             if (passwordMatch) {
@@ -43,6 +42,12 @@ export async function POST(req: NextRequest): Promise<NextResponse<CreateUserRes
                         user: existingUser },
                     { status: 200 }
                 );
+            } else {
+                return NextResponse.json(
+                    {
+                        error: "Provide the correct password to this account.",
+                    }, {status: 400}
+                )
             }
         }
 

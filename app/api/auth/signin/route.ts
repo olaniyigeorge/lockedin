@@ -25,8 +25,9 @@ export async function POST(
     });
 
     if (!res.ok) {
+      const resp = await res.json()
       return NextResponse.json(
-        { error: "An error occured while fetching user" },
+        { error: `${resp.error}` },
         { status: res.status }
       );
     }
@@ -68,10 +69,10 @@ export async function POST(
       },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error) {
     console.log(error)
     return NextResponse.json(
-      { error: "An error occured while authenticating" },
+      { error: `${error}` },
       { status: 500 }
     );
   }

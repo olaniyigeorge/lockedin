@@ -69,8 +69,7 @@ export interface iGoal {
  * Error response structure.
  */
 export interface ErrorResponse {
-    message: string;
-    error?: any;
+    error: any;
 }
 
 /**

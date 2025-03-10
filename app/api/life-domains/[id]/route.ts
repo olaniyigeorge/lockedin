@@ -115,7 +115,7 @@ export async function DELETE(request: NextRequest): Promise<NextResponse<{ messa
         console.error("Error deleting life domain:", error);
         return NextResponse.json(
             { 
-                error: "Error while attempting life domain deletion",
+                error: `${error}`,
             },
             { status: 500 }
         );

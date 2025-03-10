@@ -92,9 +92,9 @@ export async function GET(request: NextRequest): Promise<NextResponse<GetHabitTa
         { status: 200 }
       );
     } catch (error) {
-      console.error("GET /api/habit-tasks error:", error);
+      console.error(error);
       return NextResponse.json(
-        { error: "Failed to fetch habit tasks" },
+        { error: `${error}` },
         { status: 500 }
       );
     }
@@ -151,6 +151,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<PostHabit
         }, { status: 201 });
     } catch (error) {
       console.error(error);
-      return NextResponse.json({ error: "Failed to create habit task" }, { status: 500 });
+      return NextResponse.json({ error: `${error}`}, { status: 500 });
     }
   }

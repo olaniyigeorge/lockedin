@@ -92,7 +92,7 @@ export async function GET(
     console.error(error);
     return NextResponse.json(
       {
-        error: "Failed to fetch habit task",
+        error: `${error}`,
       },
       { status: 500 }
     );
@@ -155,7 +155,7 @@ export async function PATCH(
     console.error(error);
     return NextResponse.json(
       {
-        error: "Error updating habit task",
+        error: `${error}`,
       },
       { status: 500 }
     );
@@ -203,7 +203,7 @@ export async function DELETE(request: NextRequest): Promise<NextResponse> {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Error deleting habit task" },
+      { error: `${error}` },
       { status: 500 }
     );
   }

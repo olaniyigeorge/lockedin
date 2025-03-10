@@ -59,7 +59,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<GetGoalRes
     );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: "Error while fetching goal" }, { status: 500 });
+    return NextResponse.json({ error: `${error}`}, { status: 500 });
   }
 }
 
@@ -145,7 +145,7 @@ export async function DELETE(request: NextRequest): Promise<NextResponse<null | 
       return new NextResponse(null, { status: 204 });
     } catch (error) {
       console.error(error);
-      return NextResponse.json({ error: "Error deleting goal" }, { status: 500 });
+      return NextResponse.json({ error: `${error}` }, { status: 500 });
     }
   }
   

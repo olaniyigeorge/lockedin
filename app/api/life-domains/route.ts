@@ -67,7 +67,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<GetLifeDom
     } catch (error) {
         console.error("Error fetching life domains:", error);
         return NextResponse.json(
-            { error: "Failed to fetch life domains" },
+            { error: `${error}` },
             { status: 500 }
         );
     }
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<PostLifeD
     } catch (error) {
         console.error("Error creating life domain:", error);
         return NextResponse.json(
-            { error: "Failed to create life domain" },
+            { error: `${error}` },
             { status: 500 }
         );
     }

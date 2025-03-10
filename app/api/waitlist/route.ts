@@ -55,7 +55,7 @@ export async function POST(
   } catch (error) {
     console.debug(error);
     return NextResponse.json(
-      { error: "Failed to process the request." },
+      { error: `${error}` },
       { status: 500 }
     );
   }
@@ -121,9 +121,9 @@ export async function GET(
       { status: 200 }
     );
   } catch (error) {
-    console.debug(error);
+    console.error(error);
     return NextResponse.json(
-      { error: "Failed to fetch waitlist entries." },
+      { error: `${error}` },
       { status: 500 }
     );
   }

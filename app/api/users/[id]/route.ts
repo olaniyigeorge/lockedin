@@ -83,7 +83,7 @@ export async function PATCH(request: NextRequest): Promise<NextResponse<UpdateUs
         // Update only provided fields
         if (username) user.username = username;
         if (email) user.email = email;
-        if (password) user.password = password;
+        // if (password) user.password = password;
         if (first_name) user.first_name = first_name;
         if (last_name) user.last_name = last_name;
         if (country) user.country = country;

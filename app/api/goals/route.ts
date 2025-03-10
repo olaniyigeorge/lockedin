@@ -2,15 +2,17 @@ import { connectToDB } from "@/services/db_mongo";
 import Goal from "@/models/goal";
 import { NextRequest, NextResponse } from "next/server";
 import { CreateGoalResponse, CreateGoalPayload, GetGoalsResponse } from "./docs";
+import { getSessionData } from "@/utils/helpers";
 
 export async function POST(request: NextRequest): Promise<NextResponse<CreateGoalResponse>> {
+  const sessionData = await getSessionData(request);
   try {
     const { owner, name, description, privacy, isAchieved, targetDate }: CreateGoalPayload = 
       await request.json();
 
     if (!owner || !name || !targetDate) {
       return NextResponse.json(
-        { message: "Owner, name, and targetDate are required." },
+        { error: "Owner, name, and targetDate are required." },
         { status: 400 }
       );
     }
@@ -38,7 +40,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<CreateGoa
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { message: "Failed to create goal", error },
+      { error: `${error}` },
       { status: 500 }
     );
   }
@@ -92,7 +94,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<GetGoalsRe
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { message: "Failed to fetch goals", error },
+      { error: `${error}` },
       { status: 500 }
     );
   }
