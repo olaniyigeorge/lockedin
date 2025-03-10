@@ -1,5 +1,10 @@
-import React from 'react'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
+import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
 
 export const Faqs = () => {
   return (
@@ -115,4 +120,4 @@ export const Faqs = () => {
       </div>
     </div>
   );
-}
+};

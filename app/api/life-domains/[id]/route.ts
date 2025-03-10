@@ -43,7 +43,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<{ message:
  * @returns Response indicating success or failure
  */
 export async function PATCH(request: NextRequest): Promise<NextResponse<{ message: string } | { error: string }>> {
-    const sessionData = await getSessionData(request);
+    // const sessionData = await getSessionData(request);
     try {
         const url = new URL(request.url);
         const id = url.pathname.split('/').pop();

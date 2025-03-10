@@ -1,7 +1,7 @@
 "use client";
 
 import { useGlobalState } from "@/globalStore";
-import { IUser } from "@/interface";
+import { User } from "@/interface";
 import * as jose from "jose";
 import Cookies from "js-cookie";
 
@@ -12,7 +12,7 @@ export const useVerifyJWT = () => {
 
   // console.log('Auth token: ', authToken);
 
-  const verifyJWT = async (): Promise<IUser | null> => {
+  const verifyJWT = async (): Promise<User | null> => {
     try {
       if (!jwtSecret) {
         // console.log('Missing JWT secret.');
@@ -35,18 +35,23 @@ export const useVerifyJWT = () => {
 
       // console.log('Logged in user: ', payload);
 
-      const user: IUser = {
-        // id: payload.id as string,
+      const user: User = {
+        _id: payload._id as string,
         email: payload.email as string,
         username: payload.username as string,
         image: payload.image as string,
+
+        first_name: payload.first_name as string,
+        last_name: payload.last_name as string,
+        isVerified: payload.isVerified as boolean,
+        role: payload.role as string,
       };
 
       setLoggedInUser(user);
 
       return user;
     } catch (error) {
-      console.log('Token verification failed:', error);
+      console.log("Token verification failed:", error);
       return null;
     }
   };
