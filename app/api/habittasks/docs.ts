@@ -2,7 +2,7 @@
  * ===========================
  * Habit Tasks API Documentation
  * ===========================
- * @description API documentation for the `/api/habit-tasks` route. 
+ * @description API documentation for the `/api/habittasks` route. 
  * This file defines the types and interfaces used for handling habit tasks
  * and their related entries.
  */

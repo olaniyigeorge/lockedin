@@ -70,7 +70,7 @@
 //                 <section className="flex justify-between items-start my-1">
 //                     <h1 className="font-bold text-xl md:text-2xl flex justify-between items-center w-fit mt-1">
 //                         <Link 
-//                             href={`/habit-tasks/${hbtk._id}`}
+//                             href={`/habittasks/${hbtk._id}`}
 //                             className="">
 //                             {hbtk.title}
 //                         </Link>

@@ -7,7 +7,7 @@
  * and their related entries.
  */
 
-import { PublicUserInfo } from "../../habit-tasks/[id]/docs";
+import { PublicUserInfo } from "../../habittasks/[id]/docs";
 
 
 

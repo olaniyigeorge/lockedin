@@ -2,7 +2,7 @@
  * ===========================
  * Life Domains API Documentation
  * ===========================
- * @description API documentation for the `/api/life-domains` route. 
+ * @description API documentation for the `/api/lifedomains` route. 
  * This file defines the types and interfaces used for handling life domains
  * and their related operations.
  */

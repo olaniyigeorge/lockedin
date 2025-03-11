@@ -13,7 +13,7 @@ import {
 } from "./docs";
 
 /**
- * GET /api/habit-tasks/[id]
+ * GET /api/habittasks/[id]
  * Fetch a specific habit task and its associated entries.
  * @param request NextRequest
  * @returns HabitTask with populated entries or error message
@@ -100,7 +100,7 @@ export async function GET(
 }
 
 /**
- * PATCH /api/habit-tasks/[id]
+ * PATCH /api/habittasks/[id]
  * Update a specific habit task. Only the owner can update it.
  * @param request NextRequest
  * @returns Success or error message
@@ -163,7 +163,7 @@ export async function PATCH(
 }
 
 /**
- * DELETE /api/habit-tasks/[id]
+ * DELETE /api/habittasks/[id]
  * Delete a specific habit task. Only the owner can delete it.
  * @param request NextRequest
  * @returns Success or error response

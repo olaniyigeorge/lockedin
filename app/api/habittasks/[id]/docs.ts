@@ -2,7 +2,7 @@
  * ===========================
  * Habit Task API Documentation
  * ===========================
- * @description API documentation for the `/api/habit-tasks/[id]` route.
+ * @description API documentation for the `/api/habittasks/[id]` route.
  * This file defines the types and interfaces used for handling individual habit tasks
  * and their associated entries.
  */
@@ -140,20 +140,20 @@ export type iDeleteHabitTaskResponse = DeleteHabitTaskResponse | ErrorResponse;
 export const habitTaskApiDocs = {
 getHabitTaskById: {
     method: "GET",
-    path: "/api/habit-tasks/[id]",
+    path: "/api/habittasks/[id]",
     description: "Returns a specific habit task along with its entries, fetched by ID.",
     response: "iGetHabitTaskResponse",
 },
 updateHabitTask: {
     method: "PATCH",
-    path: "/api/habit-tasks/[id]",
+    path: "/api/habittasks/[id]",
     description: "Update a specific habit task (only allowed if user is the task owner).",
     requestBody: "UpdateHabitTaskPayload",
     response: "iUpdateHabitTaskResponse",
 },
 deleteHabitTask: {
     method: "DELETE",
-    path: "/api/habit-tasks/[id]",
+    path: "/api/habittasks/[id]",
     description: "Delete a specific habit task (only allowed if user is the task owner).",
     response: "iDeleteHabitTaskResponse",
 },

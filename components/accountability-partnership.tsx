@@ -139,7 +139,7 @@
 //                             <section className="flex justify-between items-center my-1">
 //                                 <h1 className="font-bold flex justify-between items-center w-fit mt-1">
 //                                     <Link 
-//                                         href={`/habit-tasks/${challenge.habit._id}`}
+//                                         href={`/habittasks/${challenge.habit._id}`}
 //                                         className="">
 //                                         {challenge.habit.title}
 //                                     </Link>
