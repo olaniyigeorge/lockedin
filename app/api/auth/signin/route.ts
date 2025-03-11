@@ -62,13 +62,20 @@ export async function POST(
       secure: true,
     });
 
-    return NextResponse.json(
+ 
+    // You CANNOT set headers on `req` directly.
+    // Instead, set headers on your response:
+    const response = NextResponse.json(
       {
         message: "Authentication Successfull",
         user: cleanedUser,
       },
       { status: 200 }
     );
+    // Set token in header
+    response.headers.set("token", session);
+
+    return response
   } catch (error) {
     console.log(error)
     return NextResponse.json(

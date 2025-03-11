@@ -1,6 +1,7 @@
 import User from '@/models/user';
 import { encrypt } from '@/utils/helpers';
 import { NextRequest, NextResponse } from 'next/server';
+import { ForgotPasswordPayload } from './docs';
 
 const DOMAIN = process.env.DOMAIN as string;
 
@@ -11,9 +12,9 @@ const DOMAIN = process.env.DOMAIN as string;
  * @param {NextRequest} req - The HTTP request object containing JSON payload `email` and `first_name`
  * @returns {Promise<NextResponse>} - Redirects to password reset page or returns appropriate error response.
  */
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    const { email, first_name } = await req.json();
+    const { email, first_name }: ForgotPasswordPayload = await req.json();
 
     // Validate input
     if (!email || !first_name) {

@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "load-test": "k6 run services/load-test.js",
     "lint": "next lint"
   },
   "dependencies": {
