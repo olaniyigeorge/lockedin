@@ -7,7 +7,7 @@ export async function log(req: NextRequest) {
     const sessionData = await getSessionData(req);
 
     const user = sessionData?.user?.id || 
-        req?.ip || 
+        // req?.ip || 
         req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || 
         "Unknown";
 
