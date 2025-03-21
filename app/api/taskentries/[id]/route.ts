@@ -1,6 +1,6 @@
 import HabitTaskEntry from "@/models/task-entry";
 import { connectToDB } from "@/services/db_mongo";
-import { getSessionData } from "@/utils/helpers";
+import { getSessionData } from "@/lib/helpers";
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 import { eHabitTaskEntry } from "./docs";

@@ -25,8 +25,8 @@ export interface iHabitTask {
     isActive: boolean; 
     start_date: Date; 
     end_date: Date; 
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 /**

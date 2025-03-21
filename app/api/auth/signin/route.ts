@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { encrypt } from "@/utils/helpers";
+import { encrypt } from "@/lib/helpers";
 import { AuthenticatedUser, AuthPayload, AuthResponse } from "./docs";
 
 const DOMAIN = process.env.DOMAIN as string;

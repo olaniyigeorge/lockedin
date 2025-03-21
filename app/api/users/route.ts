@@ -2,7 +2,7 @@ import User from "@/models/user";
 import { connectToDB } from "@/services/db_mongo";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { getSessionData } from "@/utils/helpers";
+import { getSessionData } from "@/lib/helpers";
 import { CreateUserPayload, CreateUserResponse, GetUsersResponse } from "./docs";
 
 

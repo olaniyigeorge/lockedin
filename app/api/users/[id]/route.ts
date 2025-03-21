@@ -1,6 +1,6 @@
 import User from "@/models/user";
 import { connectToDB } from "@/services/db_mongo";
-import { getSessionData } from "@/utils/helpers";
+import { getSessionData } from "@/lib/helpers";
 import { NextRequest, NextResponse } from "next/server";
 import { iGetUserResponse, UpdateUserPayload, UpdateUserResponse, DeleteUserResponse } from "./docs";
 

@@ -1,5 +1,5 @@
 import User from '@/models/user';
-import { decrypt } from '@/utils/helpers';
+import { decrypt } from '@/lib/helpers';
 import bcrypt from 'bcryptjs';
 import { NextRequest, NextResponse } from 'next/server';
 import { ResetPasswordPayload } from './docs';

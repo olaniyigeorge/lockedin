@@ -1,15 +1,15 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { connectToDB } from '@/services/db_mongo';
 import LifeDomain from '@/models/life-domain';
-import { getSessionData } from '@/utils/helpers';
-import { LifeDomainType } from './docs';
+import { getSessionData } from '@/lib/helpers';
+import { iLifeDomain } from './docs';
 
 /**
  * @description Fetch a single life domain by ID
  * @param request - Incoming request object
  * @returns JSON response with life domain data or error message
  */
-export async function GET(request: NextRequest): Promise<NextResponse<{ message: string; data?: LifeDomainType }>> {
+export async function GET(request: NextRequest): Promise<NextResponse<{ message: string; data?: iLifeDomain }>> {
     const sessionData = await getSessionData(request);
     try {
         const url = new URL(request.url);

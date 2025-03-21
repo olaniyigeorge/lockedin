@@ -29,12 +29,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<CreateHab
     }
 
     const newEntry = await HabitTaskEntry.create({
-      owner,
-      habit,
-      habit_challenge,
-      note,
-      proof_link,
-      date: entryDate,
+        owner,
+        habit,
+        habit_challenge,
+        note,
+        proof_link,
+        date: entryDate,
     });
 
     return NextResponse.json(newEntry, { status: 201 });

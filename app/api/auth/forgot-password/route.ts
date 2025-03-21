@@ -1,5 +1,5 @@
 import User from '@/models/user';
-import { encrypt } from '@/utils/helpers';
+import { encrypt } from '@/lib/helpers';
 import { NextRequest, NextResponse } from 'next/server';
 import { ForgotPasswordPayload } from './docs';
 

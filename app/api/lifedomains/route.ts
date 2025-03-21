@@ -1,6 +1,6 @@
 import LifeDomain from "@/models/life-domain";
 import { connectToDB } from "@/services/db_mongo";
-import { getSessionData } from "@/utils/helpers";
+import { getSessionData } from "@/lib/helpers";
 import { NextRequest, NextResponse } from "next/server";
 import { GetLifeDomainsResponse, PostLifeDomainRequest, PostLifeDomainResponse } from "./docs";
 /**

@@ -1,4 +1,4 @@
-import { getSessionData } from "@/utils/helpers";
+import { getSessionData } from "@/lib/helpers";
 import HabitTask from "@/models/habit-task";
 import HabitTaskEntry from "@/models/task-entry";
 import User from "@/models/user";

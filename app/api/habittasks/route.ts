@@ -3,7 +3,7 @@ import HabitTaskEntry from "@/models/task-entry";
 import { connectToDB } from "@/services/db_mongo";
 
 import { NextRequest, NextResponse } from "next/server";
-import { getSessionData } from "@/utils/helpers";
+import { getSessionData } from "@/lib/helpers";
 import { GetHabitTasksResponse, HabitTaskFilter, PostHabitTaskRequest, PostHabitTaskResponse } from "./docs";
 
 

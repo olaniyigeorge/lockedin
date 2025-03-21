@@ -8,10 +8,10 @@
  */
 
 /**
- * @interface LifeDomainType
+ * @interface eLifeDomain
  * @description Defines the structure of a Life Domain.
  */
-export interface LifeDomainType {
+export interface eLifeDomain {
     _id: string;
     name: string;
     description: string;
@@ -26,7 +26,7 @@ export interface LifeDomainType {
  */
 export interface GetLifeDomainsResponse {
     message: string;
-    data: LifeDomainType[] | null;
+    data: eLifeDomain[] | null;
     pagination: {
         totalLifeDomains: number;
         totalPages: number;
@@ -51,5 +51,5 @@ export interface PostLifeDomainRequest {
  */
 export interface PostLifeDomainResponse {
     message: string;
-    data: LifeDomainType | null;
+    data: eLifeDomain | null;
 }

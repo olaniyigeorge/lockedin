@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { isAuthenticated } from "./utils/helpers";
+import { isAuthenticated } from "./lib/helpers";
 import { NextURL } from "next/dist/server/web/next-url";
+import { log } from "./lib/logger";
 
 export async function middleware(request: NextRequest) {
+  await log(request);
   const url = request.url;
+
   const url2 = request.nextUrl.clone();
   const isAuth = await isAuthenticated(request);
   console.log("-------------------------");

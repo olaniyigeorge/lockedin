@@ -4,7 +4,7 @@ import User from "@/models/user";
 import { connectToDB } from "@/services/db_mongo";
 import { NextRequest, NextResponse} from "next/server";
 import { ErrorResponse, GetGoalResponse, UpdateGoalPayload, UpdateGoalResponse } from "./docs";
-import { getSessionData } from "@/utils/helpers";
+import { getSessionData } from "@/lib/helpers";
 
 
 /**
