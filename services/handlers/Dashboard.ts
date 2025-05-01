@@ -22,7 +22,7 @@ export class DashboardManager {
     this.session = session;
   }
 
-  // MAIN AGGREGATION METHOD — Called from API
+  // MAIN AGGREGATION METHOD - Called from API
   async getDashboardData(): Promise<Record<string, any>> {
     // Fetch each data set via respective service
     this.goals = (await GoalService.getUserGoals(this.userId)).goals;

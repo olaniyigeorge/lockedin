@@ -5,7 +5,7 @@ import { NextURL } from "next/dist/server/web/next-url";
 import { log } from "./lib/logger";
 
 export async function middleware(request: NextRequest) {
-  await log(request);
+  //await log(request);
   const url = request.url;
 
   const url2 = request.nextUrl.clone();

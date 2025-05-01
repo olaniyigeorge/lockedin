@@ -19,7 +19,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 import { useSafeMutation } from "@/axios/query-client";
 import { toast } from "react-toastify";
-import { AllRoutes } from "@/routes";
+import { ALLROUTES } from "@/routes";
 import { InlineLoader } from "@/components/InlineLoader";
 import { useState } from "react";
 import { AuthResponse } from "@/interface";
@@ -81,7 +81,7 @@ export const SignupForm = () => {
     AuthResponse,
     Error,
     SignupFormData
-  >(`${AllRoutes.auth}/signin`, "post", {
+  >(`${ALLROUTES.auth}/signin`, "post", {
     onSuccess: (data) => {
       if (data?.message) {
         setLoggedInUser(data?.user);

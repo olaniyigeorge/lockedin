@@ -20,7 +20,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 import { useSafeMutation } from "@/axios/query-client";
 import { toast } from "react-toastify";
-import { AllRoutes } from "@/routes";
+import { ALLROUTES } from "@/routes";
 import { AuthResponse } from "@/interface";
 import { useState } from "react";
 // import { useState } from "react";
@@ -74,7 +74,7 @@ export const ResetPasswordForm = () => {
     AuthResponse,
     Error,
     ResetPasswordFormData
-  >(`${AllRoutes.auth}/signin`, "post", {
+  >(`${ALLROUTES.auth}/signin`, "post", {
     onSuccess: (data) => {
       if (data?.message) {
         // setLoggedInUser(data?.user);

@@ -19,7 +19,7 @@ import { z } from "zod";
 
 import { useSafeMutation } from "@/axios/query-client";
 import { toast } from "react-toastify";
-import { AllRoutes } from "@/routes";
+import { ALLROUTES } from "@/routes";
 import { AuthResponse } from "@/interface";
 import { useRouter } from "next/navigation";
 // import { useState } from "react";
@@ -59,7 +59,7 @@ export const ForgotPasswordForm = () => {
     AuthResponse,
     Error,
     ForgotPasswordFormData
-  >(`${AllRoutes.auth}/signin`, "post", {
+  >(`${ALLROUTES.auth}/signin`, "post", {
     onSuccess: (data) => {
       if (data?.message) {
         // setLoggedInUser(data?.user);

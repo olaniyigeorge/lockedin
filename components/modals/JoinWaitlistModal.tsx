@@ -31,7 +31,7 @@ import { MdClose } from "react-icons/md";
 import { InlineLoader } from "../InlineLoader";
 import useClickOutside from "@/hooks/use-click-outside";
 import { WaitlistEntryInput, WaitlistResponse } from "@/interface";
-import { AllRoutes } from "@/routes";
+import { ALLROUTES } from "@/routes";
 
 const waitlistFormSchema = z.object({
   full_name: z
@@ -70,7 +70,7 @@ export const JoinWaitlistModal: React.FC = () => {
     WaitlistResponse,
     Error,
     WaitlistEntryInput
-  >(`${AllRoutes.waitlist}`, "post", {
+  >(`${ALLROUTES.waitlist}`, "post", {
     onSuccess: (data) => {
       console.log(data);
       if (data.entry._id && data.message.includes("Successfully")) {
