@@ -2,21 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionData } from "@/lib/helpers";
 import { DashboardManager } from "@/services/handlers/Dashboard";
-import { HabitTaskWithEntries } from "../habittasks/[id]/docs";
-import { eLifeDomain } from "../lifedomains/docs";
-import { iGoal } from "../goals/[id]/docs";
 
-export interface DashboardResponse {
-    success: boolean;
-    data: {
-      habitTasks: HabitTaskWithEntries[];
-      lifeDomains: eLifeDomain[];
-      goals: iGoal[];
-      habitTaskEntries: any[];
-    };
-  }
-
-export async function GET(req: NextRequest): Promise<Record<string, any>> {
+export async function GET(req: NextRequest): Promise<NextResponse> {
     const sessionData = await getSessionData(req);
 
     if (!sessionData || !sessionData.user.id) {
