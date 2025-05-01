@@ -8,8 +8,9 @@ import { Sidebar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import { DashboardResponse } from "../api/dashboard/route";
+
 import LogoutButton from "@/components/logoutBtn";
+import { DashboardResponse } from "../api/dashboard/docs";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { isSidebarOpen, toggleSidebarOpen, loggedInUser } = useGlobalState();

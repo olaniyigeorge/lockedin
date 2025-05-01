@@ -1,8 +1,5 @@
 "use client";
-
-
 import { useDashboardState } from "@/lib/stores/dashboardStore"
-import { useEffect } from "react";
 
 export default function Dashboard() {
     const { habitTasks, lifeDomains, goals, habitTaskEntries, authenticatedUserUser } = useDashboardState()
