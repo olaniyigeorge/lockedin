@@ -1,5 +1,6 @@
 import { iGoal } from "@/app/api/goals/docs";
-import { iHabitTask, iHabitTaskEntry } from "@/app/api/habittasks/docs";
+import { HabitTaskWithEntries } from "@/app/api/habittasks/[id]/docs";
+import { iHabitTaskEntry } from "@/app/api/habittasks/docs";
 import { iLifeDomain } from "@/app/api/lifedomains/[id]/docs";
 import { User } from "@/interface";
 import { create } from "zustand";
@@ -19,14 +20,18 @@ export const DefaultUser: User = {
 }
 
 interface DashBoardStore {
-  habitTasks: iHabitTask[];
-  manageHabitTasks: (habitTasks: iHabitTask[]) => void;
+  habitTasks: HabitTaskWithEntries[];
+  manageHabitTasks: (habitTasks: HabitTaskWithEntries[]) => void;
+
   lifeDomains: iLifeDomain[];
   manageLifeDomains: (lifeDomains: iLifeDomain[]) => void;
+  
   goals: iGoal[];
   manageGoals: (goals: iGoal[]) => void;
+  
   habitTaskEntries: iHabitTaskEntry[];
-  ManageHabitTaskEntries: (habitTaskEntries: iHabitTaskEntry[]) => void;
+  manageHabitTaskEntries: (habitTaskEntries: iHabitTaskEntry[]) => void;
+  
   authenticatedUserUser: User | null;
   setAuthenticatedUserUser: (user: User | null) => void;
 }
@@ -37,15 +42,19 @@ export const useDashboardState = create<DashBoardStore>()(
   persist(
     (set) => ({
       habitTasks: [],
-      manageHabitTasks: (open) => set({ habitTasks: []}),
+      manageHabitTasks: (hbts) => set({ habitTasks: hbts}),
+      
       lifeDomains: [],
-      manageLifeDomains: (open) => set({ lifeDomains: []}),
+      manageLifeDomains: (lfds) => set({ lifeDomains: lfds}),
+      
       goals: [],
-      manageGoals: (open) => set({ goals: []}),
+      manageGoals: (gls) => set({ goals: gls}),
+      
       habitTaskEntries: [],
-      ManageHabitTaskEntries: (open) => set({ habitTaskEntries: []}),
-      authenticatedUserUser: DefaultUser,
-      setAuthenticatedUserUser: (open) => set({ authenticatedUserUser: DefaultUser})
+      manageHabitTaskEntries: (taskEntries) => set({ habitTaskEntries: taskEntries}),
+      
+      authenticatedUserUser: null, // DefaultUser,
+      setAuthenticatedUserUser: (user) => set({ authenticatedUserUser: user})
       // isSidebarOpen: false,
       // toggleSidebarOpen: (open) => set({ isSidebarOpen: open }),
 

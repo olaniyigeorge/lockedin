@@ -8,17 +8,39 @@ import { Sidebar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { DashboardResponse } from "../api/dashboard/route";
+import LogoutButton from "@/components/logoutBtn";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { isSidebarOpen, toggleSidebarOpen} = useGlobalState();
-  const { authenticatedUserUser } = useDashboardState()
+  const { isSidebarOpen, toggleSidebarOpen, loggedInUser } = useGlobalState();
+  const { authenticatedUserUser, setAuthenticatedUserUser, manageHabitTasks, manageGoals, manageLifeDomains, manageHabitTaskEntries } = useDashboardState()
 
-  // useEffect(() => {
-  //   if (typeof window && window.innerWidth > 500) {
-  //     console.log("On browser and large screen")
-  //     // toggleSidebarOpen(true)
-  //   }
-  // }, [])
+  if (!authenticatedUserUser && loggedInUser) {
+    setAuthenticatedUserUser(loggedInUser)
+    console.log("\n\n Authenticated User set as \n", authenticatedUserUser, "\n\n")
+
+  }
+
+  useEffect(() => {
+    const fetchDashData = async () => {
+      try {
+        const dashData: DashboardResponse = await getDashData();
+        console.log(`\n\n ${JSON.stringify(dashData.data.habitTasks[0])} \n\n`)
+        
+        manageHabitTasks(dashData.data.habitTasks);
+        manageGoals(dashData.data.goals);
+        manageLifeDomains(dashData.data.lifeDomains);
+        manageHabitTaskEntries(dashData.data.habitTaskEntries);
+
+        console.log("Dashboard data set in store");
+      } catch (error) {
+        console.error("Failed to fetch or set dashboard data:", error);
+      }
+    };
+
+    fetchDashData();
+  }, []);
+
   return (
     <div className="">
      
@@ -40,9 +62,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
 
                 <div className="w-full mt-20 flex flex-col justify-center items-center">
-                  <Image src={authenticatedUserUser!.image} width={200} height={200} alt='avatar' className="w-10 h-10 border rounded-full items-center"/>
-                  <p className="text-center text-md font-medium">{authenticatedUserUser?.first_name} {authenticatedUserUser?.last_name}</p>
-                  <p className="text-center text-xs underline">{authenticatedUserUser?.email}</p>
+                  <Link href="/">
+                    <Image src={loggedInUser!.image} width={200} height={200} alt='avatar' className="w-10 h-10 border rounded-full items-center"/>
+                  </Link>
+                  <p className="text-center text-md font-medium">{loggedInUser?.first_name} {loggedInUser?.last_name}</p>
+                  <p className="text-center text-xs underline">{loggedInUser?.email}</p>
+                  <LogoutButton />
                 </div>
               </div>
             </div>
@@ -58,3 +83,24 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 export default Layout;
+
+export async function getDashData() {
+  try {
+    const response = await fetch(`/api/dashboard/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch dashboard data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching dashboard data:", error);
+    throw error;
+  }
+}

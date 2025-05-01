@@ -63,7 +63,7 @@ export const SigninForm = () => {
   });
 
   const router = useRouter();
-  const { setLoggedInUser } = useGlobalState();
+  const { setLoggedInUser, loggedInUser } = useGlobalState();
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -77,7 +77,9 @@ export const SigninForm = () => {
   >(`${ALLROUTES.auth}/signin`, "post", {
     onSuccess: (data) => {
       if (data?.message) {
+        console.log("Setting user data:", data?.user);
         setLoggedInUser(data?.user);
+        console.log("User data set:", loggedInUser);
         toast.success(data.message);
         router.push(`/`);
       }

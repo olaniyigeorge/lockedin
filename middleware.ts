@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
 
   if (url.includes("/signin") && isAuth) {
     console.log("User is already logged in!");
-    url2.pathname = "/dashboard";
+    url2.pathname = "/dash";
     return redirectResponse(url2);
   }
 

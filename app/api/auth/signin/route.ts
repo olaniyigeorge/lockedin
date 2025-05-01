@@ -67,7 +67,7 @@ export async function POST(
     // Instead, set headers on your response:
     const response = NextResponse.json(
       {
-        message: "Authentication Successfull",
+        message: `Welcome back ${data.user.first_name}`,
         user: cleanedUser,
       },
       { status: 200 }
